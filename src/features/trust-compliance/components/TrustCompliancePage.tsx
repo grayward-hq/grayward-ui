@@ -25,37 +25,39 @@ export default function TrustCompliancePage() {
   return (
     <div className="min-h-[calc(100vh-88px)] bg-brand-dashboard-bg px-4 py-6 md:px-6">
       {/* ── Top bar: tabs + export ── */}
-      <div className="mb-6 flex items-start justify-between">
-        {/* Tab list */}
-        <div className="flex items-end gap-20">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setActiveTab(tab.id)}
-              className={cn(
-                "flex flex-col items-center gap-4 text-base tracking-wide transition-colors",
-                activeTab === tab.id
-                  ? "font-medium text-scan-primary-900"
-                  : "font-normal text-brand-gray hover:text-brand-dark"
-              )}
-            >
-              <span>{tab.label}</span>
-              {/* Active underline */}
-              <span
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        {/* Tab list — scrollable on mobile */}
+        <div className="overflow-x-auto scrollbar-none">
+          <div className="flex shrink-0 items-end gap-8 md:gap-20">
+            {TABS.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "block h-[5px] w-full rounded-full transition-colors",
-                  activeTab === tab.id ? "bg-scan-primary-900" : "bg-transparent"
+                  "flex flex-col items-center gap-4 whitespace-nowrap text-sm md:text-base tracking-wide transition-colors",
+                  activeTab === tab.id
+                    ? "font-medium text-scan-primary-900"
+                    : "font-normal text-brand-gray hover:text-brand-dark"
                 )}
-              />
-            </button>
-          ))}
+              >
+                <span>{tab.label}</span>
+                {/* Active underline */}
+                <span
+                  className={cn(
+                    "block h-[5px] w-full rounded-full transition-colors",
+                    activeTab === tab.id ? "bg-scan-primary-900" : "bg-transparent"
+                  )}
+                />
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Export button */}
+        {/* Export button — full-width on mobile, auto width on md+ */}
         <button
           type="button"
-          className="flex shrink-0 items-center gap-2 rounded-lg bg-scan-primary-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-scan-primary-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto md:shrink-0"
         >
           <Upload className="h-4 w-4" strokeWidth={1.8} />
           Export Executive Report

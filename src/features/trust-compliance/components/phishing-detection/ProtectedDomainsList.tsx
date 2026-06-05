@@ -7,7 +7,7 @@ export function ProtectedDomainsList({ domains }: { domains: ProtectedDomain[] }
       <h3 className="text-2xl font-semibold text-brand-dark leading-none">
         Protected Domains
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {domains.map((item) => (
           <div
             key={item.id}

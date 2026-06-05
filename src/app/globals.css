@@ -399,3 +399,12 @@ input:-webkit-autofill:active {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* Hide scrollbar but allow scrolling (used for tab overflow on mobile) */
+.scrollbar-none {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}

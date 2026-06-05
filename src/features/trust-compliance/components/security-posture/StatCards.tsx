@@ -79,7 +79,7 @@ function StatCardItem({ card }: { card: StatCard }) {
 
 export function StatCards({ cards }: { cards: StatCard[] }) {
   return (
-    <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
       {cards.map((card) => (
         <StatCardItem key={card.id} card={card} />
       ))}

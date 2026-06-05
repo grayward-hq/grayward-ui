@@ -31,13 +31,13 @@ export function TyposquattingDomainsList({
   return (
     <div className="rounded-xl bg-white p-6 border border-brand-light-gray flex flex-col gap-6">
       {/* Title row */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-semibold text-brand-dark leading-none">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <h3 className="text-xl font-semibold text-brand-dark leading-none sm:text-2xl">
           Detected Typosquatting Domains
         </h3>
-        <div className="flex items-center gap-4 text-brand-gray">
-          <Eye className="h-6 w-6 text-brand-gray" strokeWidth={1.8} />
-          <span className="text-base font-normal">Continuous monitoring active</span>
+        <div className="flex items-center gap-2 text-brand-gray">
+          <Eye className="h-5 w-5 text-brand-gray" strokeWidth={1.8} />
+          <span className="text-sm font-normal sm:text-base">Continuous monitoring active</span>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ export function TyposquattingDomainsList({
           return (
             <div
               key={item.id}
-              className="flex flex-col md:flex-row md:items-center justify-between rounded-xl border border-brand-light-gray bg-white p-6 gap-4"
+              className="flex flex-col gap-4 rounded-xl border border-brand-light-gray bg-white p-4 sm:p-6 sm:flex-row sm:items-center sm:justify-between"
             >
               {/* Left side info */}
               <div className="flex flex-col gap-4">

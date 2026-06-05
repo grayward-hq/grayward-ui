@@ -5,6 +5,8 @@ import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SecurityPostureTab } from "./security-posture/SecurityPostureTab";
 
+import { PhishingDetectionTab } from "./phishing-detection/PhishingDetectionTab";
+
 // ── Tab definitions ────────────────────────────────────────────────────────
 
 const TABS = [
@@ -63,11 +65,7 @@ export default function TrustCompliancePage() {
       {/* ── Tab content ── */}
       {activeTab === "owasp" && <SecurityPostureTab />}
 
-      {activeTab === "phishing" && (
-        <div className="flex h-64 items-center justify-center rounded-xl bg-white text-brand-gray">
-          Phishing Detection — coming soon
-        </div>
-      )}
+      {activeTab === "phishing" && <PhishingDetectionTab />}
 
       {activeTab === "credentials" && (
         <div className="flex h-64 items-center justify-center rounded-xl bg-white text-brand-gray">

@@ -13,6 +13,7 @@ import {
   Settings,
   LogOut,
   ChevronDown,
+  ShieldCheck,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
@@ -21,6 +22,10 @@ const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Domain', href: '/domain', icon: Globe },
   { label: 'Report', href: '/report', icon: FileText },
+  { label: 'Trust and Compliance', href: '/trust-compliance', icon: ShieldCheck },
+];
+
+const BOTTOM_ITEMS = [
   { label: 'Settings', href: '/settings', icon: Settings },
 ];
 
@@ -33,6 +38,9 @@ function getPageHeaderInfo(pathname: string) {
   }
   if (pathname.startsWith('/report') || pathname.startsWith('/scan')) {
     return { title: 'Report Overview', description: 'Summary of all security reports' };
+  }
+  if (pathname.startsWith('/trust-compliance')) {
+    return { title: 'Trust and Compliance', description: 'Demonstrate your security posture and protect your brand identity' };
   }
   if (pathname.startsWith('/settings')) {
     return { title: 'Settings', description: 'Manage your account and preferences' };
@@ -255,7 +263,26 @@ export function DashboardHeader() {
             );
           })}
         </nav>
-        <div className='px-3 pb-6 border-t border-gray-200 pt-4'>
+        <div className='px-3 pb-6 border-t border-gray-200 pt-4 space-y-1'>
+          {BOTTOM_ITEMS.map(({ label, href, icon: Icon }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  'flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary text-white'
+                    : 'text-slate-700 hover:bg-gray-100',
+                )}
+              >
+                <Icon className='h-5 w-5 shrink-0' strokeWidth={1.8} />
+                {label}
+              </Link>
+            );
+          })}
           <button
             onClick={handleLogout}
             className='w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-red-500 hover:bg-red-50'

@@ -80,6 +80,15 @@
   --spacing-138.75: 555px;
   --spacing-154.25: 617px;
   --spacing-290: 1160px;
+
+  /* Trust and Compliance Section Theme Tokens */
+  --color-owasp-blue: #263fa5;
+  --color-owasp-blue-bg: #ebeefd;
+  --color-owasp-green-bg: #e8f7ef;
+  --color-owasp-warn-bg: #fffbf0;
+  --color-owasp-activity-bg: #f3f3f3;
+  --color-owasp-compliant-bg: #f6fdfa;
+  --color-owasp-card-subtle: #fcfcfc;
 }
 
 :root {

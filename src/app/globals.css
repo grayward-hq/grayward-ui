@@ -409,9 +409,10 @@ input:-webkit-autofill:active {
   display: none; /* Chrome / Safari */
 }
 
-/* Remove Recharts focus outline on click */
-.recharts-wrapper *:focus,
-.recharts-surface:focus,
-.recharts-pie-sector:focus {
-  outline: none !important;
+/* Improve Recharts keyboard accessibility */
+.recharts-wrapper *:focus-visible,
+.recharts-surface:focus-visible,
+.recharts-pie-sector:focus-visible {
+  outline: 2px solid #1DAF61;
+  outline-offset: 2px;
 }

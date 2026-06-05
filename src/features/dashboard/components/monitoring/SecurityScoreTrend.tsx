@@ -8,6 +8,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  TooltipProps,
 } from 'recharts';
 import type { ScoreTrendItem } from '@/features/dashboard/types/dashboard-api.types';
 
@@ -15,7 +16,8 @@ interface SecurityScoreTrendProps {
   data?: ScoreTrendItem[];
 }
 
-const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number }>; label?: string }) => {
+// Recharts v3 TooltipProps omits payload and label, so we intersect them back in
+const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string> & { payload?: Array<{ value: number }>; label?: string; active?: boolean }) => {
   if (active && payload && payload.length) {
     return (
       <div

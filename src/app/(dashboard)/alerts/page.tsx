@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { dashboardService } from '@/features/dashboard/services/dashboard.service';
@@ -28,7 +28,7 @@ function apiAlertToItem(alert: DashboardAlert): DashboardAlertItem {
   };
   const mappedType = typeMap[alert.type] ?? alert.type;
   
-  // Safe validation check since isValidAlertType requires string
+  
   const typeStr = mappedType;
   const isValid = ['SSL', 'Security', 'DNS'].includes(typeStr);
 
@@ -49,13 +49,6 @@ export default function AlertsPage() {
   });
 
   return (
-    <Suspense
-      fallback={
-        <div className="flex h-[60vh] w-full items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
-        </div>
-      }
-    >
       <div className="flex flex-col gap-6 p-4 md:p-8 min-h-screen" style={{ background: '#F9F9F9' }}>
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-semibold text-brand-dark" style={{ fontFamily: 'Geist, sans-serif' }}>
@@ -77,7 +70,6 @@ export default function AlertsPage() {
         ) : (
           <AlertsListView initialAlerts={(alerts ?? []).map(apiAlertToItem)} />
         )}
-      </div>
-    </Suspense>
+    </div>
   );
 }

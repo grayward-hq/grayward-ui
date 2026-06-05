@@ -18,6 +18,8 @@ const COLORS = {
   Low: '#1DAF61',
 };
 
+// Recharts type definitions (e.g. v3.8.1) are incomplete for custom label positioning props.
+// We intentionally use any and eslint-disable to access cx, cy, midAngle, outerRadius, etc.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderCustomizedLabel = ({ cx, cy, midAngle, outerRadius, value, name }: any) => {
   const RADIAN = Math.PI / 180;

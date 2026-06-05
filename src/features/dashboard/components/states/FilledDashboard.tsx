@@ -132,7 +132,9 @@ export function FilledDashboard({
   let scoreTrendDirection: 'up' | 'down' | 'neutral' = 'neutral';
   
   if (scoreTrend && scoreTrend.length > 0) {
-    const validScores = scoreTrend.filter((s) => s.score !== null);
+    const validScores = scoreTrend
+      .filter((s) => s.score !== null)
+      .sort((a, b) => new Date(a.day).getTime() - new Date(b.day).getTime());
     if (validScores.length >= 2) {
       const oldest = validScores[0].score!;
       const newest = validScores[validScores.length - 1].score!;

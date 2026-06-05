@@ -32,7 +32,7 @@ const NAV_ITEMS: NavItemType[] = [
   {
     label: 'Trust and Compliance',
     href: '/trust-compliance',
-    icon: <ShieldCheck className="h-5 w-5" />,
+    icon: <ShieldCheck className="h-[22px] w-[22px]" strokeWidth={1.8} />,
   },
 ];
 

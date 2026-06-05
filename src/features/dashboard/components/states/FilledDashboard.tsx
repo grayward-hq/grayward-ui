@@ -3,6 +3,7 @@ import type {
   DashboardSummary,
   DashboardDomainRow,
   DashboardAlert,
+  ScoreTrendItem,
 } from '@/features/dashboard/types/dashboard-api.types';
 
 import { MonitoringStatusBanner } from '@/features/dashboard/components/monitoring/MonitoringStatusBanner';
@@ -89,6 +90,7 @@ function apiAlertToItem(alert: DashboardAlert): DashboardAlertItem {
 
 interface FilledDashboardProps {
   summary: DashboardSummary | null | undefined;
+  scoreTrend: ScoreTrendItem[];
   domainRows: DashboardDomainRow[];
   totalDomainsCount: number;
   alerts: DashboardAlert[];
@@ -98,6 +100,7 @@ interface FilledDashboardProps {
 
 export function FilledDashboard({
   summary,
+  scoreTrend,
   domainRows,
   totalDomainsCount,
   alerts,
@@ -124,6 +127,31 @@ export function FilledDashboard({
 
   const alertItems: DashboardAlertItem[] = alerts.map(apiAlertToItem);
 
+  // ── Calculate Score Trend ────────────────────────────────────────────────────
+  let scoreTrendText = 'No trend data';
+  let scoreTrendDirection: 'up' | 'down' | 'neutral' = 'neutral';
+  
+  if (scoreTrend && scoreTrend.length > 0) {
+    const validScores = scoreTrend.filter((s) => s.score !== null);
+    if (validScores.length >= 2) {
+      const oldest = validScores[0].score!;
+      const newest = validScores[validScores.length - 1].score!;
+      const diff = newest - oldest;
+      if (diff > 0) {
+        scoreTrendDirection = 'up';
+        scoreTrendText = `+${diff} from last week`;
+      } else if (diff < 0) {
+        scoreTrendDirection = 'down';
+        scoreTrendText = `${diff} from last week`;
+      } else {
+        scoreTrendDirection = 'neutral';
+        scoreTrendText = `No change from last week`;
+      }
+    } else if (validScores.length === 1) {
+      scoreTrendText = 'Not enough data';
+    }
+  }
+
   return (
     <div className="flex flex-col gap-4 md:gap-6 p-4 md:p-8 min-h-screen" style={{ background: '#F9F9F9' }}>
       
@@ -136,10 +164,11 @@ export function FilledDashboard({
 
       <DashboardStatCards
         securityScore={summary?.avgSecurityScore ?? 0}
-        scoreTrend="from last week"
+        scoreTrend={scoreTrendText}
+        scoreTrendDirection={scoreTrendDirection}
         totalIssues={summary?.totalOpenFindings ?? 0}
         criticalCount={summary?.totalCriticalFindings ?? 0}
-        highCount={0}
+        highCount={summary?.severityBreakdown?.high ?? 0}
         sslCount={domainRows.length}
         sslExpiringSoon={sslExpiringSoon}
         monitoredDomains={summary?.monitoringActiveDomains ?? 0}
@@ -148,10 +177,10 @@ export function FilledDashboard({
 
       <div className="flex flex-col xl:flex-row gap-6 items-stretch">
         <div className="flex-1 min-w-0">
-          <SecurityScoreTrend />
+          <SecurityScoreTrend data={scoreTrend} />
         </div>
         <div className="flex-1 min-w-0">
-          <RiskSeverityBreakdown />
+          <RiskSeverityBreakdown breakdown={summary?.severityBreakdown} />
         </div>
       </div>
 
@@ -165,7 +194,7 @@ export function FilledDashboard({
           <SslCertificatesList items={sslItems.slice(0, 5)} totalCount={totalDomainsCount} />
         </div>
         <div className="flex-1 min-w-0">
-          <DashboardRecentAlerts alerts={alertItems.slice(0, 5)} onViewAll={() => router.push('/report')} />
+          <DashboardRecentAlerts alerts={alertItems.slice(0, 5)} onViewAll={() => router.push('/alerts')} />
         </div>
       </div>
 

@@ -408,3 +408,10 @@ input:-webkit-autofill:active {
 .scrollbar-none::-webkit-scrollbar {
   display: none; /* Chrome / Safari */
 }
+
+/* Remove Recharts focus outline on click */
+.recharts-wrapper *:focus,
+.recharts-surface:focus,
+.recharts-pie-sector:focus {
+  outline: none !important;
+}

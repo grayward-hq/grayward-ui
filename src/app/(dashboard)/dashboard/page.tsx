@@ -71,6 +71,12 @@ export default function DashboardController() {
     enabled: verifiedDomains.length > 0,
   });
 
+  const { data: scoreTrendRes } = useQuery({
+    queryKey: ['dashboard', 'score-trend'],
+    queryFn: () => dashboardService.getDashboardScoreTrend(),
+    enabled: verifiedDomains.length > 0,
+  });
+
   const hasScans = selectedDomain && selectedDomain.lastScannedAt !== null;
 
   // ── Routing Logic ───────────────────────────────────────────────────────
@@ -119,6 +125,7 @@ export default function DashboardController() {
     <FilledDashboard
       // Global Data
       summary={summaryRes}
+      scoreTrend={scoreTrendRes ?? []}
       domainRows={dashboardDomainsRes?.data ?? []}
       totalDomainsCount={dashboardDomainsRes?.totalCount ?? 0}
       alerts={alertsRes ?? []}

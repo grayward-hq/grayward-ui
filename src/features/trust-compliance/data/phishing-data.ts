@@ -20,7 +20,7 @@ export interface TyposquattingDomain {
 
 export const PHISHING_STATS: PhishingStat[] = [
   { value: "4", label: "Protected Domains" },
-  { value: "3", label: "Threat Detected" },
+  { value: "3", label: "Threats Detected" },
   { value: "1", label: "Active Threat" },
   { value: "1", label: "Mitigated" },
 ];
@@ -28,7 +28,6 @@ export const PHISHING_STATS: PhishingStat[] = [
 export const PROTECTED_DOMAINS: ProtectedDomain[] = [
   { id: "pd1", domain: "example.com" },
   { id: "pd2", domain: "example.net" },
-  { id: "pd3", domain: "example.com" },
   { id: "pd4", domain: "mycompany.com" },
 ];
 

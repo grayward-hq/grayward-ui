@@ -68,10 +68,12 @@ export function TyposquattingDomainsList({
                   >
                     {status.label}
                   </span>
-                  {/* High Risk Badge */}
-                  <span className="rounded-lg bg-brand-sidebar-bg px-3 py-2 text-sm font-normal leading-none text-brand-gray">
-                    High Risk
-                  </span>
+                  {/* High Risk Badge — only shown for active threats */}
+                  {item.status !== "taken down" && (
+                    <span className="rounded-lg bg-brand-sidebar-bg px-3 py-2 text-sm font-normal leading-none text-brand-gray">
+                      High Risk
+                    </span>
+                  )}
                 </div>
 
                 {/* Subtitle details */}
@@ -82,10 +84,12 @@ export function TyposquattingDomainsList({
                 </div>
               </div>
 
-              {/* Right side action button */}
+              {/* Right side action button — disabled until takedown flow is wired */}
               <button
                 type="button"
-                className="rounded-lg bg-brand-sidebar-bg px-6 py-4 text-base font-medium text-brand-gray transition-opacity hover:opacity-95 text-center shrink-0 min-w-[136px] h-12 flex items-center justify-center cursor-pointer"
+                disabled
+                aria-disabled="true"
+                className="rounded-lg bg-brand-sidebar-bg px-6 py-4 text-base font-medium text-brand-gray text-center shrink-0 min-w-[136px] h-12 flex items-center justify-center cursor-not-allowed opacity-60"
               >
                 Take Action
               </button>

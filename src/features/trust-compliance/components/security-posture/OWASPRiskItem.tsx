@@ -103,6 +103,9 @@ export function OWASPRiskItem({
       {/* ── Clickable header ── */}
       <button
         type="button"
+        id={`owasp-${item.id}-btn`}
+        aria-expanded={open}
+        aria-controls={`owasp-${item.id}-panel`}
         onClick={() => setOpen((prev) => !prev)}
         className="flex w-full items-start gap-6 bg-owasp-card-subtle p-6 text-left transition-colors hover:bg-white"
       >
@@ -170,8 +173,13 @@ export function OWASPRiskItem({
       </button>
 
       {/* ── Compliant footer (no findings) ── */}
-      {open && item.status === "compliant" && (
-        <div className="flex items-center gap-4 bg-owasp-compliant-bg px-6 py-4">
+      {open && item.status === "compliant" && item.findings.length === 0 && (
+        <div
+          id={`owasp-${item.id}-panel`}
+          role="region"
+          aria-labelledby={`owasp-${item.id}-btn`}
+          className="flex items-center gap-4 bg-owasp-compliant-bg px-6 py-4"
+        >
           <CheckCircle2 className="h-6 w-6 shrink-0 text-brand-green" strokeWidth={1.8} />
           <span className="text-base text-brand-green">
             No findings detected – Fully compliant
@@ -180,8 +188,13 @@ export function OWASPRiskItem({
       )}
 
       {/* ── Findings list (needs-attention / non-compliant) ── */}
-      {open && item.findings.length > 0 && (
-        <div className="flex flex-col gap-4 px-6 pb-6 pt-2">
+      {open && item.findings.length > 0 && item.status !== "compliant" && (
+        <div
+          id={`owasp-${item.id}-panel`}
+          role="region"
+          aria-labelledby={`owasp-${item.id}-btn`}
+          className="flex flex-col gap-4 px-6 pb-6 pt-2"
+        >
           <p className="text-base font-semibold tracking-wide text-brand-dark">
             Findings
           </p>

@@ -244,7 +244,7 @@ export function DashboardHeader() {
         </div>
         <nav className='flex-1 px-3 py-4 space-y-1 overflow-y-auto'>
           {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-            const isActive = pathname === href;
+            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
             return (
               <Link
                 key={href}
@@ -265,7 +265,7 @@ export function DashboardHeader() {
         </nav>
         <div className='px-3 pb-6 border-t border-gray-200 pt-4 space-y-1'>
           {BOTTOM_ITEMS.map(({ label, href, icon: Icon }) => {
-            const isActive = pathname === href;
+            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
             return (
               <Link
                 key={href}

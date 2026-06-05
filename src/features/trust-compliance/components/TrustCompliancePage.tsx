@@ -28,12 +28,32 @@ export default function TrustCompliancePage() {
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         {/* Tab list — scrollable on mobile */}
         <div className="overflow-x-auto scrollbar-none">
-          <div className="flex shrink-0 items-end gap-8 md:gap-20">
-            {TABS.map((tab) => (
+          <div
+            role="tablist"
+            aria-label="Trust and Compliance sections"
+            className="flex shrink-0 items-end gap-8 md:gap-20"
+          >
+            {TABS.map((tab, index) => (
               <button
                 key={tab.id}
+                id={`tab-${tab.id}`}
                 type="button"
+                role="tab"
+                aria-selected={activeTab === tab.id}
+                aria-controls={`tabpanel-${tab.id}`}
+                tabIndex={activeTab === tab.id ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowRight") {
+                    const next = TABS[(index + 1) % TABS.length];
+                    setActiveTab(next.id);
+                    document.getElementById(`tab-${next.id}`)?.focus();
+                  } else if (e.key === "ArrowLeft") {
+                    const prev = TABS[(index - 1 + TABS.length) % TABS.length];
+                    setActiveTab(prev.id);
+                    document.getElementById(`tab-${prev.id}`)?.focus();
+                  }
+                }}
                 className={cn(
                   "flex flex-col items-center gap-4 whitespace-nowrap text-sm md:text-base tracking-wide transition-colors",
                   activeTab === tab.id
@@ -54,10 +74,13 @@ export default function TrustCompliancePage() {
           </div>
         </div>
 
-        {/* Export button — full-width on mobile, auto width on md+ */}
+        {/* Export button — disabled until export flow is ready */}
         <button
           type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-scan-primary-900 px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90 md:w-auto md:shrink-0"
+          disabled
+          aria-disabled="true"
+          title="Export coming soon"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-scan-primary-900 px-5 py-2.5 text-sm font-medium text-white opacity-50 cursor-not-allowed md:w-auto md:shrink-0"
         >
           <Upload className="h-4 w-4" strokeWidth={1.8} />
           Export Executive Report
@@ -65,15 +88,36 @@ export default function TrustCompliancePage() {
       </div>
 
       {/* ── Tab content ── */}
-      {activeTab === "owasp" && <SecurityPostureTab />}
+      <div
+        id="tabpanel-owasp"
+        role="tabpanel"
+        aria-labelledby="tab-owasp"
+        hidden={activeTab !== "owasp"}
+      >
+        {activeTab === "owasp" && <SecurityPostureTab />}
+      </div>
 
-      {activeTab === "phishing" && <PhishingDetectionTab />}
+      <div
+        id="tabpanel-phishing"
+        role="tabpanel"
+        aria-labelledby="tab-phishing"
+        hidden={activeTab !== "phishing"}
+      >
+        {activeTab === "phishing" && <PhishingDetectionTab />}
+      </div>
 
-      {activeTab === "credentials" && (
-        <div className="flex h-64 items-center justify-center rounded-xl bg-white text-brand-gray">
-          Credential Monitoring — coming soon
-        </div>
-      )}
+      <div
+        id="tabpanel-credentials"
+        role="tabpanel"
+        aria-labelledby="tab-credentials"
+        hidden={activeTab !== "credentials"}
+      >
+        {activeTab === "credentials" && (
+          <div className="flex h-64 items-center justify-center rounded-xl bg-white text-brand-gray">
+            Credential Monitoring — coming soon
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export const CREDENTIAL_BREACHES: CredentialBreach[] = [
     severity: "critical",
     actionStatus: "password reset",
     breachSource: "DataLeakDB 2026",
-    breachDate: "2026-14-05",
+    breachDate: "2026-05-14",
     exposedData: ["Email", "Password", "IP Address"],
   },
   {

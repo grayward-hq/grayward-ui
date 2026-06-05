@@ -1,4 +1,5 @@
 import { CheckCircle } from "lucide-react";
+import { useId } from "react";
 import {
   CREDENTIAL_STATS,
   CREDENTIAL_BREACHES,
@@ -6,6 +7,8 @@ import {
 import { BreachCard } from "./BreachCard";
 
 export function CredentialMonitoringTab() {
+  const clipId = useId();
+
   return (
     <div className="flex flex-col gap-6">
       {/* ── Stat cards ── */}
@@ -37,7 +40,7 @@ export function CredentialMonitoringTab() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clipPath="url(#clip0_7953_34604)">
+              <g clipPath={`url(#${clipId})`}>
                 <path
                   d="M12 3.19L19 6.3V11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19ZM12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"
                   fill="#1DAF61"
@@ -48,7 +51,7 @@ export function CredentialMonitoringTab() {
                 />
               </g>
               <defs>
-                <clipPath id="clip0_7953_34604">
+                <clipPath id={clipId}>
                   <rect width="24" height="24" fill="white" />
                 </clipPath>
               </defs>

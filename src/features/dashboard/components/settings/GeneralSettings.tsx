@@ -122,6 +122,33 @@ const GeneralSettingsContent = ({
     profile.notificationPreferences?.pushNotifications ?? false
   );
 
+  const handleTogglePreference = async (
+    key: "emailAlerts" | "slackAlerts" | "pushNotifications",
+    currentValue: boolean
+  ) => {
+    const newValue = !currentValue;
+    
+    // Optimistic update
+    if (key === "emailAlerts") setEmailNotifications(newValue);
+    if (key === "slackAlerts") setSlackNotifications(newValue);
+    if (key === "pushNotifications") setPushNotifications(newValue);
+
+    try {
+      await profileService.updateNotificationPreferences({
+        emailAlerts: key === "emailAlerts" ? newValue : emailNotifications,
+        slackAlerts: key === "slackAlerts" ? newValue : slackNotifications,
+        pushNotifications: key === "pushNotifications" ? newValue : pushNotifications,
+      });
+      toast.success("Preferences updated successfully");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to update preferences");
+      // Revert on failure
+      if (key === "emailAlerts") setEmailNotifications(currentValue);
+      if (key === "slackAlerts") setSlackNotifications(currentValue);
+      if (key === "pushNotifications") setPushNotifications(currentValue);
+    }
+  };
+
   const initialForm = {
     firstName: profile.firstName ?? "",
     lastName: profile.lastName ?? "",
@@ -202,7 +229,11 @@ const GeneralSettingsContent = ({
 
   return (
     <div className="space-y-6">
-      <PersonalInfoCard profile={initialForm} onEdit={handleOpenEditModal} />
+      <PersonalInfoCard 
+        profile={initialForm} 
+        pictureUrl={profile.profilePictureUrl || useAuthStore.getState().picture} 
+        onEdit={handleOpenEditModal} 
+      />
 
       <Section
         title="Preferences"
@@ -212,17 +243,17 @@ const GeneralSettingsContent = ({
           <Toggle
             label="Email Notifications"
             checked={emailNotifications}
-            onChange={() => setEmailNotifications((value) => !value)}
+            onChange={() => handleTogglePreference("emailAlerts", emailNotifications)}
           />
           <Toggle
             label="Slack Notifications"
             checked={slackNotifications}
-            onChange={() => setSlackNotifications((value) => !value)}
+            onChange={() => handleTogglePreference("slackAlerts", slackNotifications)}
           />
           <Toggle
             label="Push Notifications"
             checked={pushNotifications}
-            onChange={() => setPushNotifications((value) => !value)}
+            onChange={() => handleTogglePreference("pushNotifications", pushNotifications)}
           />
         </div>
       </Section>

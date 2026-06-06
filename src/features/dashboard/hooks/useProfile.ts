@@ -8,6 +8,7 @@ import {
   type ProfileValue,
   type UpdateProfilePayload,
 } from "../services/profile.service";
+import { useAuthStore } from "@/store/auth.store";
 
 type UseProfileResult = {
   profile: ProfileValue | null;
@@ -29,6 +30,12 @@ export const useProfile = (): UseProfileResult => {
     try {
       const nextProfile = await profileService.getProfile();
       setProfile(nextProfile);
+      
+      // Sync the loaded profile picture with the global auth state for the Header
+      if (nextProfile.profilePictureUrl) {
+        const { firstName, lastName, updateProfile } = useAuthStore.getState();
+        updateProfile(firstName, lastName, nextProfile.profilePictureUrl);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load profile.");
     } finally {

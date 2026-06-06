@@ -1,21 +1,45 @@
+"use client";
+
 import { CheckCircle } from "lucide-react";
 import { useId } from "react";
-import {
-  CREDENTIAL_STATS,
-  CREDENTIAL_BREACHES,
-} from "../../data/credential-data";
+import { useMonitoredEmails } from "../../hooks/use-compliance";
 import { BreachCard } from "./BreachCard";
-
-// ── Tab ────────────────────────────────────────────────────────────────────
 
 export function CredentialMonitoringTab() {
   const clipId = useId();
+  const { data: emailsData, isLoading, isError } = useMonitoredEmails();
+
+  if (isLoading) {
+    return (
+      <div className="flex h-64 items-center justify-center text-brand-gray">
+        Loading credential monitoring data...
+      </div>
+    );
+  }
+
+  if (isError || !emailsData) {
+    return (
+      <div className="flex h-64 items-center justify-center text-red-500">
+        Failed to load credential monitoring data.
+      </div>
+    );
+  }
+
+  const totalMonitored = emailsData.length;
+  const breachesFound = emailsData.reduce((acc, curr) => acc + curr.breachCount, 0);
+
+  const stats = [
+    { value: totalMonitored.toString(), label: "Monitored Email" },
+    { value: breachesFound.toString(), label: "Breaches Found" },
+    { value: "N/A", label: "Resolved" }, // Data missing from API
+    { value: "N/A", label: "Investigating" }, // Data missing from API
+  ];
 
   return (
     <div className="flex flex-col gap-6">
       {/* ── Stat cards ── */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {CREDENTIAL_STATS.map((stat) => (
+        {stats.map((stat) => (
           <div
             key={stat.label}
             className="flex flex-col gap-6 rounded-xl border border-brand-light-gray bg-white p-6"
@@ -83,23 +107,19 @@ export function CredentialMonitoringTab() {
         {/* Header row */}
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold text-brand-dark">
-            Detected Credential Breaches
+            Monitored Emails & Breaches
           </h3>
-          <button
-            type="button"
-            disabled
-            aria-disabled="true"
-            className="text-base font-medium text-scan-primary-900 cursor-not-allowed opacity-70 whitespace-nowrap"
-          >
-            View All Monitored Email
-          </button>
         </div>
 
         {/* Breach cards */}
         <div className="flex flex-col gap-4">
-          {CREDENTIAL_BREACHES.map((breach) => (
-            <BreachCard key={breach.id} breach={breach} />
-          ))}
+          {emailsData.length === 0 ? (
+            <p className="text-brand-gray text-sm py-4">No monitored emails found.</p>
+          ) : (
+            emailsData.map((breach) => (
+              <BreachCard key={breach.id} breach={breach} />
+            ))
+          )}
         </div>
       </div>
     </div>

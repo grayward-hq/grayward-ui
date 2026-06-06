@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle2, AlertTriangle, ChevronUp, ChevronDown } from "lucide-react";
+import { CheckCircle2, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type {
   OWASPItem,
-  OWASPFinding,
   OWASPStatus,
-  Severity,
 } from "../../data/owasp-data";
 
 // ── Status config — all Tailwind classes live here ─────────────────────────
@@ -48,67 +45,16 @@ const STATUS_CONFIG: Record<OWASPStatus, StatusConfig> = {
   },
 };
 
-// ── Severity config ────────────────────────────────────────────────────────
 
-type SeverityConfig = { wrap: string; text: string; label: string };
 
-const SEVERITY_CONFIG: Record<Severity, SeverityConfig> = {
-  medium: { wrap: "bg-owasp-warn-bg", text: "text-scan-yellow-900", label: "Medium" },
-  low: { wrap: "bg-owasp-blue-bg", text: "text-owasp-blue", label: "Low" },
-  high: { wrap: "bg-brand-risk-high-bg", text: "text-brand-risk-high", label: "High" },
-  critical: {
-    wrap: "bg-brand-risk-critical-bg",
-    text: "text-brand-risk-critical",
-    label: "Critical",
-  },
-};
 
-// ── Finding row ────────────────────────────────────────────────────────────
-
-function FindingRow({ finding }: { finding: OWASPFinding }) {
-  const sev = SEVERITY_CONFIG[finding.severity];
-  return (
-    <div className="flex items-start gap-4 rounded-lg border border-brand-light-gray p-6">
-      <span
-        className={cn(
-          "shrink-0 rounded-[9.6px] px-3 py-2 text-sm font-medium",
-          sev.wrap,
-          sev.text
-        )}
-      >
-        {sev.label}
-      </span>
-      <div className="flex flex-col gap-4">
-        <p className="text-base font-semibold text-brand-dark">{finding.title}</p>
-        <p className="text-sm text-brand-gray">Location: {finding.location}</p>
-      </div>
-    </div>
-  );
-}
-
-// ── OWASP row (expandable) ─────────────────────────────────────────────────
-
-export function OWASPRiskItem({
-  item,
-  defaultOpen = false,
-}: {
-  item: OWASPItem;
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
+export function OWASPRiskItem({ item }: { item: OWASPItem }) {
   const cfg = STATUS_CONFIG[item.status];
 
   return (
-    <div className={cn("flex flex-col overflow-hidden rounded-lg border", cfg.border)}>
-      {/* ── Clickable header ── */}
-      <button
-        type="button"
-        id={`owasp-${item.id}-btn`}
-        aria-expanded={open}
-        aria-controls={`owasp-${item.id}-panel`}
-        onClick={() => setOpen((prev) => !prev)}
-        className="flex w-full items-start gap-6 bg-owasp-card-subtle p-6 text-left transition-colors hover:bg-white"
-      >
+    <div className={cn("flex flex-col overflow-hidden rounded-lg border bg-owasp-card-subtle", cfg.border)}>
+      {/* ── Static Card Header ── */}
+      <div className="flex w-full items-start gap-6 p-6 text-left transition-colors hover:bg-white">
         {/* Status icon */}
         <div
           className={cn(
@@ -161,50 +107,7 @@ export function OWASPRiskItem({
             </span>
           </div>
         </div>
-
-        {/* Chevron */}
-        <div className="mt-1 shrink-0">
-          {open ? (
-            <ChevronUp className="h-6 w-6 text-scan-primary-900" strokeWidth={2} />
-          ) : (
-            <ChevronDown className="h-6 w-6 text-scan-primary-900" strokeWidth={2} />
-          )}
-        </div>
-      </button>
-
-      {/* ── Compliant footer (no findings) ── */}
-      {open && item.status === "compliant" && item.findings.length === 0 && (
-        <div
-          id={`owasp-${item.id}-panel`}
-          role="region"
-          aria-labelledby={`owasp-${item.id}-btn`}
-          className="flex items-center gap-4 bg-owasp-compliant-bg px-6 py-4"
-        >
-          <CheckCircle2 className="h-6 w-6 shrink-0 text-brand-green" strokeWidth={1.8} />
-          <span className="text-base text-brand-green">
-            No findings detected – Fully compliant
-          </span>
-        </div>
-      )}
-
-      {/* ── Findings list (needs-attention / non-compliant) ── */}
-      {open && item.findings.length > 0 && item.status !== "compliant" && (
-        <div
-          id={`owasp-${item.id}-panel`}
-          role="region"
-          aria-labelledby={`owasp-${item.id}-btn`}
-          className="flex flex-col gap-4 px-6 pb-6 pt-2"
-        >
-          <p className="text-base font-semibold tracking-wide text-brand-dark">
-            Findings
-          </p>
-          <div className="flex flex-col gap-4">
-            {item.findings.map((finding) => (
-              <FindingRow key={finding.id} finding={finding} />
-            ))}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

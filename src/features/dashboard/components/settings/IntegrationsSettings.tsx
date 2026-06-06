@@ -50,7 +50,8 @@ const IntegrationsSettings = () => {
     try {
       const { authorizationUrl } = await integrationsService.getSlackAuthorizeUrl();
       if (authorizationUrl) {
-        window.location.href = authorizationUrl;
+        window.open(authorizationUrl, "_blank");
+        setActionLoading(false);
       } else {
         throw new Error("No authorization URL returned");
       }

@@ -2,7 +2,9 @@ import { privateApi } from "@/lib/axios";
 import type { 
   OwaspComplianceResponse, 
   MonitoredEmail, 
-  ApiResponse 
+  ApiResponse,
+  MonitoredEmailsResponse,
+  BrandThreatsResponse
 } from "../types/compliance.types";
 
 function unwrap<T>(res: { data: ApiResponse<T>; status: number }): T {
@@ -37,7 +39,12 @@ export const complianceService = {
   },
 
   async getMonitoredEmails(domainId: string): Promise<MonitoredEmail[]> {
-    const res = await privateApi.get<ApiResponse<MonitoredEmail[]>>(`/api/compliance/monitored-emails/${domainId}`);
+    const res = await privateApi.get<ApiResponse<MonitoredEmailsResponse>>(`/api/compliance/domains/${domainId}/monitored-emails`);
+    return unwrap(res).emails.data;
+  },
+
+  async getBrandThreats(domainId: string): Promise<BrandThreatsResponse> {
+    const res = await privateApi.get<ApiResponse<BrandThreatsResponse>>(`/api/compliance/domains/${domainId}/brand-threats`);
     return unwrap(res);
   },
 

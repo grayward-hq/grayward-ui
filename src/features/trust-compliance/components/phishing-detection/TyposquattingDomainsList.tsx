@@ -1,32 +1,32 @@
 import { Eye, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { TyposquattingDomain, TyposquattingStatus } from "../../data/phishing-data";
+import type { BrandThreat } from "../../types/compliance.types";
 
 const STATUS_CONFIG: Record<
-  TyposquattingStatus,
+  string,
   { bg: string; text: string; label: string }
 > = {
-  active: {
+  Active: {
     bg: "bg-brand-failed-bg", // #FDEBEC
     text: "text-brand-failed-text", // #D00416
-    label: "active",
+    label: "Active",
   },
-  monitoring: {
+  Monitoring: {
     bg: "bg-owasp-warn-bg", // #FFFBF0
     text: "text-scan-yellow-900", // #B27F06
-    label: "monitoring",
+    label: "Monitoring",
   },
-  "taken down": {
+  Resolved: {
     bg: "bg-owasp-green-bg", // #E8F7EF
     text: "text-brand-green", // #1DAF61
-    label: "taken down",
+    label: "Resolved",
   },
 };
 
 export function TyposquattingDomainsList({
   domains,
 }: {
-  domains: TyposquattingDomain[];
+  domains: BrandThreat[];
 }) {
   return (
     <div className="rounded-xl bg-white p-6 border border-brand-light-gray flex flex-col gap-6">
@@ -44,7 +44,9 @@ export function TyposquattingDomainsList({
       {/* List of domains */}
       <div className="flex flex-col gap-4">
         {domains.map((item) => {
-          const status = STATUS_CONFIG[item.status];
+          const status = STATUS_CONFIG[item.status] || STATUS_CONFIG["Monitoring"];
+          const isHighRisk = item.status !== "Resolved" && (item.riskLevel === "High" || item.riskLevel === "Critical");
+          
           return (
             <div
               key={item.id}
@@ -56,7 +58,7 @@ export function TyposquattingDomainsList({
                 <div className="flex items-center gap-4 flex-wrap">
                   <AlertCircle className="h-5 w-5 text-brand-failed-text" />
                   <span className="text-base font-normal text-brand-dark">
-                    {item.domain}
+                    {item.lookAlikeDomain}
                   </span>
                   {/* Status Badge */}
                   <span
@@ -69,7 +71,7 @@ export function TyposquattingDomainsList({
                     {status.label}
                   </span>
                   {/* High Risk Badge — only shown for active threats */}
-                  {item.status !== "taken down" && (
+                  {isHighRisk && (
                     <span className="rounded-lg bg-brand-sidebar-bg px-3 py-2 text-sm font-normal leading-none text-brand-gray">
                       High Risk
                     </span>
@@ -78,9 +80,9 @@ export function TyposquattingDomainsList({
 
                 {/* Subtitle details */}
                 <div className="flex items-center gap-2 text-sm text-brand-gray">
-                  <span>Similarity: {item.similarity}</span>
+                  <span>Similarity: {item.variationType}</span>
                   <span className="h-2 w-2 rounded-full bg-brand-gray opacity-50" />
-                  <span>Detected: {item.detectedDate}</span>
+                  <span>Detected: {new Date(item.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
 

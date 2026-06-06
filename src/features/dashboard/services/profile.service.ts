@@ -29,6 +29,12 @@ export interface UpdateProfilePayload {
   organization?: string;
 }
 
+export interface NotificationPreferences {
+  emailAlerts: boolean;
+  slackAlerts: boolean;
+  pushNotifications: boolean;
+}
+
 function unwrap<T>(res: { data: ApiResponse<T>; status: number }): T {
   if (!res.data.isSuccess || res.data.value === null || res.data.value === undefined) {
     throw new Error(res.data.error?.message ?? `Request failed (${res.status})`);
@@ -44,6 +50,11 @@ export const profileService = {
 
   async updateProfile(payload: UpdateProfilePayload): Promise<ProfileValue> {
     const res = await privateApi.put<ApiResponse<ProfileValue>>("/api/Profile", payload);
+    return unwrap(res);
+  },
+
+  async updateNotificationPreferences(payload: NotificationPreferences): Promise<NotificationPreferences> {
+    const res = await privateApi.put<ApiResponse<NotificationPreferences>>("/api/profile/notifications", payload);
     return unwrap(res);
   },
 

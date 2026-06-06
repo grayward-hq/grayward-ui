@@ -1,15 +1,15 @@
-// ─────────────────────────────────────────────────────────────────�
-// Dashboard API Types
+// ── Dashboard API Types ────────────────────────────────────────────────────────
 // Source: GET /api/dashboard/summary
 //         GET /api/dashboard/domains
 //         GET /api/dashboard/alerts
+//         GET /api/dashboard/score-trend
 //
 // NOTE: These are schema/type definitions only.
 //       No service calls are wired here yet (Phase 1).
 //       Service layer will be added in Phase 3.
-// ─────────────────────────────────────────────────────────────────�
+// ──────────────────────────────────────────────────────────────────────────────
 
-// ── Generic API wrapper ───────────────────────────────────────────────────────
+// ── Generic API wrapper ────────────────────────────────────────────────────────
 
 export interface DashboardApiError {
   code: string;
@@ -22,7 +22,7 @@ export interface DashboardApiResponse<T> {
   error: DashboardApiError | null;
 }
 
-// ── GET /api/dashboard/summary ────────────────────────────────────────────────
+// ── GET /api/dashboard/summary ─────────────────────────────────────────────────
 
 /**
  * The most urgent SSL certificate across all domains.
@@ -64,11 +64,26 @@ export interface DashboardSummary {
   sslAlertsActive: number;
   mostUrgentSsl: DashboardSummaryMostUrgentSsl | null;
   mostRecentScan: DashboardSummaryMostRecentScan | null;
+  severityBreakdown: {
+    critical: number;
+    high: number;
+    medium: number;
+    low: number;
+  };
 }
 
 export type DashboardSummaryResponse = DashboardApiResponse<DashboardSummary>;
 
-// ── GET /api/dashboard/domains ────────────────────────────────────────────────
+// ── GET /api/dashboard/score-trend ─────────────────────────────────────────────
+
+export interface ScoreTrendItem {
+  day: string;
+  score: number | null;
+}
+
+export type ScoreTrendResponse = DashboardApiResponse<ScoreTrendItem[]>;
+
+// ── GET /api/dashboard/domains ─────────────────────────────────────────────────
 
 /**
  * Pagination links returned alongside the domains list.
@@ -119,7 +134,7 @@ export interface DashboardDomainsParams {
   pageSize?: number;
 }
 
-// ── GET /api/dashboard/alerts ─────────────────────────────────────────────────
+// ── GET /api/dashboard/alerts ──────────────────────────────────────────────────
 
 /** Alert type discriminator */
 export type DashboardAlertType =

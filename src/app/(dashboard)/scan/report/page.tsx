@@ -278,7 +278,7 @@ function ScanReportContent() {
                 </p>
               </div>
             </div>
-            <div className="flex justify-end mt-6">
+            <div className="hidden justify-end mt-6">
               {detailsHref ? (
                 <Button
                   asChild

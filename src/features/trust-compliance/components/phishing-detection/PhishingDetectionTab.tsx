@@ -27,7 +27,6 @@ export function PhishingDetectionTab() {
     { value: brandThreats.totalThreats.toString(), label: "Total Threats" },
     { value: brandThreats.activeCount.toString(), label: "Active" },
     { value: brandThreats.resolvedCount.toString(), label: "Resolved" },
-    { value: brandThreats.monitoringCount.toString(), label: "Monitoring" },
   ];
 
   const activeDomain = verifiedDomains.find(d => d.id === activeDomainId);

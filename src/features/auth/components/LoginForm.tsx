@@ -45,7 +45,7 @@ export function LoginForm() {
         useAuthStore
           .getState()
           .login(response.value.accessToken, data.email);
-        
+
         const returnUrl = searchParams.get("returnUrl");
         router.push(getSafeReturnUrl(returnUrl));
       } else {
@@ -57,7 +57,7 @@ export function LoginForm() {
         if (isNotVerified) {
           toast.error(
             response.error?.message ||
-              "Your account has not been verified. Redirecting to verification page...",
+            "Your account has not been verified. Redirecting to verification page...",
           );
           if (typeof window !== "undefined") {
             window.sessionStorage.setItem("verify_email_address", data.email);
@@ -91,7 +91,7 @@ export function LoginForm() {
             </Link>
           </div>
           <p className="font-geist text-center text-[15px] font-normal text-[#666666] sm:text-[16px]">
-            Eter yor credentials to access the secure enterprise dashboard.
+            Enter yor credentials to access the secure enterprise dashboard.
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { Eye, AlertCircle } from "lucide-react";
+import { Eye, AlertCircle, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BrandThreat } from "../../types/compliance.types";
 
@@ -11,11 +11,7 @@ const STATUS_CONFIG: Record<
     text: "text-brand-failed-text", // #D00416
     label: "Active",
   },
-  Monitoring: {
-    bg: "bg-owasp-warn-bg", // #FFFBF0
-    text: "text-scan-yellow-900", // #B27F06
-    label: "Monitoring",
-  },
+
   Resolved: {
     bg: "bg-owasp-green-bg", // #E8F7EF
     text: "text-brand-green", // #1DAF61
@@ -43,61 +39,64 @@ export function TyposquattingDomainsList({
 
       {/* List of domains */}
       <div className="flex flex-col gap-4">
-        {domains.map((item) => {
-          const status = STATUS_CONFIG[item.status] || STATUS_CONFIG["Monitoring"];
-          const isHighRisk = item.status !== "Resolved" && (item.riskLevel === "High" || item.riskLevel === "Critical");
-          
-          return (
-            <div
-              key={item.id}
-              className="flex flex-col gap-4 rounded-xl border border-brand-light-gray bg-white p-4 sm:p-6 sm:flex-row sm:items-center sm:justify-between"
-            >
-              {/* Left side info */}
-              <div className="flex flex-col gap-4">
-                {/* Top row with domain and badges */}
-                <div className="flex items-center gap-4 flex-wrap">
-                  <AlertCircle className="h-5 w-5 text-brand-failed-text" />
-                  <span className="text-base font-normal text-brand-dark">
-                    {item.lookAlikeDomain}
-                  </span>
-                  {/* Status Badge */}
-                  <span
-                    className={cn(
-                      "rounded-lg px-3 py-2 text-xs font-normal leading-none capitalize",
-                      status.bg,
-                      status.text
-                    )}
-                  >
-                    {status.label}
-                  </span>
-                  {/* High Risk Badge — only shown for active threats */}
-                  {isHighRisk && (
-                    <span className="rounded-lg bg-brand-sidebar-bg px-3 py-2 text-sm font-normal leading-none text-brand-gray">
-                      High Risk
-                    </span>
-                  )}
-                </div>
-
-                {/* Subtitle details */}
-                <div className="flex items-center gap-2 text-sm text-brand-gray">
-                  <span>Similarity: {item.variationType}</span>
-                  <span className="h-2 w-2 rounded-full bg-brand-gray opacity-50" />
-                  <span>Detected: {new Date(item.createdAt).toLocaleDateString()}</span>
-                </div>
-              </div>
-
-              {/* Right side action button — disabled until takedown flow is wired */}
-              <button
-                type="button"
-                disabled
-                aria-disabled="true"
-                className="rounded-lg bg-brand-sidebar-bg px-6 py-4 text-base font-medium text-brand-gray text-center shrink-0 min-w-[136px] h-12 flex items-center justify-center cursor-not-allowed opacity-60"
-              >
-                Take Action
-              </button>
+        {domains.length === 0 ? (
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-brand-light-gray bg-[#FAFAFA] py-12 px-4 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm mb-4">
+              <Shield className="h-6 w-6 text-brand-gray opacity-50" />
             </div>
-          );
-        })}
+            <h4 className="text-base font-semibold text-brand-dark">No Typosquatting Threats Found</h4>
+            <p className="mt-1 text-sm text-brand-gray max-w-sm">
+              We are continuously monitoring your domain. Any look-alike domains or typosquatting attempts will appear here.
+            </p>
+          </div>
+        ) : (
+          domains.map((item) => {
+            const status = STATUS_CONFIG[item.status] || STATUS_CONFIG["Active"];
+            
+            return (
+              <div
+                key={item.id}
+                className="flex flex-col gap-4 rounded-xl border border-brand-light-gray bg-white p-4 sm:p-6 sm:flex-row sm:items-center sm:justify-between"
+              >
+                {/* Left side info */}
+                <div className="flex flex-col gap-4">
+                  {/* Top row with domain and badges */}
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <AlertCircle className="h-5 w-5 text-brand-failed-text" />
+                    <span className="text-base font-normal text-brand-dark">
+                      {item.lookAlikeDomain}
+                    </span>
+                    {/* Status Badge */}
+                    <span
+                      className={cn(
+                        "rounded-lg px-3 py-2 text-xs font-normal leading-none capitalize",
+                        status.bg,
+                        status.text
+                      )}
+                    >
+                      {status.label}
+                    </span>
+                  </div>
+
+                  {/* Subtitle details */}
+                  <div className="flex items-center gap-2 text-sm text-brand-gray">
+                    <span>Detected: {new Date(item.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+
+                {/* Right side action button — disabled until takedown flow is wired */}
+                <button
+                  type="button"
+                  disabled
+                  aria-disabled="true"
+                  className="rounded-lg bg-brand-sidebar-bg px-6 py-4 text-base font-medium text-brand-gray text-center shrink-0 min-w-[136px] h-12 flex items-center justify-center cursor-not-allowed opacity-60"
+                >
+                  Take Action
+                </button>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

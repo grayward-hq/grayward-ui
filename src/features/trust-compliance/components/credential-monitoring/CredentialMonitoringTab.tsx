@@ -10,6 +10,7 @@ import { BreachCard } from "./BreachCard";
 
 export function CredentialMonitoringTab() {
   const clipId = useId();
+
   return (
     <div className="flex flex-col gap-6">
       {/* ── Stat cards ── */}

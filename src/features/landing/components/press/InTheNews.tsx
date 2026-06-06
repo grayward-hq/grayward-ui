@@ -4,7 +4,7 @@ import { newsItems } from "../../constants/press";
 export default function InTheNews() {
     return (
         <section className="mx-auto max-w-6xl px-6 py-10">
-            <h2 className="mb-8 text-[20px] font-bold text-[#000000] md:text-[24px]">
+            <h2 className="mb-8 text-[20px] font-bold text-header md:text-[24px]">
                 In the news
             </h2>
 

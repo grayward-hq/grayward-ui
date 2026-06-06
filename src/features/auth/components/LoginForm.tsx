@@ -7,7 +7,7 @@ import { Mail, Loader2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { authService } from "@/features/auth/services/auth.services";
 
@@ -20,9 +20,11 @@ import { AuthInput } from "./AuthInput";
 import { PasswordInput } from "./PasswordInput";
 import { AuthDivider } from "./AuthDivider";
 import { SocialAuthButton } from "./SocialAuthButton";
+import { getSafeReturnUrl } from "@/lib/utils";
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -43,11 +45,29 @@ export function LoginForm() {
         useAuthStore
           .getState()
           .login(response.value.accessToken, data.email);
-        router.push("/dashboard");
+        
+        const returnUrl = searchParams.get("returnUrl");
+        router.push(getSafeReturnUrl(returnUrl));
       } else {
-        const errMsg = response.error?.message || "Login failed. Please check your credentials.";
-        toast.error(errMsg);
-        setError("root", { message: errMsg });
+        const isNotVerified =
+          response.error?.code === "403" ||
+          response.error?.message?.toLowerCase().includes("not been verified") ||
+          response.error?.message?.toLowerCase().includes("not verified");
+
+        if (isNotVerified) {
+          toast.error(
+            response.error?.message ||
+              "Your account has not been verified. Redirecting to verification page...",
+          );
+          if (typeof window !== "undefined") {
+            window.sessionStorage.setItem("verify_email_address", data.email);
+          }
+          router.push("/register/verify-email");
+        } else {
+          const errMsg = response.error?.message || "Login failed. Please check your credentials.";
+          toast.error(errMsg);
+          setError("root", { message: errMsg });
+        }
       }
     } catch {
       toast.error("An unexpected error occurred. Please try again later.");
@@ -55,7 +75,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-[#FAFAFA] px-4 py-8 sm:px-6 lg:px-8">
+    <main className="flex min-h-screen w-full flex-col items-center justify-center bg-[#FAFAFA] px-4 py-8 sm:px-6 lg:px-8">
       <AuthCard>
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4">
@@ -126,7 +146,7 @@ export function LoginForm() {
               Already have an Account?{" "}
               <Link
                 href="/register"
-                className="font-medium text-[#C68A00] hover:underline"
+                className="font-medium text-[#8B6200] hover:underline"
               >
                 Sign up
               </Link>
@@ -138,6 +158,6 @@ export function LoginForm() {
           </div>
         </form>
       </AuthCard>
-    </div>
+    </main>
   );
 }

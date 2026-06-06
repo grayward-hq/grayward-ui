@@ -229,28 +229,28 @@ const FaqSection = () => {
         <div className="grid items-center gap-16 bg-[#FAFAFA] px-4 py-10 sm:px-6 md:grid-cols-[min-content_1fr] md:rounded-4xl md:p-14">
           <div className="space-y-12">
             <div className="space-y-4">
-              <h1 className="mb-2 text-4xl font-semibold text-[#2b2b2b] md:text-[40px]">
+              <h2 className="mb-2 text-4xl font-semibold text-[#2b2b2b] md:text-[40px]">
                 Frequently asked questions
-              </h1>
+              </h2>
               <p className="text-muted-foreground">
                 Have Questions? Here are quick answers to some of the most
                 common queries
               </p>
             </div>
             <Card>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-3 pt-4">
                 <div className="space-y-1 leading-tight">
-                  <h3 className="text-lg font-bold text-[#2b2b2b]">
+                  <h3 className="text-lg font-bold text-header">
                     More questions?
                   </h3>
                   <p className="text-muted-foreground text-sm">
-                    We’re always ready to help you out.
+                    We&apos;re always ready to help you out.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap">
                   <UserAvatarCascade />
                   <Button
-                    className="bg-[#A0E870] px-8 text-black hover:bg-[#A0E870]"
+                    className="bg-secondary px-8 text-primary hover:bg-secondary"
                     href="/contact"
                   >
                     Contact support

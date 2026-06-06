@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
 import DashboardSidebarIcon from '@/lib/icons/dashboard-sidebar-icon';
 import DomainSidebarIcon from '@/lib/icons/domain-sidebar-icon';
-import ScanSidebarIcon from '@/lib/icons/scan-sidebar-icon';
 import ReportSidebarIcon from '@/lib/icons/report-sidebar-icon';
 import SettingsIcon from '@/lib/icons/settings-icon';
 
@@ -19,7 +18,7 @@ type NavItemType = {
 };
 
 const NAV_ITEMS: NavItemType[] = [
-      {
+  {
     label: 'Dashboard',
     href: '/dashboard',
     icon: <DashboardSidebarIcon />,
@@ -29,13 +28,11 @@ const NAV_ITEMS: NavItemType[] = [
     href: '/domain',
     icon: <DomainSidebarIcon />,
   },
-  { label: 'Scan', href: '/scan', icon: <ScanSidebarIcon /> },
   { label: 'Report', href: '/report', icon: <ReportSidebarIcon /> },
-];
-
-const BOTTOM_ITEMS: NavItemType[] = [
   { label: 'Settings', href: '/settings', icon: <SettingsIcon /> },
 ];
+
+const BOTTOM_ITEMS: NavItemType[] = [];
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -47,16 +44,16 @@ export function Sidebar() {
   };
 
   return (
-    <aside className='hidden lg:flex flex-col w-55 min-h-screen bg-brand-sidebar-bg shrink-0'>
+    <aside className='hidden lg:flex flex-col w-55 min-h-screen bg-white border-r border-slate-200 shrink-0'>
       {/* Logo */}
-      <div className='flex items-center h-16 my-5 px-5 border-b border-[#F3F4F6]'>
-        <Link href='/dashboard'>
+      <div className='flex items-center h-[88px] px-5 border-b border-slate-200 shrink-0'>
+        <Link href='/dashboard' className='flex items-center w-full'>
           <Image
             src='/images/logo-auth.png'
             alt='VulnWatch AI'
             width={140}
             height={48}
-            className='h-auto w-56 pb-7'
+            className='h-auto w-48'
             priority
           />
         </Link>
@@ -71,21 +68,21 @@ export function Sidebar() {
               key={href}
               href={href}
               className={cn(
-                'flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors',
                 isActive
                   ? 'bg-primary text-white'
-                  : 'text-[#4B5563] hover:bg-[#F3F4F6] hover:text-[#111827]',
+                  : 'text-slate-700 hover:bg-gray-100 hover:text-gray-900',
               )}
             >
-              <div className='text-lg'>
+              <div className='flex items-center justify-center shrink-0'>
                 {label === 'Dashboard' ? (
-                  <DashboardSidebarIcon isActive={isActive} />
+                  <DashboardSidebarIcon className='h-5 w-5' isActive={isActive} />
                 ) : label === 'Domain' ? (
-                  <DomainSidebarIcon isActive={isActive} />
-                ) : label === 'Scan' ? (
-                  <ScanSidebarIcon isActive={isActive} />
+                  <DomainSidebarIcon className='h-5 w-5' isActive={isActive} />
                 ) : label === 'Report' ? (
-                  <ReportSidebarIcon isActive={isActive} />
+                  <ReportSidebarIcon className='h-5 w-5' isActive={isActive} />
+                ) : label === 'Settings' ? (
+                  <SettingsIcon className='h-5 w-5' isActive={isActive} />
                 ) : (
                   icon
                 )}
@@ -97,30 +94,38 @@ export function Sidebar() {
       </nav>
 
       {/* Bottom items */}
-      <div className='px-3 pb-5 space-y-2.5 border-t border-[#E5E7EB] pt-4'>
+      <div className='px-3 pb-5 space-y-2.5 border-t border-gray-200 pt-4'>
         {BOTTOM_ITEMS.map(({ label, href, icon }) => {
-          const isActive = pathname === href;
+          const isActive = pathname === href || pathname.startsWith(href + '/');
           return (
             <Link
               key={href}
               href={href}
               className={cn(
-                'flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-colors',
                 isActive
                   ? 'bg-primary text-white'
-                  : 'text-[#4B5563] hover:bg-[#F3F4F6] hover:text-[#111827]',
+                  : 'text-slate-700 hover:bg-gray-100 hover:text-gray-900',
               )}
             >
-              <div className='text-lg'>{icon}</div>
+              <div className='flex items-center justify-center shrink-0'>
+                {label === 'Settings' ? (
+                  <SettingsIcon className='h-5 w-5' isActive={isActive} />
+                ) : (
+                  icon
+                )}
+              </div>
               {label}
             </Link>
           );
         })}
         <button
           onClick={handleLogout}
-          className='w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-[#374151] hover:bg-gray-50 transition-colors'
+          className='w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-gray-100 hover:text-gray-900 transition-colors'
         >
-          <LogOut className='h-4.5 w-4.5 shrink-0' strokeWidth={1.8} />
+          <div className='flex items-center justify-center shrink-0'>
+            <LogOut className='h-5 w-5 shrink-0' strokeWidth={1.8} />
+          </div>
           Logout
         </button>
       </div>

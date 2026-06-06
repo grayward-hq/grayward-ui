@@ -2,34 +2,41 @@
 
 import { useState } from "react";
 import GeneralSettings from "./GeneralSettings";
-import SecuritySettings from "./SecuritySettings";
-import SessionManagement from "./SessionManagement";
+import ComingSoon from "./ComingSoon";
+import SecurityPrivacySettings from "./SecurityPrivacySettings";
+import IntegrationsSettings from "./IntegrationsSettings";
 
-type Tab = "general" | "security" | "session";
+type Tab = "general" | "security" | "session" | "integrations";
 
 const TABS: { label: string; value: Tab }[] = [
   { label: "General", value: "general" },
   { label: "Security", value: "security" },
+  { label: "Integrations", value: "integrations" },
   { label: "Session Management", value: "session" },
 ];
 
-const Settings = () => {
-  const [activeTab, setActiveTab] = useState<Tab>("general");
+type SettingsProps = {
+  initialTab?: Tab;
+};
+
+const Settings = ({ initialTab = "general" }: SettingsProps) => {
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+
+  const handleTabChange = (tab: Tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <div>
-      <p className="text-[#2B2B2B] text-4xl font-semibold">Settings</p>
-
-      <div className="mt-6 flex sm:gap-[30px]">
+      <div className="flex sm:gap-[30px]">
         {TABS.map((tab) => (
           <button
             key={tab.value}
-            onClick={() => setActiveTab(tab.value)}
-            className={`pb-2 px-4 sm:px-10 text-sm font-medium transition-colors cursor-pointer ${
-              activeTab === tab.value
-                ? "border-b-3 border-primary text-[#2B2B2B]"
-                : "text-[#6B7280] hover:text-[#2B2B2B]"
-            }`}
+            onClick={() => handleTabChange(tab.value)}
+            className={`pb-2 px-4 sm:px-10 text-sm font-medium transition-colors cursor-pointer ${activeTab === tab.value
+              ? "border-b-3 border-primary text-[#2B2B2B]"
+              : "text-[#6B7280] hover:text-[#2B2B2B]"
+              }`}
           >
             {tab.label}
           </button>
@@ -37,9 +44,10 @@ const Settings = () => {
       </div>
 
       <div className="mt-6">
-        {activeTab === "general" && <div><GeneralSettings/></div>}
-        {activeTab === "security" && <div><SecuritySettings/></div>}
-        {activeTab === "session" && <div><SessionManagement/></div>}
+        {activeTab === "general" && <GeneralSettings />}
+        {activeTab === "security" && <SecurityPrivacySettings />}
+        {activeTab === "integrations" && <IntegrationsSettings />}
+        {activeTab === "session" && <ComingSoon title="Session Management" />}
       </div>
     </div>
   );

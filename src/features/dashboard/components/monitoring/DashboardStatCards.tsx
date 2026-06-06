@@ -1,6 +1,6 @@
 'use client';
 
-import { Shield, TriangleAlert, Lock, Globe, TrendingUp, CheckCircle, Clock } from 'lucide-react';
+import { Shield, TriangleAlert, Lock, Globe, TrendingUp, TrendingDown, Minus, CheckCircle, Clock } from 'lucide-react';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -67,12 +67,17 @@ function StatCard({ label, value, icon, footer }: StatCardProps) {
   );
 }
 
-// ── Trend badge (green up arrow + text) ───────────────────────────────────────
+// ── Trend badge (dynamic up/down/neutral) ────────────────────────────────────
 
-function TrendUp({ text }: { text: string }) {
+function ScoreTrendIndicator({ text, direction }: { text: string; direction: 'up' | 'down' | 'neutral' }) {
+  const isUp = direction === 'up';
+  const isDown = direction === 'down';
+  const color = isUp ? '#1DAF61' : isDown ? '#D00416' : '#666666';
+  const Icon = isUp ? TrendingUp : isDown ? TrendingDown : Minus;
+
   return (
     <div className="flex flex-row items-center gap-2">
-      <TrendingUp size={16} style={{ color: '#1DAF61' }} />
+      <Icon size={16} style={{ color }} />
       <span
         style={{
           fontFamily: 'Geist, sans-serif',
@@ -80,7 +85,7 @@ function TrendUp({ text }: { text: string }) {
           fontSize: '14px',
           lineHeight: '14px',
           letterSpacing: '0.02em',
-          color: '#1DAF61',
+          color,
         }}
       >
         {text}
@@ -181,6 +186,7 @@ function AllVerified() {
 interface DashboardStatCardsProps {
   securityScore?: number;
   scoreTrend?: string;
+  scoreTrendDirection?: 'up' | 'down' | 'neutral';
   totalIssues?: number;
   criticalCount?: number;
   highCount?: number;
@@ -193,6 +199,7 @@ interface DashboardStatCardsProps {
 export function DashboardStatCards({
   securityScore = 78,
   scoreTrend = '+5 from last week',
+  scoreTrendDirection = 'up',
   totalIssues = 78,
   criticalCount = 2,
   highCount = 5,
@@ -208,7 +215,7 @@ export function DashboardStatCards({
         label="Security Score"
         value={securityScore}
         icon={<Shield size={15} style={{ color: '#072E28' }} />}
-        footer={<TrendUp text={scoreTrend} />}
+        footer={<ScoreTrendIndicator text={scoreTrend} direction={scoreTrendDirection} />}
       />
 
       {/* Total Issue */}

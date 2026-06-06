@@ -6,6 +6,8 @@ import {
 } from "../../data/credential-data";
 import { BreachCard } from "./BreachCard";
 
+// ── Tab ────────────────────────────────────────────────────────────────────
+
 export function CredentialMonitoringTab() {
   const clipId = useId();
 

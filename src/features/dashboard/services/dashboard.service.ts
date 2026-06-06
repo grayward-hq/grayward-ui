@@ -8,6 +8,8 @@ import type {
   DashboardAlert,
   DashboardAlertsResponse,
   DashboardAlertsParams,
+  ScoreTrendItem,
+  ScoreTrendResponse,
 } from '@/features/dashboard/types/dashboard-api.types';
 
 // Generic unwrap helper (mirrors profile.service.ts pattern)
@@ -28,6 +30,15 @@ export const dashboardService = {
    */
   async getDashboardSummary(): Promise<DashboardSummary> {
     const res = await privateApi.get<DashboardSummaryResponse>('/api/dashboard/summary');
+    return unwrap(res);
+  },
+
+  /**
+   * GET /api/dashboard/score-trend
+   * Security score trend over the past week.
+   */
+  async getDashboardScoreTrend(): Promise<ScoreTrendItem[]> {
+    const res = await privateApi.get<ScoreTrendResponse>('/api/dashboard/score-trend');
     return unwrap(res);
   },
 
@@ -54,3 +65,4 @@ export const dashboardService = {
     return unwrap(res);
   },
 };
+

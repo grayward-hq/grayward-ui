@@ -45,6 +45,17 @@ export function useMonitoredEmails(domainId?: string) {
   });
 }
 
+export function useBrandThreats(domainId?: string) {
+  const { activeDomainId } = useActiveDomainId();
+  const effectiveDomainId = domainId || activeDomainId;
+
+  return useQuery({
+    queryKey: ["compliance", "brand-threats", effectiveDomainId],
+    queryFn: () => complianceService.getBrandThreats(effectiveDomainId as string),
+    enabled: !!effectiveDomainId,
+  });
+}
+
 export function useAddMonitoredEmail() {
   const queryClient = useQueryClient();
   

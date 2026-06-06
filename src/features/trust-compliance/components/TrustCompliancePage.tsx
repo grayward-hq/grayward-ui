@@ -159,50 +159,48 @@ export default function TrustCompliancePage() {
 
         {/* Right-side actions */}
         <div className="flex w-full items-center gap-4 md:w-auto md:shrink-0 flex-wrap md:flex-nowrap">
-          {/* Domain Selector — only on credentials tab */}
-          {activeTab === "credentials" && (
-            <div ref={dropdownRef} className="relative w-full md:w-64">
-              <button
-                type="button"
-                onClick={() => setDropdownOpen((o) => !o)}
-                disabled={domainsLoading}
-                className="flex w-full items-center justify-between gap-2 rounded-xl border border-scan-primary-900 bg-white px-4 py-3.5 text-scan-primary-900 hover:bg-scan-primary-50 transition-colors disabled:opacity-60 cursor-pointer"
-              >
-                <div className="flex items-center gap-2 min-w-0">
-                  <Globe2 className="h-5 w-5 shrink-0" strokeWidth={1.8} />
-                  <span className="truncate font-medium text-[16px]">
-                    {domainsLoading ? "Loading..." : selectedDomain?.domain ?? "Select a domain"}
-                  </span>
-                </div>
-                <ChevronDown className={cn("h-4 w-4 shrink-0 transition-transform", dropdownOpen && "rotate-180")} />
-              </button>
+          {/* Domain Selector — available on all tabs */}
+          <div ref={dropdownRef} className="relative w-full md:w-64">
+            <button
+              type="button"
+              onClick={() => setDropdownOpen((o) => !o)}
+              disabled={domainsLoading}
+              className="flex w-full items-center justify-between gap-2 rounded-xl border border-scan-primary-900 bg-white px-4 py-3.5 text-scan-primary-900 hover:bg-scan-primary-50 transition-colors disabled:opacity-60 cursor-pointer"
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <Globe2 className="h-5 w-5 shrink-0" strokeWidth={1.8} />
+                <span className="truncate font-medium text-[16px]">
+                  {domainsLoading ? "Loading..." : selectedDomain?.domain ?? "Select a domain"}
+                </span>
+              </div>
+              <ChevronDown className={cn("h-4 w-4 shrink-0 transition-transform", dropdownOpen && "rotate-180")} />
+            </button>
 
-              {dropdownOpen && (
-                <>
-                  <div className="fixed inset-0 z-10" onClick={() => setDropdownOpen(false)} />
-                  <div className="absolute left-0 top-full z-20 mt-1 w-full rounded-xl border border-[#E5E7EB] bg-white py-1 shadow-lg">
-                    {verifiedDomains.length === 0 ? (
-                      <p className="px-4 py-3 text-sm text-[#9CA3AF]">No verified domains</p>
-                    ) : (
-                      verifiedDomains.map((d) => (
-                        <button
-                          key={d.id}
-                          type="button"
-                          onClick={() => handleDomainSelect(d.id)}
-                          className="flex w-full items-center justify-between px-4 py-2.5 text-sm text-[#374151] hover:bg-[#F9FAFB] transition-colors"
-                        >
-                          <span className="truncate">{d.domain}</span>
-                          {d.id === selectedDomain?.id && (
-                            <span className="ml-2 h-2 w-2 rounded-full bg-[#072E28] shrink-0" />
-                          )}
-                        </button>
-                      ))
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          )}
+            {dropdownOpen && (
+              <>
+                <div className="fixed inset-0 z-10" onClick={() => setDropdownOpen(false)} />
+                <div className="absolute left-0 top-full z-20 mt-1 w-full rounded-xl border border-[#E5E7EB] bg-white py-1 shadow-lg">
+                  {verifiedDomains.length === 0 ? (
+                    <p className="px-4 py-3 text-sm text-[#9CA3AF]">No verified domains</p>
+                  ) : (
+                    verifiedDomains.map((d) => (
+                      <button
+                        key={d.id}
+                        type="button"
+                        onClick={() => handleDomainSelect(d.id)}
+                        className="flex w-full items-center justify-between px-4 py-2.5 text-sm text-[#374151] hover:bg-[#F9FAFB] transition-colors"
+                      >
+                        <span className="truncate">{d.domain}</span>
+                        {d.id === selectedDomain?.id && (
+                          <span className="ml-2 h-2 w-2 rounded-full bg-[#072E28] shrink-0" />
+                        )}
+                      </button>
+                    ))
+                  )}
+                </div>
+              </>
+            )}
+          </div>
 
           {/* Add Email — only on credentials tab */}
           {activeTab === "credentials" && (

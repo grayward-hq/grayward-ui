@@ -1,12 +1,14 @@
 import { Plus } from "lucide-react";
+import Image from "next/image";
 import type { ProfileForm } from "./types";
 
 type PersonalInfoCardProps = {
   profile: ProfileForm;
+  pictureUrl?: string | null;
   onEdit: () => void;
 };
 
-const PersonalInfoCard = ({ profile, onEdit }: PersonalInfoCardProps) => {
+const PersonalInfoCard = ({ profile, pictureUrl, onEdit }: PersonalInfoCardProps) => {
   return (
     <div className="bg-white rounded-2xl border border-[#E5E7EB] p-6">
       <h2 className="text-xl font-semibold text-[#2B2B2B]">Personal Information</h2>
@@ -16,7 +18,15 @@ const PersonalInfoCard = ({ profile, onEdit }: PersonalInfoCardProps) => {
 
       <div className="flex items-center gap-4 mt-5">
         <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-[#E5E7EB] flex items-center justify-center shrink-0 overflow-hidden">
-          {profile.firstName || profile.lastName ? (
+          {pictureUrl ? (
+            <Image 
+              src={pictureUrl} 
+              alt="Profile" 
+              width={96}
+              height={96}
+              className="w-full h-full object-cover" 
+            />
+          ) : profile.firstName || profile.lastName ? (
             <span className="text-2xl font-semibold text-[#6B7280]">
               {profile.firstName.charAt(0).toUpperCase()}
               {profile.lastName.charAt(0).toUpperCase()}

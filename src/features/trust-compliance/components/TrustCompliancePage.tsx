@@ -150,8 +150,9 @@ export default function TrustCompliancePage() {
           {activeTab === "credentials" && (
             <button
               type="button"
+              disabled={!activeDomainId}
               onClick={() => setIsAddEmailOpen(true)}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-scan-primary-900 px-4 py-3.5 text-base font-semibold text-scan-primary-900 hover:bg-scan-primary-50 transition-colors md:flex-none"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-scan-primary-900 px-4 py-3.5 text-base font-semibold text-scan-primary-900 hover:bg-scan-primary-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent md:flex-none"
             >
               <Plus className="h-5 w-5" strokeWidth={2} />
               Add Email
@@ -175,32 +176,53 @@ export default function TrustCompliancePage() {
       </div>
 
       {/* ── Tab content ── */}
-      <div
-        id="tabpanel-owasp"
-        role="tabpanel"
-        aria-labelledby="tab-owasp"
-        hidden={activeTab !== "owasp"}
-      >
-        {activeTab === "owasp" && <SecurityPostureTab />}
-      </div>
+      {!domainsLoading && !activeDomainId ? (
+        <div className="mt-12 flex flex-col items-center justify-center px-6 py-20 text-center">
+          <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-scan-primary-50 text-scan-primary-900">
+            <Globe2 className="h-7 w-7" />
+          </div>
+          <h3 className="text-[20px] font-semibold text-[#2B2B2B]">No Verified Domains</h3>
+          <p className="mt-2 max-w-md text-[16px] text-[#666666]">
+            You need to add and verify a domain before you can access trust and compliance monitoring data.
+          </p>
+          <button
+            onClick={() => router.push("/domain?add=true")}
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-xl bg-scan-primary-900 px-6 py-3 text-[16px] font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            <Plus className="h-5 w-5" strokeWidth={2} />
+            Add New Domain
+          </button>
+        </div>
+      ) : (
+        <>
+          <div
+            id="tabpanel-owasp"
+            role="tabpanel"
+            aria-labelledby="tab-owasp"
+            hidden={activeTab !== "owasp"}
+          >
+            {activeTab === "owasp" && <SecurityPostureTab />}
+          </div>
 
-      <div
-        id="tabpanel-phishing"
-        role="tabpanel"
-        aria-labelledby="tab-phishing"
-        hidden={activeTab !== "phishing"}
-      >
-        {activeTab === "phishing" && <PhishingDetectionTab />}
-      </div>
+          <div
+            id="tabpanel-phishing"
+            role="tabpanel"
+            aria-labelledby="tab-phishing"
+            hidden={activeTab !== "phishing"}
+          >
+            {activeTab === "phishing" && <PhishingDetectionTab />}
+          </div>
 
-      <div
-        id="tabpanel-credentials"
-        role="tabpanel"
-        aria-labelledby="tab-credentials"
-        hidden={activeTab !== "credentials"}
-      >
-        {activeTab === "credentials" && <CredentialMonitoringTab />}
-      </div>
+          <div
+            id="tabpanel-credentials"
+            role="tabpanel"
+            aria-labelledby="tab-credentials"
+            hidden={activeTab !== "credentials"}
+          >
+            {activeTab === "credentials" && <CredentialMonitoringTab />}
+          </div>
+        </>
+      )}
 
       {/* ── Add Email Dialog ── */}
       <AddEmailDialog

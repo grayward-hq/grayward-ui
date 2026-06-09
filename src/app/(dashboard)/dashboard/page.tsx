@@ -131,7 +131,7 @@ export default function DashboardController() {
       domainRows={dashboardDomainsRes?.data ?? []}
       totalDomainsCount={dashboardDomainsRes?.totalCount ?? 0}
       alerts={alertsRes ?? []}
-      
+
       onAddDomain={() => router.push('/domain?add=true')}
     />
   );

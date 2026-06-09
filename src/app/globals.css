@@ -424,3 +424,11 @@ input:-webkit-autofill:active {
   outline: 2px solid #1DAF61;
   outline-offset: 2px;
 }
+
+/* Tour Spotlight */
+.tour-highlight-active {
+  position: relative !important;
+  z-index: 99999 !important;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}

@@ -41,6 +41,7 @@ export function Contact() {
     reset,
     formState: { isSubmitting },
   } = useForm<SupportFormData>({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(supportSchema) as any,
     mode: "onBlur",
   });

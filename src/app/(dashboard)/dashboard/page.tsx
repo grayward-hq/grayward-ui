@@ -53,25 +53,25 @@ export default function DashboardController() {
 
   // ── 2. Fetch Global Dashboard Stats (Banner, Stat Cards, SSL, Alerts) ───
   // We only fetch these if there is at least one verified domain.
-  const { data: summaryRes } = useQuery({
+  const { data: summaryRes, isLoading: isSummaryLoading } = useQuery({
     queryKey: ['dashboard', 'summary'],
     queryFn: () => dashboardService.getDashboardSummary(),
     enabled: verifiedDomains.length > 0,
   });
 
-  const { data: dashboardDomainsRes } = useQuery({
+  const { data: dashboardDomainsRes, isLoading: isDomainsListLoading } = useQuery({
     queryKey: ['dashboard', 'domains'],
     queryFn: () => dashboardService.getDashboardDomains({ pageSize: 20 }),
     enabled: verifiedDomains.length > 0,
   });
 
-  const { data: alertsRes } = useQuery({
+  const { data: alertsRes, isLoading: isAlertsLoading } = useQuery({
     queryKey: ['dashboard', 'alerts'],
     queryFn: () => dashboardService.getDashboardAlerts({ limit: 5 }),
     enabled: verifiedDomains.length > 0,
   });
 
-  const { data: scoreTrendRes } = useQuery({
+  const { data: scoreTrendRes, isLoading: isScoreTrendLoading } = useQuery({
     queryKey: ['dashboard', 'score-trend'],
     queryFn: () => dashboardService.getDashboardScoreTrend(),
     enabled: verifiedDomains.length > 0,
@@ -79,9 +79,11 @@ export default function DashboardController() {
 
   const hasScans = selectedDomain && selectedDomain.lastScannedAt !== null;
 
+  const isDashboardDataLoading = hasScans && (isSummaryLoading || isDomainsListLoading || isAlertsLoading || isScoreTrendLoading);
+
   // ── Routing Logic ───────────────────────────────────────────────────────
 
-  if (isDomainsLoading) {
+  if (isDomainsLoading || isDashboardDataLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] gap-3">
         <Loader2 className="h-8 w-8 animate-spin text-[#072E28]" />

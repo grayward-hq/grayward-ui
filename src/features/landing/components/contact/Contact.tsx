@@ -41,8 +41,7 @@ export function Contact() {
     reset,
     formState: { isSubmitting },
   } = useForm<SupportFormData>({
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    resolver: zodResolver(supportSchema) as any,
+    resolver: zodResolver(supportSchema),
     mode: "onBlur",
   });
 
@@ -50,7 +49,7 @@ export function Contact() {
     try {
       const payload = {
         name: data.name,
-        email: data.email as string,
+        email: data.email,
         phoneNumber: data.phone,
         requestType: data.requestType,
         content: data.message,

@@ -20,8 +20,8 @@ export function TourProvider() {
         // If element is not yet rendered, fallback to center and wait for polling
         if (!targetElement) {
             setCardStyle({
-                opacity: 0,
-                pointerEvents: 'none',
+                opacity: 1,
+                pointerEvents: 'auto',
                 position: 'fixed',
                 top: '50%',
                 left: '50%',

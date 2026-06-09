@@ -16,6 +16,7 @@ export interface TabsProps<T extends string> {
   ariaLabel?: string;
   className?: string;
   layoutId?: string;
+  idBase?: string;
 }
 
 export function Tabs<T extends string>({ 
@@ -24,10 +25,12 @@ export function Tabs<T extends string>({
   onChange, 
   ariaLabel, 
   className,
-  layoutId = "activeTabIndicator" 
+  layoutId = "activeTabIndicator",
+  idBase
 }: TabsProps<T>) {
   const tabContainerRef = useRef<HTMLDivElement>(null);
-  const instancePrefix = useId();
+  const reactId = useId();
+  const instancePrefix = idBase || reactId;
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -14,10 +14,7 @@ export const passwordSchema = z
 
 // Reusable strict email schema
 export const EmailSchema = z.object({
-  email: z.preprocess(
-    (val) => (typeof val === "string" ? val.trim() : val),
-    z.string().min(1, "Email is required").email("Invalid email address format")
-  ),
+  email: z.string().trim().min(1, "Email is required").email("Invalid email address format"),
 });
 
 export const RegisterSchema = z.object({

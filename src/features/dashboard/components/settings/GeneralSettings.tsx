@@ -112,41 +112,27 @@ const GeneralSettingsContent = ({
   const [deleting, setDeleting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isPictureModalOpen, setIsPictureModalOpen] = useState(false);
-  const [emailNotifications, setEmailNotifications] = useState(
-    profile.notificationPreferences?.emailAlerts ?? false
-  );
-  const [slackNotifications, setSlackNotifications] = useState(
-    profile.notificationPreferences?.slackAlerts ?? false
-  );
-  const [pushNotifications, setPushNotifications] = useState(
-    profile.notificationPreferences?.pushNotifications ?? false
-  );
+  const [preferences, setPreferences] = useState({
+    emailAlerts: profile.notificationPreferences?.emailAlerts ?? false,
+    slackAlerts: profile.notificationPreferences?.slackAlerts ?? false,
+    pushNotifications: profile.notificationPreferences?.pushNotifications ?? false,
+  });
 
-  const handleTogglePreference = async (
-    key: "emailAlerts" | "slackAlerts" | "pushNotifications",
-    currentValue: boolean
+  const handleTogglePreference = (
+    key: "emailAlerts" | "slackAlerts" | "pushNotifications"
   ) => {
-    const newValue = !currentValue;
-    
-    // Optimistic update
-    if (key === "emailAlerts") setEmailNotifications(newValue);
-    if (key === "slackAlerts") setSlackNotifications(newValue);
-    if (key === "pushNotifications") setPushNotifications(newValue);
+    setPreferences((prev) => {
+      const newPrefs = { ...prev, [key]: !prev[key] };
+      
+      profileService.updateNotificationPreferences(newPrefs)
+        .then(() => toast.success("Preferences updated successfully"))
+        .catch((err) => {
+          toast.error(err instanceof Error ? err.message : "Failed to update preferences");
+          setPreferences((current) => ({ ...current, [key]: prev[key] }));
+        });
 
-    try {
-      await profileService.updateNotificationPreferences({
-        emailAlerts: key === "emailAlerts" ? newValue : emailNotifications,
-        slackAlerts: key === "slackAlerts" ? newValue : slackNotifications,
-        pushNotifications: key === "pushNotifications" ? newValue : pushNotifications,
-      });
-      toast.success("Preferences updated successfully");
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Failed to update preferences");
-      // Revert on failure
-      if (key === "emailAlerts") setEmailNotifications(currentValue);
-      if (key === "slackAlerts") setSlackNotifications(currentValue);
-      if (key === "pushNotifications") setPushNotifications(currentValue);
-    }
+      return newPrefs;
+    });
   };
 
   const initialForm: ProfileForm = useMemo(() => ({
@@ -255,18 +241,18 @@ const GeneralSettingsContent = ({
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           <Toggle
             label="Email Notifications"
-            checked={emailNotifications}
-            onChange={() => handleTogglePreference("emailAlerts", emailNotifications)}
+            checked={preferences.emailAlerts}
+            onChange={() => handleTogglePreference("emailAlerts")}
           />
           <Toggle
             label="Slack Notifications"
-            checked={slackNotifications}
-            onChange={() => handleTogglePreference("slackAlerts", slackNotifications)}
+            checked={preferences.slackAlerts}
+            onChange={() => handleTogglePreference("slackAlerts")}
           />
           <Toggle
             label="Push Notifications"
-            checked={pushNotifications}
-            onChange={() => handleTogglePreference("pushNotifications", pushNotifications)}
+            checked={preferences.pushNotifications}
+            onChange={() => handleTogglePreference("pushNotifications")}
           />
         </div>
       </Section>

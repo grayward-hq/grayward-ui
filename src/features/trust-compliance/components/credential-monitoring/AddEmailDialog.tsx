@@ -22,9 +22,10 @@ export function AddEmailDialog({
   const [email, setEmail] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    if (!email || !agreed) return;
+    if (!email || !agreed || isSubmitting || isLoading) return;
 
     const result = EmailSchema.safeParse({ email });
     if (!result.success) {
@@ -33,9 +34,14 @@ export function AddEmailDialog({
     }
 
     setError("");
-    await onSubmit(result.data.email);
-    setEmail("");
-    setAgreed(false);
+    setIsSubmitting(true);
+    try {
+      await onSubmit(result.data.email);
+      setEmail("");
+      setAgreed(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {

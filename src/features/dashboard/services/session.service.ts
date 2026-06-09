@@ -30,7 +30,7 @@ export const sessionService = {
   },
 
   async revokeSession(sessionId: string): Promise<void> {
-    await privateApi.delete(`/api/sessions/${sessionId}`);
+    await privateApi.delete(`/api/sessions/${encodeURIComponent(sessionId)}`);
   },
 
   async revokeAllOtherSessions(): Promise<void> {

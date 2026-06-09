@@ -68,33 +68,40 @@ const PersonalInfoCard = ({
       <div className="mt-5 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-[16px] font-normal text-brand-dark mb-1.5">First Name</label>
+            <label htmlFor="firstNameInput" className="block text-[16px] font-normal text-brand-dark mb-1.5">First Name</label>
             <input
+              id="firstNameInput"
               type="text"
               value={form.firstName}
               onChange={(e) => onFormChange({ ...form, firstName: e.target.value })}
               className={`w-full border ${errors?.firstName ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-primary'} rounded-lg px-3 py-2.5 text-sm text-brand-dark outline-none focus:ring-1`}
               placeholder="First name"
+              aria-invalid={!!errors?.firstName}
+              aria-describedby={errors?.firstName ? "firstNameError" : undefined}
             />
-            {errors?.firstName && <p className="mt-1.5 text-xs text-red-500">{errors.firstName}</p>}
+            {errors?.firstName && <p id="firstNameError" className="mt-1.5 text-xs text-red-500">{errors.firstName}</p>}
           </div>
 
           <div>
-            <label className="block text-[16px] font-normal text-brand-dark mb-1.5">Last Name</label>
+            <label htmlFor="lastNameInput" className="block text-[16px] font-normal text-brand-dark mb-1.5">Last Name</label>
             <input
+              id="lastNameInput"
               type="text"
               value={form.lastName}
               onChange={(e) => onFormChange({ ...form, lastName: e.target.value })}
               className={`w-full border ${errors?.lastName ? 'border-red-500 focus:ring-red-500' : 'border-gray-200 focus:ring-primary'} rounded-lg px-3 py-2.5 text-sm text-brand-dark outline-none focus:ring-1`}
               placeholder="Last name"
+              aria-invalid={!!errors?.lastName}
+              aria-describedby={errors?.lastName ? "lastNameError" : undefined}
             />
-            {errors?.lastName && <p className="mt-1.5 text-xs text-red-500">{errors.lastName}</p>}
+            {errors?.lastName && <p id="lastNameError" className="mt-1.5 text-xs text-red-500">{errors.lastName}</p>}
           </div>
         </div>
 
         <div>
-          <label className="block text-[16px] font-normal text-brand-dark mb-1.5">Email Address</label>
+          <label htmlFor="emailInput" className="block text-[16px] font-normal text-brand-dark mb-1.5">Email Address</label>
           <input
+            id="emailInput"
             type="email"
             value={form.email}
             disabled

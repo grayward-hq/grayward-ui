@@ -75,7 +75,7 @@ export function BreachCard({ breach }: { breach: MonitoredEmail }) {
             <DialogTitle className="text-xl font-semibold leading-5 tracking-tight text-brand-dark">
               Are you sure you want to remove?
             </DialogTitle>
-            <DialogDescription className="hidden">
+            <DialogDescription className="sr-only">
               This will remove {breach.emailAddress} from monitoring.
             </DialogDescription>
           </DialogHeader>

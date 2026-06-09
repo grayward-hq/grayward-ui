@@ -9,6 +9,7 @@ import SettingsErrorState from "./SettingsErrorState";
 function formatLastActive(dateStr: string) {
   if (!dateStr) return "Unknown";
   const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return "Unknown";
   const now = new Date();
   
   const isToday = date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
@@ -129,9 +130,9 @@ const SessionManagement = () => {
                       <div className="w-4 h-4 rounded-full bg-brand-green-bright" />
                       <span className="text-base text-brand-dark">Current Session</span>
                     </div>
-                    <button type="button" className="p-2 hover:bg-gray-50 rounded-full transition-colors cursor-pointer text-brand-icon-dark">
+                    <span className="p-2 text-brand-icon-dark" aria-hidden="true">
                       <MoreHorizontal className="w-6 h-6" />
-                    </button>
+                    </span>
                   </>
                 ) : (
                   <button

@@ -11,7 +11,7 @@ export default function EditProfilePictureModal({ open, onOpenChange }: EditProf
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton={false} className="top-0 left-0 w-screen max-w-none translate-x-0 translate-y-0 rounded-none border-0 p-0 sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85vh] sm:w-[90vw] sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:border sm:border-[#E5E7EB] sm:p-6">
         <div className="relative flex h-full flex-col px-4 pb-5 pt-6 sm:p-0">
-          <DialogClose className="cursor-pointer absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-[#666666] transition-colors hover:bg-[#F3F4F6]">
+          <DialogClose aria-label="Close profile picture modal" className="cursor-pointer absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full text-[#666666] transition-colors hover:bg-[#F3F4F6]">
             <X className="h-5 w-5" />
           </DialogClose>
 
@@ -30,7 +30,7 @@ export default function EditProfilePictureModal({ open, onOpenChange }: EditProf
             </div>
             <h3 className="text-lg font-medium text-[#2B2B2B] mb-2">Coming Soon</h3>
             <p className="text-sm text-[#666666] max-w-[250px]">
-              The ability to upload profile pictures is currently being finalized by the our team and will be available shortly.
+              The ability to upload profile pictures is currently being finalized by our team and will be available shortly.
             </p>
           </div>
 

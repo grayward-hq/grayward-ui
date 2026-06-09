@@ -41,7 +41,7 @@ export function Contact() {
     reset,
     formState: { isSubmitting },
   } = useForm<SupportFormData>({
-    resolver: zodResolver(supportSchema),
+    resolver: zodResolver(supportSchema) as any,
     mode: "onBlur",
   });
 
@@ -49,7 +49,7 @@ export function Contact() {
     try {
       const payload = {
         name: data.name,
-        email: data.email,
+        email: data.email as string,
         phoneNumber: data.phone,
         requestType: data.requestType,
         content: data.message,

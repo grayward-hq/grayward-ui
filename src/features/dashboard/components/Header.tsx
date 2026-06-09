@@ -140,7 +140,7 @@ export function DashboardHeader() {
         <div className='items-center gap-4 ml-auto order-4 hidden md:flex'>
           {/* User avatar */}
           <div className='relative hidden md:block'>
-            <div className='flex items-center gap-2 bg-brand-bg rounded-[12px] pt-[4.8px] pr-[9.59px] pb-[4.8px] pl-[4.8px]'>
+            <div className='flex items-center gap-2 bg-brand-bg rounded-[12px] px-2.5 py-1'>
               {picture ? (
                 <Image
                   src={picture}

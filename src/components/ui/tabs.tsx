@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useId } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -27,10 +27,11 @@ export function Tabs<T extends string>({
   layoutId = "activeTabIndicator" 
 }: TabsProps<T>) {
   const tabContainerRef = useRef<HTMLDivElement>(null);
+  const instancePrefix = useId();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const activeTabElement = document.getElementById(`tab-${activeTab}`);
+      const activeTabElement = document.getElementById(`${instancePrefix}-tab-${activeTab}`);
       if (activeTabElement && tabContainerRef.current) {
         activeTabElement.scrollIntoView({
           behavior: "smooth",
@@ -52,22 +53,24 @@ export function Tabs<T extends string>({
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            id={`tab-${tab.id}`}
+            id={`${instancePrefix}-tab-${tab.id}`}
             type="button"
             role="tab"
             aria-selected={activeTab === tab.id}
-            aria-controls={`tabpanel-${tab.id}`}
+            aria-controls={`${instancePrefix}-tabpanel-${tab.id}`}
             tabIndex={activeTab === tab.id ? 0 : -1}
             onClick={() => onChange(tab.id)}
             onKeyDown={(e) => {
               if (e.key === "ArrowRight") {
+                e.preventDefault();
                 const next = tabs[(index + 1) % tabs.length];
                 onChange(next.id);
-                document.getElementById(`tab-${next.id}`)?.focus();
+                document.getElementById(`${instancePrefix}-tab-${next.id}`)?.focus();
               } else if (e.key === "ArrowLeft") {
+                e.preventDefault();
                 const prev = tabs[(index - 1 + tabs.length) % tabs.length];
                 onChange(prev.id);
-                document.getElementById(`tab-${prev.id}`)?.focus();
+                document.getElementById(`${instancePrefix}-tab-${prev.id}`)?.focus();
               }
             }}
             className={cn(

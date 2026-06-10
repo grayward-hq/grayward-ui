@@ -1,4 +1,4 @@
-// ── Types ─────────────────────────────────────────────────────────────�
+//  Types 
 
 export type OWASPStatus = "compliant" | "needs-attention" | "non-compliant";
 export type Severity = "medium" | "low" | "high" | "critical";
@@ -39,7 +39,7 @@ export interface ActivityItem {
   timeAgo: string;
 }
 
-// ── Static data ───────────────────────────────────────────────────────────�
+//  Static data 
 
 export const STAT_CARDS: StatCard[] = [
   {

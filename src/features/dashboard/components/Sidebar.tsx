@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, ShieldCheck } from 'lucide-react';
+import { LogOut, ShieldCheck, GitFork } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
 import DashboardSidebarIcon from '@/lib/icons/dashboard-sidebar-icon';
@@ -29,6 +29,11 @@ const NAV_ITEMS: NavItemType[] = [
     icon: <DomainSidebarIcon />,
   },
   { label: 'Report', href: '/report', icon: <ReportSidebarIcon /> },
+  {
+    label: 'Repositories',
+    href: '/repositories',
+    icon: <GitFork className="h-[22px] w-[22px]" strokeWidth={1.8} />,
+  },
   {
     label: 'Trust and Compliance',
     href: '/trust-compliance',

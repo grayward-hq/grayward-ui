@@ -31,10 +31,10 @@ export function SecurityPostureTab() {
     {
       id: "owasp",
       variant: "owasp",
-      value: owaspData.compliantCount.toString(),
+      value: `${owaspData.compliantCount}/4`,
       label: "OWASP Compliance",
       footer: owaspData.complianceTier || "Compliant",
-      progressPercent: (owaspData.compliantCount / 10) * 100,
+      progressPercent: (owaspData.compliantCount / 4) * 100,
     },
     {
       id: "score",
@@ -50,14 +50,6 @@ export function SecurityPostureTab() {
       value: owaspData.threatCount.toString(),
       label: "Threats Detected",
       footer: "Active monitoring",
-    },
-    // We don't have Domains count from this API, showing N/A or omitting
-    {
-      id: "domains",
-      variant: "domains",
-      value: "N/A",
-      label: "Protected Domains",
-      footer: "Data unavailable",
     },
   ];
 

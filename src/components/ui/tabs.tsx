@@ -44,7 +44,7 @@ export function Tabs<T extends string>({
       }
     }, 50);
     return () => clearTimeout(timer);
-  }, [activeTab]);
+  }, [activeTab, instancePrefix]);
 
   return (
     <div ref={tabContainerRef} className={cn("overflow-x-auto scrollbar-none w-full min-w-0", className)}>

@@ -15,7 +15,12 @@ export function RepositorySecurityPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    repositoryService.getRepositories().then(setRepositories);
+    repositoryService.getRepositories()
+      .then(setRepositories)
+      .catch((err) => {
+        console.error("Failed to load repositories:", err);
+        setRepositories([]);
+      });
   }, []);
 
   const handleConnect = () => {

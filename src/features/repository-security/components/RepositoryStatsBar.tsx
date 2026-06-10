@@ -25,8 +25,8 @@ export function RepositoryStatsBar({ repositories }: Props) {
       label: "Critical Findings",
       value: criticalFindings,
       sub: "Immediate attention required",
-      icon: <Shield className="h-5 w-5 text-brand-risk-high" strokeWidth={1.8} />,
-      iconBg: "bg-brand-risk-high-bg",
+      icon: <Shield className="h-5 w-5 text-brand-risk-critical" strokeWidth={1.8} />,
+      iconBg: "bg-brand-risk-critical-bg",
     },
     {
       label: "High Severity",

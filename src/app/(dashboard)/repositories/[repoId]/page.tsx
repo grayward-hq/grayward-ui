@@ -22,16 +22,35 @@ export default function RepositoryDetailPage() {
 
   useEffect(() => {
     if (!repoId) return;
-    Promise.all([
-      repositoryService.getRepository(repoId),
-      repositoryService.getVulnerabilities(repoId),
-      repositoryService.getTrendData(repoId),
-    ]).then(([repo, vulns, trends]) => {
-      setRepository(repo);
-      setVulnerabilities(vulns);
-      setTrendData(trends);
-      setLoading(false);
-    });
+
+    let active = true;
+    
+    const loadData = async () => {
+      try {
+        const [repo, vulns, trends] = await Promise.all([
+          repositoryService.getRepository(repoId),
+          repositoryService.getVulnerabilities(repoId),
+          repositoryService.getTrendData(repoId),
+        ]);
+        if (active) {
+          setRepository(repo);
+          setVulnerabilities(vulns);
+          setTrendData(trends);
+        }
+      } catch (err) {
+        console.error("Failed to load repository details:", err);
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
+
+    return () => {
+      active = false;
+    };
   }, [repoId]);
 
   if (loading) {

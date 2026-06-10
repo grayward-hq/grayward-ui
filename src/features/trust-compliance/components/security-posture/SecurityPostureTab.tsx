@@ -31,10 +31,10 @@ export function SecurityPostureTab() {
     {
       id: "owasp",
       variant: "owasp",
-      value: `${owaspData.compliantCount}/4`,
+      value: `${owaspData.compliantCount}/${owaspData.categories.length || 1}`,
       label: "OWASP Compliance",
       footer: owaspData.complianceTier || "Compliant",
-      progressPercent: (owaspData.compliantCount / 4) * 100,
+      progressPercent: Math.min((owaspData.compliantCount / (owaspData.categories.length || 1)) * 100, 100),
     },
     {
       id: "score",

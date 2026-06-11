@@ -1,8 +1,8 @@
-// ── Types ──────────────────────────────────────────────────────────────────
+//  Types 
 
 export type OWASPStatus = "compliant" | "needs-attention" | "non-compliant";
 export type Severity = "medium" | "low" | "high" | "critical";
-export type StatCardVariant = "owasp" | "score" | "threats" | "domains";
+export type StatCardVariant = "owasp" | "score" | "threats";
 
 export interface OWASPFinding {
   id: string;
@@ -39,7 +39,7 @@ export interface ActivityItem {
   timeAgo: string;
 }
 
-// ── Static data ────────────────────────────────────────────────────────────
+//  Static data 
 
 export const STAT_CARDS: StatCard[] = [
   {
@@ -64,13 +64,6 @@ export const STAT_CARDS: StatCard[] = [
     value: "2",
     label: "Threats Detected",
     footer: "Active monitoring",
-  },
-  {
-    id: "domains",
-    variant: "domains",
-    value: "12",
-    label: "Protected Domains",
-    footer: "All secure",
   },
 ];
 

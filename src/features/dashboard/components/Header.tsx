@@ -38,6 +38,9 @@ function getPageHeaderInfo(pathname: string) {
   if (pathname.startsWith('/report') || pathname.startsWith('/scan')) {
     return { title: 'Report Overview', description: 'Summary of all security reports' };
   }
+  if (pathname.startsWith('/repositories')) {
+    return { title: 'GitHub Security Intelligence', description: 'Monitor your software supply chain for vulnerabilities and security risks' };
+  }
   if (pathname.startsWith('/trust-compliance')) {
     return { title: 'Trust and Compliance', description: 'Demonstrate your security posture and protect your brand identity' };
   }

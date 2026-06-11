@@ -102,7 +102,7 @@ jobs:
             pnpm install
 
             echo "Building application..."
-            if ! pnpm build; then
+              if ! NODE_OPTIONS="--max-old-space-size=3072" pnpm build; then
               echo "Build failed. Rolling back..."
 
               if [ -d "$BACKUP_DIR" ] && [ "$(ls -A $BACKUP_DIR)" ]; then

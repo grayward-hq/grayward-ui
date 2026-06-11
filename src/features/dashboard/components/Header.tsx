@@ -13,6 +13,7 @@ import {
   Settings,
   LogOut,
   ShieldCheck,
+  GitFork,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store/auth.store';
@@ -21,6 +22,7 @@ const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Domain', href: '/domain', icon: Globe },
   { label: 'Report', href: '/report', icon: FileText },
+  { label: 'Repositories', href: '/repositories', icon: GitFork },
   { label: 'Trust and Compliance', href: '/trust-compliance', icon: ShieldCheck },
 ];
 

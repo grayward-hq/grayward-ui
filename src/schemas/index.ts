@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-// Base rules for names: Letters, spaces, hyphens, and apostrophes only
-const nameRegex = /^[A-Za-z\s-']+$/;
-const nameMessage = "Only letters, spaces, hyphens, and apostrophes allowed";
+// Base rules for names: Letters, spaces, and hyphens only
+const nameRegex = /^[A-Za-z\s-]+$/;
+const nameMessage = "Only letters, spaces, and hyphens allowed";
 
 // Reusable strict password schema
 export const passwordSchema = z

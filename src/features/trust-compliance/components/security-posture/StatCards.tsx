@@ -1,4 +1,4 @@
-import { ShieldCheck, TrendingUp, AlertTriangle, Eye } from "lucide-react";
+import { ShieldCheck, TrendingUp, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { StatCard, StatCardVariant } from "../../data/owasp-data";
 
@@ -24,11 +24,6 @@ const VARIANT_CONFIG: Record<StatCardVariant, VariantConfig> = {
   threats: {
     iconBg: "bg-owasp-warn-bg",
     icon: <AlertTriangle className="h-6 w-6 text-scan-yellow-900" strokeWidth={1.8} />,
-    progressColor: "",
-  },
-  domains: {
-    iconBg: "bg-brand-sidebar-bg",
-    icon: <Eye className="h-6 w-6 text-scan-primary-900" strokeWidth={1.8} />,
     progressColor: "",
   },
 };
@@ -79,7 +74,7 @@ function StatCardItem({ card }: { card: StatCard }) {
 
 export function StatCards({ cards }: { cards: StatCard[] }) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
       {cards.map((card) => (
         <StatCardItem key={card.id} card={card} />
       ))}

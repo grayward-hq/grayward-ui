@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { Mail } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import GoogleLogo from "@/features/auth/components/icons/google-logo";
 import { useAuthStore } from "@/store/auth.store";
 import { useProfile } from "../../hooks/useProfile";
 import SettingsErrorState from "./SettingsErrorState";
 import SettingsSectionSkeleton from "./SettingsSectionSkeleton";
-import ChangePasswordModal from "./SecuritySettings";
+import ChangePasswordForm from "./SecuritySettings";
 
 type ActionType = "button" | "status";
 
@@ -17,6 +18,8 @@ type SecurityRowProps = {
   actionLabel: string;
   actionType?: ActionType;
   onAction?: () => void;
+  isExpanded?: boolean;
+  children?: React.ReactNode;
 };
 
 const SecurityRow = ({
@@ -25,31 +28,51 @@ const SecurityRow = ({
   actionLabel,
   actionType = "button",
   onAction,
+  isExpanded,
+  children,
 }: SecurityRowProps) => (
-  <div className="flex flex-col gap-4 border-b border-[#E5E7EB] py-4 sm:flex-row sm:items-center sm:justify-between">
-    <div className="min-w-0">
-      <p className="text-[16px] font-semibold text-[#2B2B2B] sm:text-[17px]">{title}</p>
-      <p className="mt-1 text-[14px] leading-6 text-[#666666] sm:text-[16px]">{description}</p>
+  <div className="border-b border-[#E5E7EB] py-4">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="min-w-0">
+        <p className="text-[16px] font-semibold text-[#2B2B2B] sm:text-[17px]">{title}</p>
+        <p className="mt-1 text-[14px] leading-6 text-[#666666] sm:text-[16px]">{description}</p>
+      </div>
+
+      {actionType === "button" ? (
+        <button
+          type="button"
+          onClick={onAction}
+          className="w-full cursor-pointer rounded-lg border border-[#072E28] px-4 py-3 text-sm font-semibold text-[#072E28] transition-colors hover:bg-[#F5FAF8] sm:w-auto sm:min-w-[180px] sm:text-[16px]"
+        >
+          {actionLabel}
+        </button>
+      ) : (
+        <span className="text-sm font-medium text-[#666666] sm:text-[15px]">{actionLabel}</span>
+      )}
     </div>
 
-    {actionType === "button" ? (
-      <button
-        type="button"
-        onClick={onAction}
-        className="w-full cursor-pointer rounded-lg border border-[#072E28] px-4 py-3 text-sm font-semibold text-[#072E28] transition-colors hover:bg-[#F5FAF8] sm:w-auto sm:min-w-[180px] sm:text-[16px]"
-      >
-        {actionLabel}
-      </button>
-    ) : (
-      <span className="text-sm font-medium text-[#666666] sm:text-[15px]">{actionLabel}</span>
-    )}
+    <AnimatePresence>
+      {isExpanded && children && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
+          className="overflow-hidden"
+        >
+          <div className="pt-5 pb-1">
+            {children}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   </div>
 );
 
 const SecurityPrivacySettings = () => {
   const authEmail = useAuthStore.getState().email ?? "";
   const { profile, loading, error, refetch } = useProfile();
-  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [isPasswordFormOpen, setIsPasswordFormOpen] = useState(false);
 
   const email = profile?.email ?? authEmail;
   const hasGoogleLinked = profile?.hasGoogleLinked ?? false;
@@ -88,10 +111,16 @@ const SecurityPrivacySettings = () => {
                 ? "This account uses Google sign-in, so password changes are managed by Google."
                 : "Manage your password and login alerts."
             }
-            actionLabel={hasGoogleLinked ? "Managed by Google" : "Change password"}
+            actionLabel={hasGoogleLinked ? "Managed by Google" : isPasswordFormOpen ? "Cancel" : "Change password"}
             actionType={hasGoogleLinked ? "status" : "button"}
-            onAction={hasGoogleLinked ? undefined : () => setIsPasswordModalOpen(true)}
-          />
+            onAction={hasGoogleLinked ? undefined : () => setIsPasswordFormOpen(!isPasswordFormOpen)}
+            isExpanded={isPasswordFormOpen}
+          >
+            <ChangePasswordForm 
+              onSuccess={() => setIsPasswordFormOpen(false)}
+              onCancel={() => setIsPasswordFormOpen(false)}
+            />
+          </SecurityRow>
 
           <SecurityRow
             title="Two-Factor Authentication"
@@ -125,11 +154,6 @@ const SecurityPrivacySettings = () => {
           </div>
         </div>
       </div>
-
-      <ChangePasswordModal
-        open={isPasswordModalOpen}
-        onOpenChange={setIsPasswordModalOpen}
-      />
     </div>
   );
 };

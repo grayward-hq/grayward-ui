@@ -9,6 +9,7 @@ export function TourProvider() {
     const { currentStep, currentStepIndex, isVisible, next, skip, totalSteps } = useTour()
     const [cardStyle, setCardStyle] = useState<React.CSSProperties>({ opacity: 0 })
     const [actualArrow, setActualArrow] = useState<ArrowDirection>('none')
+    const [arrowOffset, setArrowOffset] = useState<{ x?: number, y?: number }>({})
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     const updatePosition = useCallback(() => {
@@ -53,7 +54,11 @@ export function TourProvider() {
         let finalArrow = currentStep.arrow
         const offset = 24 // Gap between button and card
 
-        if (currentStep.arrow === 'top') {
+        if (currentStep.arrow === 'none') {
+            top = (window.innerHeight / 2) - (cardHeight / 2)
+            left = (window.innerWidth / 2) - (cardWidth / 2)
+            finalArrow = 'none'
+        } else if (currentStep.arrow === 'top') {
             if (rect.bottom + cardHeight + offset < window.innerHeight) {
                 top = rect.bottom + offset
                 left = rect.left + (rect.width / 2) - (cardWidth / 2)
@@ -96,16 +101,32 @@ export function TourProvider() {
         }
 
         // Clamp to window edges to prevent overflow
-        top = Math.max(16, Math.min(top, window.innerHeight - cardHeight - 16))
-        left = Math.max(16, Math.min(left, window.innerWidth - cardWidth - 16))
+        let clampedTop = Math.max(16, Math.min(top, window.innerHeight - cardHeight - 16))
+        let clampedLeft = Math.max(16, Math.min(left, window.innerWidth - cardWidth - 16))
+
+        let arrowOffsetY: number | undefined
+        let arrowOffsetX: number | undefined
+
+        if (finalArrow === 'left' || finalArrow === 'right') {
+            const targetCenterY = rect.top + rect.height / 2
+            let y = targetCenterY - clampedTop
+            y = Math.max(24, Math.min(y, cardHeight - 24))
+            arrowOffsetY = y
+        } else if (finalArrow === 'top' || finalArrow === 'bottom') {
+            const targetCenterX = rect.left + rect.width / 2
+            let x = targetCenterX - clampedLeft
+            x = Math.max(24, Math.min(x, cardWidth - 24))
+            arrowOffsetX = x
+        }
 
         setCardStyle({
-            top: `${top}px`,
-            left: `${left}px`,
+            top: `${clampedTop}px`,
+            left: `${clampedLeft}px`,
             opacity: 1,
             position: 'fixed'
         })
         setActualArrow(finalArrow)
+        setArrowOffset({ x: arrowOffsetX, y: arrowOffsetY })
     }, [currentStep, isVisible])
 
     // Cleanup highlight on unmount
@@ -139,6 +160,11 @@ export function TourProvider() {
 
     return (
         <>
+            <style dangerouslySetInnerHTML={{ __html: `
+                #tour-resources.tour-highlight-active {
+                    background-color: white !important;
+                }
+            `}} />
             {/* Standard full screen backdrop at z-40 */}
             <div className='fixed inset-0 pointer-events-auto bg-black/70 transition-all duration-300 z-[40]' />
 
@@ -155,6 +181,7 @@ export function TourProvider() {
                     onNext={next}
                     onSkip={skip}
                     actualArrow={actualArrow}
+                    arrowOffset={arrowOffset}
                 />
             </div>
         </>

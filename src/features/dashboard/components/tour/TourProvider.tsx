@@ -15,10 +15,19 @@ export function TourProvider() {
     const updatePosition = useCallback(() => {
         if (!isVisible || !currentStep) return
 
-        // 1. Find target element
-        const targetElement = document.querySelector(currentStep.targetSelector) as HTMLElement
+        // 1. Find target element (first visible one)
+        const elements = document.querySelectorAll(currentStep.targetSelector)
+        let targetElement: HTMLElement | null = null
+        for (let i = 0; i < elements.length; i++) {
+            const el = elements[i] as HTMLElement
+            const r = el.getBoundingClientRect()
+            if (r.width > 0 && r.height > 0) {
+                targetElement = el
+                break
+            }
+        }
         
-        // If element is not yet rendered, fallback to center and wait for polling
+        // If element is not yet rendered or visible, fallback to center and wait for polling
         if (!targetElement) {
             setCardStyle({
                 opacity: 1,
@@ -51,14 +60,21 @@ export function TourProvider() {
         // 4. Smart Auto-Flipping & Positioning
         let top = 0
         let left = 0
-        let finalArrow = currentStep.arrow
         const offset = 24 // Gap between button and card
 
-        if (currentStep.arrow === 'none') {
+        // mobile overrides
+        let requestedArrow = currentStep.arrow
+        if (window.innerWidth < 768 && (requestedArrow === 'left' || requestedArrow === 'right')) {
+            requestedArrow = (rect.top < window.innerHeight / 2) ? 'top' : 'bottom'
+        }
+
+        let finalArrow = requestedArrow
+
+        if (requestedArrow === 'none') {
             top = (window.innerHeight / 2) - (cardHeight / 2)
             left = (window.innerWidth / 2) - (cardWidth / 2)
             finalArrow = 'none'
-        } else if (currentStep.arrow === 'top') {
+        } else if (requestedArrow === 'top') {
             if (rect.bottom + cardHeight + offset < window.innerHeight) {
                 top = rect.bottom + offset
                 left = rect.left + (rect.width / 2) - (cardWidth / 2)
@@ -68,7 +84,7 @@ export function TourProvider() {
                 left = rect.left + (rect.width / 2) - (cardWidth / 2)
                 finalArrow = 'bottom'
             }
-        } else if (currentStep.arrow === 'bottom') {
+        } else if (requestedArrow === 'bottom') {
             if (rect.top - cardHeight - offset > 0) {
                 top = rect.top - cardHeight - offset
                 left = rect.left + (rect.width / 2) - (cardWidth / 2)
@@ -78,7 +94,7 @@ export function TourProvider() {
                 left = rect.left + (rect.width / 2) - (cardWidth / 2)
                 finalArrow = 'top'
             }
-        } else if (currentStep.arrow === 'left') {
+        } else if (requestedArrow === 'left') {
             if (rect.right + cardWidth + offset < window.innerWidth) {
                 top = rect.top + (rect.height / 2) - (cardHeight / 2)
                 left = rect.right + offset
@@ -88,7 +104,7 @@ export function TourProvider() {
                 left = rect.left - cardWidth - offset
                 finalArrow = 'right'
             }
-        } else if (currentStep.arrow === 'right') {
+        } else if (requestedArrow === 'right') {
             if (rect.left - cardWidth - offset > 0) {
                 top = rect.top + (rect.height / 2) - (cardHeight / 2)
                 left = rect.left - cardWidth - offset
@@ -101,8 +117,8 @@ export function TourProvider() {
         }
 
         // Clamp to window edges to prevent overflow
-        let clampedTop = Math.max(16, Math.min(top, window.innerHeight - cardHeight - 16))
-        let clampedLeft = Math.max(16, Math.min(left, window.innerWidth - cardWidth - 16))
+        const clampedTop = Math.max(16, Math.min(top, window.innerHeight - cardHeight - 16))
+        const clampedLeft = Math.max(16, Math.min(left, window.innerWidth - cardWidth - 16))
 
         let arrowOffsetY: number | undefined
         let arrowOffsetX: number | undefined
@@ -161,8 +177,18 @@ export function TourProvider() {
     return (
         <>
             <style dangerouslySetInnerHTML={{ __html: `
-                #tour-resources.tour-highlight-active {
+                #tour-resources.tour-highlight-active,
+                #tour-mobile-menu.tour-highlight-active {
                     background-color: white !important;
+                    border-radius: 8px !important;
+                }
+                
+                header:has(.tour-highlight-active) {
+                    /* Drop header stacking context so the button can break out */
+                    z-index: auto !important;
+                }
+                aside:has(.tour-highlight-active) {
+                    z-index: 50 !important;
                 }
             `}} />
             {/* Standard full screen backdrop at z-40 */}

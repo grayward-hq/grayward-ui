@@ -90,6 +90,7 @@ export function DashboardHeader() {
       )}>
         {/* Hamburger (Mobile: Right, Tablet: Left) */}
         <button
+          id='tour-mobile-menu'
           type='button'
           onClick={() => setMobileMenuOpen(true)}
           className='lg:hidden text-brand-dark p-1 order-2 md:order-1 md:mr-4'

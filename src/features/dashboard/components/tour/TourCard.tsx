@@ -21,7 +21,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
 
             {/* Arrow — top */}
             {arrow === 'top' && (
-                <div className="hidden md:block absolute -top-5 w-0 h-0
+                <div className="absolute -top-5 w-0 h-0
                     border-l-[14px] border-l-transparent
                     border-r-[14px] border-r-transparent
                     border-b-[16px] border-b-primary"
@@ -30,7 +30,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
 
             {/* Arrow — bottom */}
             {arrow === 'bottom' && (
-                <div className="hidden md:block absolute -bottom-5 w-0 h-0
+                <div className="absolute -bottom-5 w-0 h-0
                     border-l-[14px] border-l-transparent
                     border-r-[14px] border-r-transparent
                     border-t-[16px] border-t-primary"
@@ -39,7 +39,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
 
             {/* Arrow — left */}
             {arrow === 'left' && (
-                <div className="hidden md:block absolute -left-5 w-0 h-0
+                <div className="absolute -left-5 w-0 h-0
                     border-t-[14px] border-t-transparent
                     border-b-[14px] border-b-transparent
                     border-r-[16px] border-r-primary"
@@ -48,7 +48,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
 
             {/* Arrow — right */}
             {arrow === 'right' && (
-                <div className="hidden md:block absolute -right-5 w-0 h-0
+                <div className="absolute -right-5 w-0 h-0
                     border-t-[14px] border-t-transparent
                     border-b-[14px] border-b-transparent
                     border-l-[16px] border-l-primary"

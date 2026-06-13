@@ -25,7 +25,7 @@ export default function ScanningProgress({
   color?: string;
   trackColor?: string;
 }) {
-  const pct = Math.min(100, Math.max(0, value));
+  const pct = Math.round(Math.min(100, Math.max(0, value)));
 
   const svgSize = size * (220 / 280);
   const cx = svgSize / 2;

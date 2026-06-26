@@ -24,11 +24,11 @@ export function IntelligenceSection() {
           {/* Left Side: Content */}
           <div className="flex flex-1 flex-col items-start max-w-xl">
             <h2 className="mb-6 text-4xl font-semibold tracking-tight text-brand-dark md:text-5xl leading-tight">
-              Not just a list of CVEs.<br />Aplan to fix them.
+              Not just a list of CVEs.<br />A plan to fix them.
             </h2>
             
             <p className="mb-8 text-lg text-brand-gray md:text-xl">
-              Each finding includes a severity ranked breakdown, CVSS score affected file path, and AI- generated remediation steps with the exact package version to upgrade to.
+              Each finding includes a severity ranked breakdown, CVSS score affected file path, and AI-generated remediation steps with the exact package version to upgrade to.
             </p>
 
             <ul className="flex flex-col gap-4">

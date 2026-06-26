@@ -59,7 +59,7 @@ export function WaitlistForm() {
         comments: combinedComments,
       });
 
-      if (response.isSuccess || response.value) {
+      if (response.isSuccess && response.value) {
         setIsSubmitted(true);
       } else {
         form.setError("root", { 

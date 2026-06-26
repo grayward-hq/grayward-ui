@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { waitlistService, WaitlistStatusResponse } from "../services/waitlist.services";
-import { Loader2, Search, Trash2 } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -19,7 +19,6 @@ type EmailFormValues = z.infer<typeof emailSchema>;
 export function WaitlistStatusPage() {
   const [statusData, setStatusData] = useState<WaitlistStatusResponse | null>(null);
   const [isChecking, setIsChecking] = useState(false);
-  const [isCanceling, setIsCanceling] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
@@ -44,32 +43,6 @@ export function WaitlistStatusPage() {
       setErrorMsg("An unexpected error occurred while checking status.");
     } finally {
       setIsChecking(false);
-    }
-  };
-
-  const onCancelWaitlist = async () => {
-    if (!statusData) return;
-    
-    if (!window.confirm("Are you sure you want to cancel your waitlist entry? This action cannot be undone.")) {
-      return;
-    }
-
-    setIsCanceling(true);
-    setErrorMsg("");
-    setSuccessMsg("");
-    
-    try {
-      const response = await waitlistService.cancel({ email: statusData.email });
-      if (response.isSuccess) {
-        setSuccessMsg("Your waitlist entry has been cancelled.");
-        setStatusData(null);
-      } else {
-        setErrorMsg(response.error?.message || "Failed to cancel waitlist entry.");
-      }
-    } catch {
-      setErrorMsg("An unexpected error occurred while cancelling.");
-    } finally {
-      setIsCanceling(false);
     }
   };
 
@@ -130,19 +103,9 @@ export function WaitlistStatusPage() {
               </div>
             </div>
             
-            <p className="text-sm text-brand-gray mb-8">
+            <p className="text-sm text-brand-gray">
               Registered on: {new Date(statusData.createdAt).toLocaleDateString()}
             </p>
-
-            <Button 
-              variant="outline" 
-              onClick={onCancelWaitlist}
-              disabled={isCanceling}
-              className="w-full h-12 text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600 rounded-xl"
-            >
-              {isCanceling ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Trash2 className="mr-2 h-4 w-4" />}
-              {isCanceling ? "Canceling..." : "Cancel Waitlist Entry"}
-            </Button>
           </div>
         )}
       </div>

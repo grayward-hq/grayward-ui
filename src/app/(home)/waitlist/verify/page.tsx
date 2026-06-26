@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { VerifyWaitlistPage } from "@/features/waitlist/views/VerifyWaitlistPage";
 
 export const metadata = {
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function WaitlistVerifyRoute() {
-  return <VerifyWaitlistPage />;
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-[50vh]">Loading...</div>}>
+      <VerifyWaitlistPage />
+    </Suspense>
+  );
 }

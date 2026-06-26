@@ -9,7 +9,7 @@ export function TestimonialsSection() {
       role: "Lead Engineer, Fintech startup"
     },
     {
-      quote: "The continuous monitoring is what sold us. We don't have to remember to scan - Vulnwatch just tells us when something new breaks.",
+      quote: "The continuous monitoring is what sold us. We don't have to remember to scan - VulnWatch just tells us when something new breaks.",
       author: "Marcus T.",
       role: "CTO B2B SaaS"
     }

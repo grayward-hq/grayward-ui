@@ -14,7 +14,7 @@ export function HowItWorksSection() {
     },
     {
       number: "03",
-      title: "Monitored and Remediate",
+      title: "Monitor and Remediate",
       description: "Get alerted to new CVEs instantly. Follow AI-generated remediation steps with exact version pins."
     }
   ];
@@ -31,7 +31,7 @@ export function HowItWorksSection() {
             Up and Running in Under 5 Minutes
           </h2>
           <p className="max-w-2xl text-lg text-brand-gray md:text-xl">
-            No installs, no agents, no access to your hosting account. Just a domain and a minute of your time.
+            No installs, no agents, no access to your hosting account. Just link your GitHub and authorize read-only access.
           </p>
         </div>
 

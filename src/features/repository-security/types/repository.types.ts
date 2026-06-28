@@ -42,9 +42,7 @@ export interface TrendDataPoint {
   low: number;
 }
 
-/* -------------------------------------------------------------------------- */
-/* API contracts (/api/repositories)                                          */
-/* -------------------------------------------------------------------------- */
+// API contracts (/api/repositories)
 
 export interface ApiResponse<T> {
   isSuccess: boolean;
@@ -115,7 +113,6 @@ export interface ApiRepositoryDetail {
   trend: TrendDataPoint[];
 }
 
-/** Query parameters accepted by GET /api/repositories. */
 export interface GetRepositoriesParams {
   search?: string;
   status?: RepositoryStatus;
@@ -125,7 +122,6 @@ export interface GetRepositoriesParams {
   page_size?: number;
 }
 
-/** Body for PUT /api/repositories/{id}/settings. */
 export interface UpdateRepositorySettingsPayload {
   periodicScanEnabled: boolean;
   periodicScanFrequency: string;
@@ -135,7 +131,6 @@ export interface UpdateRepositorySettingsPayload {
   version: string;
 }
 
-/** Mapped result of the detail endpoint, shaped for the existing UI. */
 export interface RepositoryDetailData {
   repository: Repository;
   vulnerabilities: Vulnerability[];

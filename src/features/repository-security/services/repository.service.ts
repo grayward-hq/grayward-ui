@@ -1,12 +1,3 @@
-/**
- * Repository Security Service
- *
- * Talks to the real backend (`/api/repositories`). The API response shapes
- * differ from the UI types, so each call is mapped into the existing
- * `Repository` / `Vulnerability` / `TrendDataPoint` types the components expect.
- * Fields the API does not return are filled with safe defaults.
- */
-
 import { privateApi } from "@/lib/axios";
 import type {
   ApiResponse,
@@ -34,7 +25,6 @@ function unwrap<T>(res: { data: ApiResponse<T>; status: number }): T {
   return res.data.value;
 }
 
-/** Derive a short repo name (e.g. "owner/repo" -> "repo"). */
 function shortName(fullName: string): string {
   const parts = fullName.split("/");
   return parts[parts.length - 1] || fullName;
@@ -55,7 +45,6 @@ function mapListItem(item: ApiRepositoryListItem): Repository {
     visibility: item.isPrivate ? "Private" : "Public",
     defaultBranch: item.defaultBranch,
     lastScanDate: item.lastScannedAt,
-    // The list endpoint does not return per-severity counts.
     totalFindings: 0,
     criticalFindings: 0,
     highFindings: 0,
@@ -95,9 +84,7 @@ function mapVulnerability(v: ApiVulnerability): Vulnerability {
     severity: v.severity,
     cveId: v.cveId,
     discoveredDate: v.detectedAt,
-    // Use the title as the human-readable summary the UI renders.
     description: v.title,
-    // Fields the API does not provide yet — safe defaults so the UI never breaks.
     currentVersion: "",
     fixedVersion: null,
     cvssScore: 0,
@@ -117,7 +104,6 @@ export const repositoryService = {
     if (params.sort_by) query.set("sort_by", params.sort_by);
     if (params.order) query.set("order", params.order);
     query.set("page", String(params.page ?? 1));
-    // Large default so the existing client-side search/filter sees the full set.
     query.set("page_size", String(params.page_size ?? 100));
 
     const res = await privateApi.get<ApiResponse<Paginated<ApiRepositoryListItem>>>(

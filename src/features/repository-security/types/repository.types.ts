@@ -136,3 +136,8 @@ export interface RepositoryDetailData {
   vulnerabilities: Vulnerability[];
   trendData: TrendDataPoint[];
 }
+
+export interface ConnectGithubPayload {
+  installationId: number;
+  setupAction: string;
+}

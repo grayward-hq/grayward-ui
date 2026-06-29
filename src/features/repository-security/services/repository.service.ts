@@ -4,6 +4,7 @@ import type {
   ApiRepositoryDetail,
   ApiRepositoryListItem,
   ApiVulnerability,
+  ConnectGithubPayload,
   GetRepositoriesParams,
   Paginated,
   Repository,
@@ -134,6 +135,14 @@ export const repositoryService = {
   ): Promise<RepositorySettings> {
     const res = await privateApi.put<ApiResponse<RepositorySettings>>(
       `/api/repositories/${id}/settings`,
+      payload,
+    );
+    return unwrap(res);
+  },
+
+  async connectGithub(payload: ConnectGithubPayload): Promise<{ message: string }> {
+    const res = await privateApi.post<ApiResponse<{ message: string }>>(
+      "/api/integrations/github",
       payload,
     );
     return unwrap(res);

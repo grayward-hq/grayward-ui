@@ -22,6 +22,16 @@ export interface CreateScanPayload {
   // TODO: add notifyOnComplete: boolean when backend supports it
 }
 
+export type ScanTargetType = "Domain" | "Repository";
+
+/** Unified scan payload: scans a domain or repository by id. */
+export interface CreateTargetScanPayload {
+  target: string;
+  targetType: ScanTargetType;
+  coverage?: "Quick" | "Full";
+  surfaceTypes?: string;
+}
+
 export interface ScanResponse {
   scanId: string;
   status: "Queued" | string;
@@ -333,6 +343,27 @@ export const scanService = {
         domain: cleanedDomain,
         coverage: COVERAGE_MAP[payload.scanType],
         // notifyOnComplete: payload.emailNotification, // ← uncomment when backend adds this field
+      },
+      {
+        headers: {
+          // Idempotency-Key prevents duplicate scans if the request is retried
+          "Idempotency-Key": crypto.randomUUID(),
+        },
+      },
+    );
+    return response.data;
+  },
+
+  async createTargetScan(
+    payload: CreateTargetScanPayload,
+  ): Promise<ApiResponse<ScanResponse>> {
+    const response = await privateApi.post<ApiResponse<ScanResponse>>(
+      "/api/Scans",
+      {
+        target: payload.target,
+        targetType: payload.targetType,
+        coverage: payload.coverage ?? "Quick",
+        surfaceTypes: payload.surfaceTypes ?? "None",
       },
       {
         headers: {

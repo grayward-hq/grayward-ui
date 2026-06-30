@@ -129,16 +129,16 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
 
         <div className="mt-6 flex flex-col gap-3">
           <Link
-            href={ROUTES.LOGIN}
+            href={ROUTES.WAITLIST}
             onClick={onClose}
-            className="border-primary text-primary flex h-12 w-full items-center 
-            justify-center rounded-xl border-2 bg-white text-base font-medium 
+            className="border-primary text-primary flex h-12 w-full items-center
+            justify-center rounded-xl border-2 bg-white text-base font-medium
             transition-all duration-200 hover:bg-primary hover:text-white"
           >
-            Log in
+            Join Waitlist
           </Link>
           <Link
-            href={ROUTES.REGISTER}
+            href={ROUTES.WAITLIST}
             onClick={onClose}
             className="bg-primary flex h-12 w-full items-center justify-center 
             gap-1.5 rounded-xl text-base font-medium text-white transition-opacity duration-300 

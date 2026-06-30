@@ -12,7 +12,7 @@ export function HeroScanForm() {
     <div className="flex justify-center">
       <button
         type="button"
-        onClick={() => router.push(ROUTES.REGISTER)}
+        onClick={() => router.push(ROUTES.WAITLIST)}
         className="flex items-center justify-center gap-2.5 w-[260px] h-[62px]
           rounded-2xl bg-[#072E28] transition-opacity hover:opacity-90
           focus:outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] px-6 text-white cursor-pointer"

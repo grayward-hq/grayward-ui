@@ -129,7 +129,7 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
             <div className="mt-6 border-t border-gray-100" />
             <div className="mt-6 flex flex-col gap-3">
               <Link
-                href={ROUTES.WAITLIST}
+                href={`${ROUTES.WAITLIST}#waitlist-form`}
                 onClick={onClose}
                 className="border-primary text-primary flex h-12 w-full items-center
                 justify-center rounded-xl border-2 bg-white text-base font-medium

@@ -74,11 +74,13 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
 
         {/* CTA */}
         <div className="mt-6">
-          <div
+          <button
+            disabled
+            aria-disabled="true"
             className="bg-primary text-primary-foreground relative block w-full rounded-xl py-3.5 text-center text-sm font-semibold cursor-not-allowed"
           >
             Coming Soon
-          </div>
+          </button>
         </div>
       </div>
     </div>

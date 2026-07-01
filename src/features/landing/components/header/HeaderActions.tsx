@@ -15,7 +15,7 @@ export function HeaderActions() {
   return (
     <div className="flex items-center gap-3">
       <Link
-        href={ROUTES.WAITLIST}
+        href={`${ROUTES.WAITLIST}#waitlist-form`}
         className="border-primary text-primary flex h-11 items-center
          justify-center gap-1.5 rounded-xl border-2 bg-white px-6 py-3
          text-base leading-6 font-medium transition-all duration-400

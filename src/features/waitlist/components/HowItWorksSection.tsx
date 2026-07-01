@@ -5,12 +5,12 @@ export function HowItWorksSection() {
     {
       number: "01",
       title: "Add Your Domain",
-      description: "Generate daily/weekly sales and profit reports. Export to CSV/PDF with one click"
+      description: "Enter your domain to configure automatic SSL, DNS, and baseline security tracking for your website."
     },
     {
       number: "02",
       title: "Scan Your Website",
-      description: "Full access to settings, reports, and tax configurations between Admin and Users"
+      description: "Run automated security checks across your endpoints to find exposed assets and misconfigurations."
     },
     {
       number: "03",

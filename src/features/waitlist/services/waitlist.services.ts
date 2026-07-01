@@ -24,8 +24,10 @@ export interface WaitlistResponse {
 export interface WaitlistStatusResponse {
   email: string;
   position: number;
+  totalOnWaitlist: number;
   status: string;
-  createdAt: string;
+  emailConfirmed: boolean;
+  joinedAt: string;
 }
 
 export interface CancelWaitlistRequest {

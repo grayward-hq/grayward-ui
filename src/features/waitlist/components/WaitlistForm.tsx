@@ -14,7 +14,7 @@ import { waitlistService } from "../services/waitlist.services";
 
 const waitlistSchema = z.object({
   workEmail: z.string().email({ message: "Please enter a valid work email." }),
-  company: z.string().min(1, { message: "Company name is required." }),
+  company: z.string().optional(),
   features: z
     .array(z.string())
     .min(1, { message: "Please select at least one feature." }),
@@ -57,7 +57,7 @@ export function WaitlistForm() {
 
       const response = await waitlistService.join({
         email: data.workEmail,
-        companyName: data.company,
+        companyName: data.company || undefined,
         comments: combinedComments,
       });
 
@@ -121,7 +121,9 @@ export function WaitlistForm() {
               name="company"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel className="text-brand-dark font-semibold text-base">Company</FormLabel>
+                  <FormLabel className="text-brand-dark font-semibold text-base">
+                    Company <span className="text-brand-gray font-normal text-sm">(Optional)</span>
+                  </FormLabel>
                   <FormControl>
                     <div className="mt-2">
                       <Input placeholder="Acme Inc." className="h-14 rounded-xl border-gray-200 text-base placeholder:text-brand-gray px-4" {...field} />

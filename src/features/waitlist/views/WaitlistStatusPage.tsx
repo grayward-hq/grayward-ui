@@ -98,14 +98,29 @@ export function WaitlistStatusPage() {
             <div className="mb-4">
               <span className="text-sm font-semibold text-brand-gray uppercase tracking-wider">Your Position</span>
               <div className="text-5xl font-bold text-brand-dark my-2">#{statusData.position}</div>
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
-                Status: {statusData.status}
+              
+              <div className="flex flex-wrap gap-2 justify-center mt-3">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
+                  Status: {statusData.status}
+                </div>
+                <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                  statusData.emailConfirmed
+                    ? "bg-blue-100 text-blue-800"
+                    : "bg-amber-100 text-amber-800"
+                }`}>
+                  Email: {statusData.emailConfirmed ? "Verified" : "Unverified"}
+                </div>
               </div>
             </div>
             
-            <p className="text-sm text-brand-gray">
-              Registered on: {new Date(statusData.createdAt).toLocaleDateString()}
-            </p>
+            <div className="flex flex-col gap-1.5 mt-2 text-sm text-brand-gray">
+              <p>
+                Total on Waitlist: <span className="font-semibold text-brand-dark">{statusData.totalOnWaitlist}</span>
+              </p>
+              <p>
+                Registered on: {new Date(statusData.joinedAt).toLocaleDateString()}
+              </p>
+            </div>
           </div>
         )}
       </div>

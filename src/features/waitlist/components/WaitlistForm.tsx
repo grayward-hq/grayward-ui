@@ -15,7 +15,9 @@ import { waitlistService } from "../services/waitlist.services";
 const waitlistSchema = z.object({
   workEmail: z.string().email({ message: "Please enter a valid work email." }),
   company: z.string().min(1, { message: "Company name is required." }),
-  feature: z.string().min(1, { message: "Please select a feature." }),
+  features: z
+    .array(z.string())
+    .min(1, { message: "Please select at least one feature." }),
   additionalInfo: z.string().optional(),
 });
 
@@ -42,14 +44,14 @@ export function WaitlistForm() {
     defaultValues: {
       workEmail: "",
       company: "",
-      feature: "",
+      features: [],
       additionalInfo: "",
     },
   });
 
   const onSubmit = async (data: WaitlistFormValues) => {
     try {
-      const combinedComments = `Selected Feature: ${data.feature}${
+      const combinedComments = `Selected Features: ${data.features.join(", ")}${
         data.additionalInfo ? ` | Comments: ${data.additionalInfo}` : ""
       }`;
 
@@ -133,23 +135,30 @@ export function WaitlistForm() {
 
           <FormField
             control={form.control}
-            name="feature"
+            name="features"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-brand-dark font-semibold text-base">Which Feature Would You Actually Use?</FormLabel>
+                <FormLabel className="text-brand-dark font-semibold text-base">Which Features Would You Actually Use?</FormLabel>
                 <FormControl>
                   <div className="flex flex-wrap gap-4 pt-2">
                     {featuresList.map((fw) => {
-                      const isSelected = field.value === fw;
+                      const isSelected = field.value.includes(fw);
                       return (
                         <button
                           key={fw}
                           type="button"
-                          onClick={() => field.onChange(fw)}
+                          aria-pressed={isSelected}
+                          onClick={() =>
+                            field.onChange(
+                              isSelected
+                                ? field.value.filter((f) => f !== fw)
+                                : [...field.value, fw]
+                            )
+                          }
                           className={cn(
                             "rounded-xl border h-12 px-4 text-base transition-colors",
-                            isSelected 
-                              ? "border-primary bg-primary text-white" 
+                            isSelected
+                              ? "border-primary bg-primary text-white"
                               : "border-primary bg-white text-primary hover:bg-gray-50"
                           )}
                         >

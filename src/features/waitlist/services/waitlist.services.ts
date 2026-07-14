@@ -95,7 +95,10 @@ async function fetchWithTimeout<T>(
     return {
       isSuccess: false,
       value: null,
-      error: { code: "NETWORK_ERROR", message: err.message || "A network error occurred." },
+      error: {
+        code: "NETWORK_ERROR",
+        message: "We couldn't reach the server. Please check your connection and try again.",
+      },
     };
   }
 }

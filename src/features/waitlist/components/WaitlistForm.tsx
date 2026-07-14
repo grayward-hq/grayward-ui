@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,14 +13,23 @@ import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { waitlistService } from "../services/waitlist.services";
 
+const REFERRAL_CODE_PATTERN = /^[A-Za-z0-9_-]{1,64}$/;
+
 const waitlistSchema = z.object({
-  workEmail: z.string().email({ message: "Please enter a valid work email." }),
-  company: z.string().optional(),
+  workEmail: z.string().trim().email({ message: "Please enter a valid email address." }),
+  company: z.string().trim().optional(),
   features: z
     .array(z.string())
     .min(1, { message: "Please select at least one feature." }),
-  additionalInfo: z.string().optional(),
-  referralCode: z.string().optional(),
+  additionalInfo: z.string().trim().optional(),
+  referralCode: z
+    .string()
+    .trim()
+    .max(64, { message: "Referral code is too long." })
+    .regex(/^[A-Za-z0-9_-]*$/, {
+      message: "Referral code can only contain letters, numbers, hyphens, and underscores.",
+    })
+    .optional(),
 });
 
 type WaitlistFormValues = z.infer<typeof waitlistSchema>;
@@ -37,8 +47,12 @@ const featuresList = [
   "License Compliance"
 ];
 
+const SUBMITTED_STORAGE_KEY = "vulnwatch_waitlist_submitted";
+
 export function WaitlistForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
+  const confirmationRef = useRef<HTMLDivElement>(null);
 
   const form = useForm<WaitlistFormValues>({
     resolver: zodResolver(waitlistSchema),
@@ -56,14 +70,43 @@ export function WaitlistForm() {
       const params = new URLSearchParams(window.location.search);
       const urlRef = params.get("ref") || params.get("referralCode");
       const storedRef = sessionStorage.getItem("vulnwatch_referral");
-      
+
       const ref = urlRef || storedRef;
-      if (ref) {
+      // Only accept a well-formed referral code; ignore anything malicious.
+      if (ref && REFERRAL_CODE_PATTERN.test(ref)) {
         form.setValue("referralCode", ref);
-        if (urlRef) sessionStorage.setItem("vulnwatch_referral", urlRef);
+        if (urlRef) sessionStorage.setItem("vulnwatch_referral", ref);
       }
     }
   }, [form]);
+
+  // Restore the confirmation state after a refresh.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const saved = localStorage.getItem(SUBMITTED_STORAGE_KEY);
+    if (!saved) return;
+    const t = window.setTimeout(() => {
+      setSubmittedEmail(saved);
+      setIsSubmitted(true);
+    }, 0);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  // Keep the confirmation card in view instead of leaving the page scrolled down.
+  useEffect(() => {
+    if (isSubmitted) {
+      confirmationRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [isSubmitted]);
+
+  const handleReset = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(SUBMITTED_STORAGE_KEY);
+    }
+    setSubmittedEmail("");
+    setIsSubmitted(false);
+    form.reset();
+  };
 
   const onSubmit = async (data: WaitlistFormValues) => {
     try {
@@ -79,6 +122,10 @@ export function WaitlistForm() {
       });
 
       if (response.isSuccess && response.value) {
+        if (typeof window !== "undefined") {
+          localStorage.setItem(SUBMITTED_STORAGE_KEY, data.workEmail);
+        }
+        setSubmittedEmail(data.workEmail);
         setIsSubmitted(true);
       } else {
         form.setError("root", { 
@@ -97,12 +144,31 @@ export function WaitlistForm() {
 
   if (isSubmitted) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-brand-bg-light p-12 text-center shadow-sm">
+      <div
+        ref={confirmationRef}
+        className="flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-brand-bg-light p-12 text-center shadow-sm"
+      >
         <CheckCircle2 className="mb-4 h-16 w-16 text-secondary" />
         <h3 className="mb-2 text-2xl font-semibold text-brand-dark">Almost there!</h3>
         <p className="text-brand-gray">
           Thank you for joining the waitlist. We&apos;ve sent a verification link to your email address. Please click the link to confirm your email and secure your spot.
         </p>
+
+        <Link
+          href={`/waitlist/status${submittedEmail ? `?email=${encodeURIComponent(submittedEmail)}` : ""}`}
+          className="group mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-white transition-colors hover:bg-primary/90"
+        >
+          Check your waitlist status
+          <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+        </Link>
+
+        <button
+          type="button"
+          onClick={handleReset}
+          className="mt-4 text-sm font-medium text-brand-gray underline-offset-2 hover:text-brand-dark hover:underline"
+        >
+          Join with a different email
+        </button>
       </div>
     );
   }
@@ -119,8 +185,8 @@ export function WaitlistForm() {
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel className="text-brand-dark font-semibold text-base flex items-center gap-2">
-                    Work Email 
-                    <span className="h-3 w-3 rounded-full bg-green-400" />
+                     Email 
+                    {/* <span className="h-3 w-3 rounded-full bg-green-400" /> */}
                   </FormLabel>
                   <FormControl>
                     <div className="relative mt-2">

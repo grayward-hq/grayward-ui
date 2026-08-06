@@ -8,3 +8,8 @@ ignoredBuiltDependencies:
 overrides:
   postcss: ">=8.5.18"
   sharp: ">=0.35.0"
+  # Security: force patched transitive deps (Trivy HIGH advisories)
+  "brace-expansion@<1.1.18": ">=1.1.18 <2"
+  "brace-expansion@>=4.0.0 <5.0.9": ">=5.0.9 <6"
+  "fast-uri": ">=3.1.5 <4"
+  "ip-address": ">=10.3.1"

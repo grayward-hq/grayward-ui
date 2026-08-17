@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FOOTER_BRAND } from "../../constants/footer-meta";
+import { FooterSocials } from "./FooterSocials";
 
 export function FooterBrand() {
   return (
@@ -19,6 +20,8 @@ export function FooterBrand() {
       >
         {FOOTER_BRAND.description}
       </p>
+
+      <FooterSocials />
     </div>
   );
 }

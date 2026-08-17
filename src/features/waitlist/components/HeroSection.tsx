@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { FEATURE_FLAGS } from "@/constants/feature-flags";
 
 export function HeroSection() {
   return (
@@ -18,17 +19,19 @@ export function HeroSection() {
           VulnWatch connects to your GitHub repos and scans every dependency for CVEs automatically. Continuously, with simple explanations your whole team can act on.
         </p>
 
-        <div className="mt-10">
-          <Link href="#waitlist-form">
-            <Button 
-              size="lg" 
-              className="group h-14 rounded-xl border border-secondary bg-primary px-8 text-lg font-semibold text-white hover:bg-primary-hover"
-            >
-              Join Waitlist
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </div>
+        {FEATURE_FLAGS.SHOW_WAITLIST_HERO_CTA && (
+          <div className="mt-10">
+            <Link href="#waitlist-form">
+              <Button
+                size="lg"
+                className="group h-14 rounded-xl border border-secondary bg-primary px-8 text-lg font-semibold text-white hover:bg-primary-hover"
+              >
+                Join Waitlist
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

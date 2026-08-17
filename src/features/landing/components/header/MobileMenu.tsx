@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "../../constants/nav-links";
 import { ROUTES } from "@/constants/routes";
+import { FEATURE_FLAGS } from "@/constants/feature-flags";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -85,6 +86,13 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
     return null;
   }
 
+  // Mirrors HeaderActions so the desktop and mobile menus never disagree.
+  const isCtaSuppressedPage =
+    pathname === ROUTES.HOME || pathname === ROUTES.WAITLIST;
+  const showLogin = FEATURE_FLAGS.SHOW_LOGIN_BUTTON;
+  const showJoinWaitlist =
+    FEATURE_FLAGS.SHOW_JOIN_WAITLIST_BUTTON && !isCtaSuppressedPage;
+
   return (
     <>
       <div
@@ -124,19 +132,33 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
           })}
         </ul>
 
-        {pathname !== ROUTES.HOME && pathname !== ROUTES.WAITLIST && (
+        {(showLogin || showJoinWaitlist) && (
           <>
             <div className="mt-6 border-t border-gray-100" />
             <div className="mt-6 flex flex-col gap-3">
-              <Link
-                href={`${ROUTES.WAITLIST}#waitlist-form`}
-                onClick={onClose}
-                className="border-primary text-primary flex h-12 w-full items-center
-                justify-center rounded-xl border-2 bg-white text-base font-medium
-                transition-all duration-200 hover:bg-primary hover:text-white"
-              >
-                Join Waitlist
-              </Link>
+              {showLogin && (
+                <Link
+                  href={ROUTES.LOGIN}
+                  onClick={onClose}
+                  className="text-primary flex h-12 w-full items-center
+                  justify-center rounded-xl bg-primary/10 text-base font-medium
+                  transition-all duration-200 hover:bg-primary hover:text-white"
+                >
+                  Login
+                </Link>
+              )}
+
+              {showJoinWaitlist && (
+                <Link
+                  href={`${ROUTES.WAITLIST}#waitlist-form`}
+                  onClick={onClose}
+                  className="border-primary text-primary flex h-12 w-full items-center
+                  justify-center rounded-xl border-2 bg-white text-base font-medium
+                  transition-all duration-200 hover:bg-primary hover:text-white"
+                >
+                  Join Waitlist
+                </Link>
+              )}
             </div>
           </>
         )}

@@ -2,7 +2,7 @@
  * Feature flags for showing / hiding UI that is built but not yet launched.
  *
  * Driven by NEXT_PUBLIC_* environment variables so visibility can be set per
- * environment (e.g. Login on in preview, off in production) without a code
+ * environment (e.g. Login on in staging, off in production) without a code
  * change. Set a var to "true" to show the element, "false" to hide it.
  *
  * IMPORTANT — NEXT_PUBLIC_* values are inlined at BUILD time, not read at
@@ -18,20 +18,35 @@
 /**
  * Parses an env var into a boolean.
  *
+ * Surrounding quotes are stripped before comparing. A .env file has them
+ * removed by the loader, but a value typed into a hosting dashboard keeps them
+ * as literal characters, so `NEXT_PUBLIC_X="true"` must mean the same thing in
+ * both places. Without this, a quoted value would silently read as false.
+ *
  * Anything other than "true" (case-insensitive, trimmed) is treated as false,
- * so a typo fails closed rather than silently exposing an unlaunched feature.
- * An unset or empty var falls back to `fallbackWhenUnset`, which keeps local
+ * so a typo fails closed rather than exposing an unlaunched feature. An unset
+ * or empty var falls back to `fallbackWhenUnset`, which keeps local
  * development working with no .env file present.
  */
 function isEnabled(
   value: string | undefined,
   fallbackWhenUnset: boolean,
 ): boolean {
-  if (value === undefined || value.trim() === "") {
+  if (value === undefined) {
     return fallbackWhenUnset;
   }
 
-  return value.trim().toLowerCase() === "true";
+  const normalised = value
+    .trim()
+    .replace(/^["']+|["']+$/g, "")
+    .trim()
+    .toLowerCase();
+
+  if (normalised === "") {
+    return fallbackWhenUnset;
+  }
+
+  return normalised === "true";
 }
 
 export const FEATURE_FLAGS = {

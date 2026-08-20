@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { waitlistService, WaitlistStatusResponse } from "../services/waitlist.services";
+import { formatStatusLabel } from "@/lib/utils";
 import { Loader2, Search } from "lucide-react";
 
 const emailSchema = z.object({
@@ -140,7 +141,7 @@ export function WaitlistStatusPage() {
               
               <div className="flex flex-wrap gap-2 justify-center mt-3">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
-                  Status: {statusData.status}
+                  Status: {formatStatusLabel(statusData.status)}
                 </div>
                 <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                   statusData.emailConfirmed

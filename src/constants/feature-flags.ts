@@ -16,17 +16,44 @@
  */
 
 /**
+ * Strips surrounding quotes, but only in *matching* pairs.
+ *
+ * A .env loader removes quotes itself, while a value typed into a hosting
+ * dashboard keeps them as literal characters — so `NEXT_PUBLIC_X="true"` has
+ * to mean the same thing in both places.
+ *
+ * Only a pair of identical quote characters is removed. A value with a stray
+ * or mismatched quote (`true"`, `'true"`) is deliberately left untouched so it
+ * fails the comparison in `isEnabled` and the flag stays off. Stripping each
+ * boundary independently would turn `true"` into `true` and switch a feature
+ * on from a malformed value.
+ */
+function stripMatchingQuotes(value: string): string {
+  let result = value;
+
+  while (result.length >= 2) {
+    const first = result[0];
+    const last = result[result.length - 1];
+
+    if ((first === '"' || first === "'") && first === last) {
+      result = result.slice(1, -1).trim();
+      continue;
+    }
+
+    break;
+  }
+
+  return result;
+}
+
+/**
  * Parses an env var into a boolean.
  *
- * Surrounding quotes are stripped before comparing. A .env file has them
- * removed by the loader, but a value typed into a hosting dashboard keeps them
- * as literal characters, so `NEXT_PUBLIC_X="true"` must mean the same thing in
- * both places. Without this, a quoted value would silently read as false.
- *
- * Anything other than "true" (case-insensitive, trimmed) is treated as false,
- * so a typo fails closed rather than exposing an unlaunched feature. An unset
- * or empty var falls back to `fallbackWhenUnset`, which keeps local
- * development working with no .env file present.
+ * Anything other than "true" (case-insensitive, trimmed, optionally wrapped in
+ * one matching quote pair) is treated as false, so a typo or a malformed value
+ * fails closed rather than exposing an unlaunched feature. An unset or empty
+ * var falls back to `fallbackWhenUnset`, which keeps local development working
+ * with no .env file present.
  */
 function isEnabled(
   value: string | undefined,
@@ -36,11 +63,7 @@ function isEnabled(
     return fallbackWhenUnset;
   }
 
-  const normalised = value
-    .trim()
-    .replace(/^["']+|["']+$/g, "")
-    .trim()
-    .toLowerCase();
+  const normalised = stripMatchingQuotes(value.trim()).toLowerCase();
 
   if (normalised === "") {
     return fallbackWhenUnset;

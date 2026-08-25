@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "VulnWatch AI — Intelligent Vulnerability Detection";
@@ -38,6 +39,15 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Root layout wrapping every route.
+ *
+ * Holds the html/body shell, the shared query client, the toast host, and the
+ * Google Analytics tag. Analytics lives here rather than per-route so a single
+ * mount covers the whole site; it self-disables when no measurement ID is set.
+ *
+ * @param children The active route's rendered tree.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,6 +63,7 @@ export default function RootLayout({
           {children}
           <Toaster richColors position="top-right" />
         </ReactQueryProvider>
+        <GoogleAnalytics />
       </body>
     </html>
   );

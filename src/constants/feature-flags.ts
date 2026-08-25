@@ -2,7 +2,7 @@
  * Feature flags for showing / hiding UI that is built but not yet launched.
  *
  * Driven by NEXT_PUBLIC_* environment variables so visibility can be set per
- * environment (e.g. Login on in preview, off in production) without a code
+ * environment (e.g. Login on in staging, off in production) without a code
  * change. Set a var to "true" to show the element, "false" to hide it.
  *
  * IMPORTANT — NEXT_PUBLIC_* values are inlined at BUILD time, not read at
@@ -16,22 +16,60 @@
  */
 
 /**
+ * Strips surrounding quotes, but only in *matching* pairs.
+ *
+ * A .env loader removes quotes itself, while a value typed into a hosting
+ * dashboard keeps them as literal characters — so `NEXT_PUBLIC_X="true"` has
+ * to mean the same thing in both places.
+ *
+ * Only a pair of identical quote characters is removed. A value with a stray
+ * or mismatched quote (`true"`, `'true"`) is deliberately left untouched so it
+ * fails the comparison in `isEnabled` and the flag stays off. Stripping each
+ * boundary independently would turn `true"` into `true` and switch a feature
+ * on from a malformed value.
+ */
+function stripMatchingQuotes(value: string): string {
+  let result = value;
+
+  while (result.length >= 2) {
+    const first = result[0];
+    const last = result[result.length - 1];
+
+    if ((first === '"' || first === "'") && first === last) {
+      result = result.slice(1, -1).trim();
+      continue;
+    }
+
+    break;
+  }
+
+  return result;
+}
+
+/**
  * Parses an env var into a boolean.
  *
- * Anything other than "true" (case-insensitive, trimmed) is treated as false,
- * so a typo fails closed rather than silently exposing an unlaunched feature.
- * An unset or empty var falls back to `fallbackWhenUnset`, which keeps local
- * development working with no .env file present.
+ * Anything other than "true" (case-insensitive, trimmed, optionally wrapped in
+ * one matching quote pair) is treated as false, so a typo or a malformed value
+ * fails closed rather than exposing an unlaunched feature. An unset or empty
+ * var falls back to `fallbackWhenUnset`, which keeps local development working
+ * with no .env file present.
  */
 function isEnabled(
   value: string | undefined,
   fallbackWhenUnset: boolean,
 ): boolean {
-  if (value === undefined || value.trim() === "") {
+  if (value === undefined) {
     return fallbackWhenUnset;
   }
 
-  return value.trim().toLowerCase() === "true";
+  const normalised = stripMatchingQuotes(value.trim()).toLowerCase();
+
+  if (normalised === "") {
+    return fallbackWhenUnset;
+  }
+
+  return normalised === "true";
 }
 
 export const FEATURE_FLAGS = {

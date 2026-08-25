@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "VulnWatch AI — Intelligent Vulnerability Detection";
@@ -53,6 +54,7 @@ export default function RootLayout({
           {children}
           <Toaster richColors position="top-right" />
         </ReactQueryProvider>
+        <GoogleAnalytics />
       </body>
     </html>
   );

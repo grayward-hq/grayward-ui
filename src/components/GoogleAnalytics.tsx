@@ -1,6 +1,31 @@
 import Script from "next/script";
 
 /**
+ * Shape of a GA4 measurement ID: "G-" followed by alphanumerics.
+ *
+ * Used as an allow-list, not a formatting nicety. The ID is interpolated into
+ * an inline script, so anything outside this character set — a stray quote from
+ * a mistyped dashboard value, most obviously — must never reach the page. A
+ * value that fails this test disables analytics rather than emitting a broken
+ * or hostile tag.
+ */
+const GA_MEASUREMENT_ID_PATTERN = /^G-[A-Z0-9]+$/i;
+
+/**
+ * IMPORTANT — NEXT_PUBLIC_* values are inlined at BUILD time, not read at
+ * runtime, so setting the ID in the hosting dashboard requires a redeploy
+ * before analytics starts reporting. This must stay a static
+ * `process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID` reference; a dynamic lookup is
+ * not inlined and reads as undefined in the browser.
+ */
+const rawMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+
+const measurementId =
+  rawMeasurementId && GA_MEASUREMENT_ID_PATTERN.test(rawMeasurementId)
+    ? rawMeasurementId
+    : undefined;
+
+/**
  * Google Analytics 4 via the Google tag (gtag.js).
  *
  * Renders the two-part official snippet with `next/script` rather than raw
@@ -11,17 +36,17 @@ import Script from "next/script";
  * analytics is not critical to rendering the page.
  *
  * The measurement ID comes from NEXT_PUBLIC_GA_MEASUREMENT_ID. When it is
- * unset — local development, preview builds, CI — this renders nothing, so
- * development traffic never lands in the production property.
+ * missing or malformed — local development, preview builds, CI, a typo in the
+ * hosting dashboard — this renders nothing, so development traffic never lands
+ * in the production property and a bad value cannot break the page.
  *
- * IMPORTANT — NEXT_PUBLIC_* values are inlined at BUILD time, not read at
- * runtime, so setting the ID in the hosting dashboard requires a redeploy
- * before analytics starts reporting. The reference below must stay a static
- * `process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID`; a dynamic lookup is not inlined
- * and reads as undefined in the browser.
+ * The ID is `JSON.stringify`-ed into the inline script rather than pasted into
+ * a quoted literal. Combined with the pattern check above that is redundant by
+ * design: the interpolation stays safe even if the allow-list is ever loosened.
+ *
+ * @returns The gtag.js script pair, or `null` when no valid measurement ID is
+ * configured.
  */
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-
 export function GoogleAnalytics() {
   if (!measurementId) {
     return null;
@@ -30,7 +55,9 @@ export function GoogleAnalytics() {
   return (
     <>
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+          measurementId,
+        )}`}
         strategy="afterInteractive"
       />
       <Script
@@ -41,7 +68,7 @@ export function GoogleAnalytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${measurementId}');
+            gtag('config', ${JSON.stringify(measurementId)});
           `,
         }}
       />

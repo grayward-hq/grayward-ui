@@ -44,7 +44,7 @@ export function LoginForm() {
         toast.success(msg);
         useAuthStore
           .getState()
-          .login(response.value.accessToken, data.email);
+          .login(response.value.accessToken, data.email, undefined, response.value.refreshToken);
 
         const returnUrl = searchParams.get("returnUrl");
         router.push(getSafeReturnUrl(returnUrl));

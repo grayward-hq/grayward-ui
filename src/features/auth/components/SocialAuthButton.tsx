@@ -62,7 +62,7 @@ export function SocialAuthButton({
       if (data.isSuccess && data.value.accessToken) {
         const successMessage = data.message ?? "Google login successful!";
         toast.success(successMessage);
-        
+
         // Decode tokens to get picture and email
         let picture = "";
         let email: string | null = null;
@@ -87,7 +87,10 @@ export function SocialAuthButton({
           console.error("Failed to decode access token:", e);
         }
 
-        useAuthStore.getState().login(data.value.accessToken, email, picture);
+        useAuthStore
+          .getState()
+          .login(data.value.accessToken, email, picture, data.value.refreshToken);
+
         const returnUrl = searchParams.get("returnUrl");
         router.push(getSafeReturnUrl(returnUrl));
       } else {

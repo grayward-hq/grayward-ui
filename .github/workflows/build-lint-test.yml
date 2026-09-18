@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: ['**']
 
+permissions:
+  contents: read
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -17,9 +20,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.36.0
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           scan-ref: '.'
@@ -51,8 +56,8 @@ jobs:
       - name: Set dummy env for build check
         run: |
           echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=dummy-client-id.apps.googleusercontent.com" >> .env.local
-          echo "NEXT_PUBLIC_APP_URL=https://staging.vulnwatch.com.ng" >> .env.local
-          echo "API_BASE_URL=https://api.staging.vulnwatch.com.ng" >> .env.local
+          echo "NEXT_PUBLIC_APP_URL=https://staging.grayward.net" >> .env.local
+          echo "API_BASE_URL=https://api-staging.grayward.net" >> .env.local
 
       - name: Build project
         run: pnpm build

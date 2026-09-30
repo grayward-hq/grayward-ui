@@ -1,0 +1,27 @@
+{
+  "default_branch": "dev",
+  "branches": [
+    "dev",
+    "feat/branding-updates",
+    "fix/auth-refresh",
+    "main",
+    "origin",
+    "staging"
+  ],
+  "parent": {
+    "dev": null,
+    "feat/branding-updates": "dev",
+    "fix/auth-refresh": "dev",
+    "main": "dev",
+    "origin": "dev",
+    "staging": "dev"
+  },
+  "order": [
+    "dev",
+    "feat/branding-updates",
+    "fix/auth-refresh",
+    "main",
+    "origin",
+    "staging"
+  ]
+}

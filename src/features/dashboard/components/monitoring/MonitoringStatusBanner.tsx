@@ -18,7 +18,7 @@ export function MonitoringStatusBanner({
       className="w-full flex flex-row justify-between items-center px-6 py-5 rounded-xl"
       style={{
         background: '#FFFFFF',
-        border: '1px solid #072E28',
+        border: '1px solid #0F264F',
         borderRadius: '12px',
       }}
     >

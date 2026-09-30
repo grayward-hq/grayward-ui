@@ -60,7 +60,7 @@ export default function DomainPage() {
       <div className="flex items-start justify-end">
         <Button
           onClick={() => setModalOpen(true)}
-          className="bg-[#072E28] text-white hover:bg-[#072E28]/90 rounded-lg h-10 px-4"
+          className="bg-[#0F264F] text-white hover:bg-[#0F264F]/90 rounded-lg h-10 px-4"
         >
           <PlusCircle size={16} className="mr-2" />
           Add domain

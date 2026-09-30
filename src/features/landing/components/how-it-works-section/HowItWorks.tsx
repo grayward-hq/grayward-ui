@@ -7,22 +7,22 @@ const steps = [
   {
     id: "01",
     title: "Add Your Domain",
-    description: "Add your domain and verify ownership in seconds to securely initiate a deep scanning sequence.",
-    image: "/images/landing-page/how-it-work-1.png",
+    description: "Generate daily/weekly sales and profit reports. Export to CSV/PDF with one click",
+    image: "/images/how-it-work-1.png",
     imageLeft: true,
   },
   {
     id: "02",
     title: "Scan Your Website",
-    description: "Identify vulnerabilities and DNS misconfigurations, automatically prioritizing critical threats by severity levels.",
-    image: "/images/landing-page/how-it-work-2.png",
+    description: "Full access to settings, reports, and tax configurations between Admin and Users",
+    image: "/images/how-it-work-2.png",
     imageLeft: false,
   },
   {
     id: "03",
     title: "Get Report",
-    description: "Instantly produce and export a comprehensive remediation report with actionable steps to patch security gaps.",
-    image: "/images/landing-page/how-it-work-3.png",
+    description: "Expiring SSL certificate, misconfigurated DNS and exposed admin pages can break your site & lead to loss of customer trust overnight.",
+    image: "/images/how-it-work-3.png",
     imageLeft: true,
   },
 ];
@@ -40,14 +40,13 @@ const HowItWorks = () => {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <span className="mb-6 inline-block rounded-lg border border-brand-border-gray bg-brand-bg-light px-5 py-2 text-sm text-header">
-              How It Works
+            <span className="mb-6 inline-block rounded-xl border border-[#E0E0E0] bg-[#FAFAFA] px-5 py-2 text-[18px] font-medium text-[#172033]">
+              Quick Start
             </span>
-            <h2 tabIndex={0} className="font-geist font-semibold text-brand-dark text-center mt-4 text-3xl sm:text-4xl md:text-5xl outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
-              Three (3) steps
-              <br className="hidden md:block" /> from Curious to Confident
+            <h2 tabIndex={0} className="font-geist font-semibold text-[#172033] text-center mt-4 text-3xl sm:text-4xl md:text-5xl outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
+              From Curious to Confident
             </h2>
-            <p className="font-geist font-normal text-brand-gray text-center mt-4 text-lg md:text-xl">
+            <p className="font-geist font-normal text-[#4B5568] text-center mt-4 text-lg md:text-xl">
               No installs, no agents, no access to your hosting account.
               <br className="hidden md:block" /> Just a domain and a minute of your time.
             </p>
@@ -102,7 +101,7 @@ const HowItWorks = () => {
 
                   {/* Text card */}
                   <motion.div
-                    className={`relative z-2 bg-secondary flex flex-col justify-center gap-6 p-12 w-full md:w-1/2 md:h-88.75 text-left items-start ${radiusClass}`}
+                    className={`relative z-2 bg-[#0F264F] flex flex-col justify-center gap-6 p-12 w-full md:w-1/2 md:h-88.75 text-left items-start ${radiusClass}`}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-60px" }}
@@ -110,14 +109,14 @@ const HowItWorks = () => {
                   >
                     <div className={`flex flex-col gap-6 ${index === 1 ? "md:pl-15" : ""}`}>
                       <div>
-                        <h3 tabIndex={0} className="text-black/90 font-inter mb-2 text-2xl font-semibold outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
+                        <h3 tabIndex={0} className="text-white font-inter mb-2 text-2xl font-semibold outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 rounded">
                           {step.title}
                         </h3>
-                        <p className="text-black font-geist max-w-95 text-base leading-relaxed font-normal">
+                        <p className="text-white font-geist max-w-95 text-base leading-relaxed font-normal">
                           {step.description}
                         </p>
                       </div>
-                      <span className="text-black font-geist block text-40px md:text-7xl leading-none font-semibold">
+                      <span className="text-white font-geist block text-40px md:text-7xl leading-none font-semibold">
                         {step.id}
                       </span>
                     </div>

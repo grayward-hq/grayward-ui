@@ -379,7 +379,7 @@ export default function DomainDetailsModal({ domain, open, onOpenChange, onDelet
             <button
               onClick={handleCheck}
               disabled={checking || deleting}
-              className="flex-1 h-11 rounded-xl bg-[#072E28] text-white text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#072E28]/90 transition-colors disabled:opacity-60"
+              className="flex-1 h-11 rounded-xl bg-[#0F264F] text-white text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#0F264F]/90 transition-colors disabled:opacity-60"
             >
               <RefreshCw size={15} className={checking ? "animate-spin" : ""} />
               {checking ? "Checking..." : "Check now"}

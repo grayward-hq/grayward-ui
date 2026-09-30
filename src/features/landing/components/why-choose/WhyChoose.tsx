@@ -45,12 +45,12 @@ const WhyChoose: React.FC = () => {
           <span className="mb-6 w-fit rounded-xl border border-[#E0E0E0] bg-[#FAFAFA] px-4 py-2 text-[0.9rem] font-geist font-medium tracking-wide text-[#2B2B2B] sm:text-[1.1rem]">
             Why Choose VulnWatch AI
           </span>
-          <h2 className="mb-4 w-[95%] text-2xl leading-snug font-bold text-[#072e28] sm:w-full sm:text-3xl md:text-4xl lg:text-5xl">
+          <h2 className="mb-4 w-[95%] text-2xl leading-snug font-semibold text-[#2B2B2B] sm:w-full sm:text-3xl md:text-4xl lg:text-5xl">
             See risks clearly, fix them faster,
             <br className="hidden sm:block" />
-            and stay ahead of threats
+            and stay <span className="text-[#0F264F]">ahead of threats</span>
           </h2>
-          <p className="mx-auto max-w-120 text-center text-[0.95rem] leading-relaxed text-[#666] sm:text-base md:max-w-xl md:text-lg">
+          <p className="mx-auto max-w-120 text-center text-[0.95rem] leading-relaxed text-[#666666] sm:text-base md:max-w-xl md:text-lg">
             No installs, no agents, no access to your hosting accounts. Just a
             domain and a minute of your time.
           </p>
@@ -70,16 +70,16 @@ const WhyChoose: React.FC = () => {
                 hidden: { opacity: 0, x: index % 2 === 0 ? -30 : 30 },
                 visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
               } as Variants}
-              className={`mt-4 border-l-[6px] border-t-transparent border-r-transparent border-b-transparent px-6 py-2 shadow-sm md:mt-8 md:px-8 md:py-2 ${
+              className={`mt-4 border-l-[8px] border-t-transparent border-r-transparent border-b-transparent px-6 py-2 shadow-sm md:mt-8 md:px-8 md:py-2 ${
                 index === 0 || index === 3
-                  ? "border-[#a0e870]"
-                  : "border-[#072e28]"
+                  ? "border-[#C0D7FF]"
+                  : "border-[#0F264F]"
               } transition-shadow duration-200 hover:shadow-md`}
             >
-              <h3 className="mb-3 text-base font-semibold text-[#2b2b2b] sm:text-xl md:text-2xl">
+              <h3 className="mb-3 text-base font-semibold text-[#2B2B2B] sm:text-xl md:text-2xl">
                 {benefit.title}
               </h3>
-              <p className="text-[0.9rem] leading-relaxed text-[#666] sm:text-base md:text-[1.05rem] md:leading-7">
+              <p className="text-[0.9rem] leading-relaxed text-[#666666] sm:text-base md:text-[1.05rem] md:leading-7">
                 {benefit.description}
               </p>
             </motion.div>

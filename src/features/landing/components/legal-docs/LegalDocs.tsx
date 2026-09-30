@@ -192,7 +192,7 @@ export function LegalDocs() {
                       "relative flex min-h-14 cursor-pointer items-center justify-center px-1 py-3 text-center",
                       "text-[11px] leading-4 font-medium tracking-[-0.3px] transition-colors sm:text-[12px]",
                       "md:min-h-0 md:text-[1rem]",
-                      isActive ? "text-[#072E28]" : "text-[#666666]",
+                      isActive ? "text-[#0F264F]" : "text-[#666666]",
                     ].join(" ")}
                   >
                     {tab.label}
@@ -201,7 +201,7 @@ export function LegalDocs() {
               })}
             </div>
             <span
-              className="absolute -bottom-px left-0 h-0.75 rounded-full bg-[#072E28] transition-[transform,width] duration-300 ease-out"
+              className="absolute -bottom-px left-0 h-0.75 rounded-full bg-[#0F264F] transition-[transform,width] duration-300 ease-out"
               style={indicatorStyle}
               aria-hidden="true"
             />

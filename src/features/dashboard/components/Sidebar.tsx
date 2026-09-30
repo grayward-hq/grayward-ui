@@ -60,7 +60,7 @@ export function Sidebar() {
       <div className='flex items-center h-[88px] px-5 border-b border-slate-200 shrink-0'>
         <Link href='/dashboard' className='flex items-center w-full'>
           <Image
-            src='/images/logo-auth.png'
+            src='/images/logo.png'
             alt='VulnWatch AI'
             width={140}
             height={48}

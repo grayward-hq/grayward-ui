@@ -5,10 +5,10 @@ export default function HowItWorks() {
   return (
     <main className="bg-white text-[#111]">
       <section id="how-it-works" className="relative overflow-hidden scroll-mt-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#f9f9f9] via-[#f5ffe8] to-[#eefad9]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#EEF7F9] to-[#C0D7FF]/20" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 sm:py-14 md:py-24">
-          <h1 tabIndex={0} className="mx-auto text-[36px] font-semibold leading-[24px] tracking-[-0.02em] text-[#2B2B2BE5] max-w-[350px] md:max-w-none md:text-[64px] md:font-bold md:leading-[72px] md:tracking-[-2px] outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
+          <h1 tabIndex={0} className="mx-auto text-[36px] font-semibold leading-[24px] tracking-[-0.02em] text-[#2B2B2BE5] max-w-[350px] md:max-w-none md:text-[64px] md:font-bold md:leading-[72px] md:tracking-[-2px] outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
             How It Works
           </h1>
 
@@ -23,13 +23,13 @@ export default function HowItWorks() {
         <div className="mb-10 text-center md:mb-24">
           <h2 className="mx-auto max-w-[309px] text-[24px] font-semibold leading-[48px] tracking-[-1.5px] md:max-w-none md:text-[40px]">
             Three (3) steps from{" "}
-            <span className="text-[#163F36]">Curious to Confident</span>
+            <span className="text-[#0F264F]">Curious to Confident</span>
           </h2>
         </div>
 
         <div className="grid items-center gap-6 md:grid-cols-2 md:gap-16">
           <div>
-            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#163F36] leading-[24px] md:text-[28px] md:leading-[36px]">
+            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#0F264F] leading-[24px] md:text-[28px] md:leading-[36px]">
               STEP 1
             </p>
 
@@ -37,7 +37,7 @@ export default function HowItWorks() {
               01
             </h3>
 
-            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
+            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
               Add Your Domain
             </h4>
 
@@ -50,7 +50,7 @@ export default function HowItWorks() {
           </div>
 
           <div className="flex justify-center">
-            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#072E28] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
+            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#0F264F] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
               <Image
                 src="/images/landing-page/01.png"
                 alt="Dashboard preview"
@@ -64,7 +64,7 @@ export default function HowItWorks() {
 
         <div className="mt-12 grid items-center gap-6 md:mt-32 md:grid-cols-2 md:gap-16">
           <div className="order-2 flex justify-center md:order-1">
-            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#072E28] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
+            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#0F264F] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
               <Image
                 src="/images/landing-page/02.png"
                 alt="Website scan preview"
@@ -76,7 +76,7 @@ export default function HowItWorks() {
           </div>
 
           <div className="order-1 md:order-2">
-            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#163F36] leading-[24px] md:text-[28px] md:leading-[36px]">
+            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#0F264F] leading-[24px] md:text-[28px] md:leading-[36px]">
               STEP 2
             </p>
 
@@ -84,7 +84,7 @@ export default function HowItWorks() {
               02
             </h3>
 
-            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
+            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
               Scan Your Website
             </h4>
 
@@ -99,7 +99,7 @@ export default function HowItWorks() {
 
         <div className="mt-12 grid items-center gap-6 md:mt-32 md:grid-cols-2 md:gap-16">
           <div>
-            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#163F36] leading-[24px] md:text-[28px] md:leading-[36px]">
+            <p className="mb-2 text-[16px] font-bold uppercase tracking-[0.2em] text-[#0F264F] leading-[24px] md:text-[28px] md:leading-[36px]">
               STEP 3
             </p>
 
@@ -107,7 +107,7 @@ export default function HowItWorks() {
               03
             </h3>
 
-            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2 rounded">
+            <h4 tabIndex={0} className="mt-2 text-[24px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[32px] md:leading-none outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
               Generate Report
             </h4>
 
@@ -120,7 +120,7 @@ export default function HowItWorks() {
           </div>
 
           <div className="flex justify-center">
-            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#072E28] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
+            <div className="relative h-[222px] w-[264.86px] overflow-hidden rounded-[13.3px] border-[2.77px] border-[#0F264F] bg-[#f7f7f7] shadow-lg md:h-[351px] md:w-[419px] md:rounded-[24px] md:border-[5px] md:shadow-xl">
               <Image
                 src="/images/landing-page/03.png"
                 alt="Generated report preview"

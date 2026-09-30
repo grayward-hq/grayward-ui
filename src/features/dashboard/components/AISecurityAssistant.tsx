@@ -95,7 +95,7 @@ export function AISecurityAssistant({ actions }: AISecurityAssistantProps) {
         </div>
         <Link
           href="/report"
-          className="font-geist font-normal text-[16px] leading-[16px] tracking-[2%] text-[#072E28] hover:opacity-70 transition-opacity flex items-center gap-1"
+          className="font-geist font-normal text-[16px] leading-[16px] tracking-[2%] text-[#0F264F] hover:opacity-70 transition-opacity flex items-center gap-1"
         >
           View all <ArrowRight className="h-4 w-4" />
         </Link>

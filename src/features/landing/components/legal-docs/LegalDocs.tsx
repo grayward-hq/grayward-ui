@@ -151,12 +151,18 @@ export function LegalDocs() {
 
   return (
     <main className="bg-white">
-      <section className="flex min-h-64 items-center bg-linear-to-b from-white via-[#F5FFF0] to-[#E4FFD8] px-4 py-10 text-center md:py-16">
+      <section
+        className="flex min-h-64 items-center px-4 py-10 text-center md:py-16"
+        style={{
+          background:
+            "linear-gradient(179.2deg, #FFFFFF 53.96%, #C0D7FF 244.21%)",
+        }}
+      >
         <div className="mx-auto max-w-190">
-          <h1 className="font-geist text-[32px] leading-10 font-bold tracking-[-1px] text-[#2B2B2BE5] md:text-[56px] md:leading-16 md:tracking-[-1.5px]">
+          <h1 className="font-geist text-[36px] leading-10 font-bold tracking-[-1.5px] text-[#2B2B2B]/90 md:text-[64px] md:leading-[72px] md:tracking-[-2px]">
             Legal Doc
           </h1>
-          <p className="mx-auto mt-4 max-w-155 text-[13px] leading-5.5 tracking-[-0.5px] text-[#2B2B2B] md:text-[16px] md:leading-6.5">
+          <p className="mx-auto mt-4 max-w-155 text-[15px] leading-6 tracking-[-0.5px] text-[#666666] md:text-[20px] md:leading-8 md:tracking-[-1px]">
             Transparent policies designed to protect your organization, data,
             and platform, with good experience.
           </p>
@@ -165,7 +171,7 @@ export function LegalDocs() {
 
       <section className="px-4 pt-8 pb-12 md:pt-10 md:pb-16">
         <div className="mx-auto max-w-280">
-          <div className="relative border-b border-[#E8E8E8]">
+          <div className="relative border-b border-[#D9E0EA]">
             <div
               className="grid grid-cols-3 md:flex md:gap-12 lg:gap-16"
               role="tablist"
@@ -189,10 +195,10 @@ export function LegalDocs() {
                     onClick={() => setActiveTab(tab)}
                     onKeyDown={(event) => handleTabKeyDown(event, index)}
                     className={[
-                      "relative flex min-h-14 cursor-pointer items-center justify-center px-1 py-3 text-center",
-                      "text-[11px] leading-4 font-medium tracking-[-0.3px] transition-colors sm:text-[12px]",
-                      "md:min-h-0 md:text-[1rem]",
-                      isActive ? "text-[#0F264F]" : "text-[#666666]",
+                      "relative flex min-h-14 cursor-pointer items-center justify-center px-2 py-4 text-center",
+                      "text-[13px] leading-4 font-medium tracking-[-0.02em] transition-colors sm:text-[14px]",
+                      "md:min-h-0 md:text-[20px]",
+                      isActive ? "text-[#0F264F] font-medium" : "text-[#4B5568]",
                     ].join(" ")}
                   >
                     {tab.label}
@@ -201,7 +207,7 @@ export function LegalDocs() {
               })}
             </div>
             <span
-              className="absolute -bottom-px left-0 h-0.75 rounded-full bg-[#0F264F] transition-[transform,width] duration-300 ease-out"
+              className="absolute -bottom-px left-0 h-0.5 rounded-full bg-[#0F264F] transition-[transform,width] duration-300 ease-out"
               style={indicatorStyle}
               aria-hidden="true"
             />
@@ -214,20 +220,20 @@ export function LegalDocs() {
             aria-labelledby={`${activeTab.id}-tab`}
             className="animate-in fade-in-0 slide-in-from-bottom-1 pt-8 duration-300 md:pt-10"
           >
-            <h2 className="font-geist text-[26px] leading-8.5 font-semibold tracking-[-1px] text-[#111111] md:text-[32px] md:leading-10">
+            <h2 className="font-geist text-[28px] leading-9 font-semibold tracking-[-0.02em] text-black md:text-[40px] md:leading-10">
               Introduction
             </h2>
-            <p className="mt-4 max-w-262.5 text-[14px] leading-6 tracking-[-0.45px] text-[#666666] md:text-[16px] md:leading-7">
+            <p className="mt-4 max-w-262.5 text-[15px] leading-6 tracking-[-0.02em] text-[#4B5568] md:text-[20px] md:leading-7">
               {activeTab.intro}
             </p>
 
             <div className="mt-7 space-y-7 md:mt-8 md:space-y-8">
               {activeTab.sections.map((section) => (
                 <section key={section.title}>
-                  <h3 className="font-geist text-[24px] leading-8 font-semibold tracking-[-0.9px] text-[#111111] md:text-[32px] md:leading-10">
+                  <h3 className="font-geist text-[26px] leading-8 font-semibold tracking-[-0.02em] text-black md:text-[40px] md:leading-10">
                     {section.title}
                   </h3>
-                  <p className="mt-3 max-w-262.5 text-[14px] leading-6 tracking-[-0.45px] text-[#666666] md:text-[16px] md:leading-7">
+                  <p className="mt-3 max-w-262.5 text-[15px] leading-6 tracking-[-0.02em] text-[#4B5568] md:text-[20px] md:leading-7">
                     {section.body}
                   </p>
                 </section>

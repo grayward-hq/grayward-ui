@@ -207,7 +207,7 @@ const FaqPage = () => {
                 {showAllCategories ? "Show less" : "Show more category"}
                 <ChevronDown
                   className={cn(
-                    "h-4 w-4 stroke-2 text-[#57D132] transition-transform xl:h-5 xl:w-5",
+                    "h-4 w-4 stroke-2 text-[#0F264F] transition-transform xl:h-5 xl:w-5",
                     showAllCategories && "rotate-180",
                   )}
                 />

@@ -314,7 +314,7 @@ export function WaitlistForm() {
             <Button 
               type="submit" 
               disabled={form.formState.isSubmitting}
-              className="group h-14 w-full rounded-xl bg-primary border border-green-400 text-lg font-semibold text-white hover:bg-primary/90"
+              className="group h-14 w-full rounded-xl bg-primary border border-primary text-lg font-semibold text-white hover:bg-primary/90"
             >
               {form.formState.isSubmitting ? "Submitting..." : "Join Waitlist"}
               {!form.formState.isSubmitting && (

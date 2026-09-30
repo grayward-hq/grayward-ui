@@ -18,7 +18,7 @@ const contactItems = [
   // },
   {
     label: "Email Address",
-    value: "info@vulnwatch.com.ng",
+    value: "info@grayward.net",
     icon: Mail,
   },
   {

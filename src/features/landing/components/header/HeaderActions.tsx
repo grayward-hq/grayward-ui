@@ -26,9 +26,9 @@ export function HeaderActions() {
       {showLogin && (
         <Link
           href={ROUTES.LOGIN}
-          className="text-primary flex h-11 items-center justify-center gap-1.5
-           rounded-xl px-6 py-3 text-base leading-6 font-medium
-           transition-all duration-400 hover:bg-primary/10"
+          className="border-[#0F264F] text-[#2A2A2A] flex h-11 items-center justify-center gap-1.5
+           rounded-xl border bg-white px-6 py-3 text-base leading-6 font-medium
+           transition-all duration-400 hover:bg-[#0F264F]/5"
         >
           Login
         </Link>
@@ -37,10 +37,10 @@ export function HeaderActions() {
       {showJoinWaitlist && (
         <Link
           href={`${ROUTES.WAITLIST}#waitlist-form`}
-          className="border-primary text-primary flex h-11 items-center
-           justify-center gap-1.5 rounded-xl border-2 bg-white px-6 py-3
+          className="border-[#C0D7FF] bg-[#0F264F] text-white flex h-11 items-center
+           justify-center gap-1.5 rounded-xl border px-6 py-3
            text-base leading-6 font-medium transition-all duration-400
-           hover:bg-primary hover:text-white"
+           hover:bg-[#0a1b38]"
         >
           Join Waitlist
         </Link>

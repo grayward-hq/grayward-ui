@@ -75,7 +75,7 @@ export function RegisterVerifyEmail() {
           <div className="mb-8 w-full flex items-center justify-center">
             <Link href="/">
               <Image
-                src="/images/logo-auth.png"
+                src="/images/logo.png"
                 alt="VulnWatch AI Logo"
                 width={260}
                 height={105}
@@ -93,7 +93,7 @@ export function RegisterVerifyEmail() {
           </p>
         </div>
 
-        <div className="mx-auto my-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E7E4D9] text-[#072E28]">
+        <div className="mx-auto my-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#E7E4D9] text-[#0F264F]">
           <MailCheck className="h-10 w-10 animate-pulse" />
         </div>
 

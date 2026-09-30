@@ -183,7 +183,7 @@ export default function AllFindings() {
               className={cn(
                 "px-4 pb-3 pt-1 text-sm font-medium transition-colors",
                 activeTab === tab
-                  ? "border-b-2 border-[#072E28] text-[#072E28]"
+                  ? "border-b-2 border-[#0F264F] text-[#0F264F]"
                   : "text-[#6B7280] hover:text-[#2B2B2B]",
               )}
             >

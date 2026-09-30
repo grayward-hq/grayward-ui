@@ -56,7 +56,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
             )}
 
             {/* Label */}
-            <p className="text-[10px] md:text-[14px] font-medium text-[#072E28] tracking-widest mb-2">
+            <p className="text-[10px] md:text-[14px] font-medium text-[#0F264F] tracking-widest mb-2">
                 {step.label}
             </p>
 
@@ -71,7 +71,7 @@ export function TourCard({ step, currentIndex, totalSteps, onNext, onSkip, actua
             </p>
 
             {/* Progress pills inside bordered box */}
-            <div className="border border-[#072E28] rounded-md px-2 py-2 mb-6">
+            <div className="border border-[#0F264F] rounded-md px-2 py-2 mb-6">
                 <div className="flex gap-1.5">
                     {Array.from({ length: totalSteps }).map((_, i) => (
                         <span

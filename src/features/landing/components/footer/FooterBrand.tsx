@@ -6,7 +6,7 @@ export function FooterBrand() {
   return (
     <div className="flex flex-col items-start gap-5 lg:max-w-[340px]">
       <Image
-        src="/images/logo-footer.png"
+        src="/images/logo.png"
         alt="VulnWatch AI Logo"
         width={180}
         height={72}

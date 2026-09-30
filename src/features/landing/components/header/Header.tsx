@@ -37,7 +37,7 @@ export function Header() {
           >
             {/* Mobile Logo */}
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo-mobile.png"
               alt="VulnWatch AI"
               width={140}
               height={40}
@@ -46,7 +46,7 @@ export function Header() {
             />
             {/* Desktop Logo */}
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo.png"
               alt="VulnWatch AI"
               width={160}
               height={40}

@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     <Suspense
       fallback={
         <div className="flex h-[60vh] items-center justify-center">
-          <Loader2 className="h-7 w-7 animate-spin text-[#0F264F]" />
+          <Loader2 className="h-7 w-7 animate-spin text-[#072E28]" />
         </div>
       }
     >

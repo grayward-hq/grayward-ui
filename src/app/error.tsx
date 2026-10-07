@@ -52,7 +52,7 @@ export default function Error({
 
         <button
           onClick={handleRetry}
-          className="group mt-6 flex items-center justify-center gap-2.5 rounded-full bg-[#0F264F] px-8 py-4 text-[16px] font-semibold text-white shadow-lg transition-all hover:bg-[#0a423a] hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
+          className="group mt-6 flex items-center justify-center gap-2.5 rounded-full bg-[#072E28] px-8 py-4 text-[16px] font-semibold text-white shadow-lg transition-all hover:bg-[#0a423a] hover:shadow-xl hover:-translate-y-1 active:scale-[0.98]"
         >
           <RefreshCcw className="h-5 w-5 transition-transform group-hover:-rotate-180 duration-500" />
           Try again

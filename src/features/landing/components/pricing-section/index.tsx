@@ -18,7 +18,7 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="mx-auto w-full bg-[#EEF7F9] px-4 py-20 lg:px-15">
+    <section className="mx-auto w-full bg-[#F1FCEA] px-4 py-20 lg:px-15">
       <div className="mx-auto w-full max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

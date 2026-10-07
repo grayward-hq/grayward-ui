@@ -128,7 +128,7 @@ export default function VerifyEmailPage({ domainId }: { domainId: string }) {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-4 py-6 md:px-6">
-        <Loader2 size={24} className="animate-spin text-[#0F264F]" />
+        <Loader2 size={24} className="animate-spin text-[#072E28]" />
       </div>
     );
   }
@@ -175,7 +175,7 @@ export default function VerifyEmailPage({ domainId }: { domainId: string }) {
 
         <div className="flex justify-center">
           <div className="w-full max-w-[620px] rounded-[22px] border border-[#E5E7EB] bg-white px-5 py-8 shadow-[0_14px_34px_rgba(15,23,42,0.06)] sm:px-8">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#A0E870] text-[#0F264F] shadow-[0_8px_24px_rgba(160,232,112,0.35)]">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#A0E870] text-[#072E28] shadow-[0_8px_24px_rgba(160,232,112,0.35)]">
               <MailCheck size={36} />
             </div>
 
@@ -215,7 +215,7 @@ export default function VerifyEmailPage({ domainId }: { domainId: string }) {
                 type="button"
                 onClick={handleResend}
                 disabled={countdown > 0}
-                className="text-sm font-medium text-[#A1A1AA] transition-colors enabled:text-[#466557] enabled:hover:text-[#0F264F] disabled:cursor-default"
+                className="text-sm font-medium text-[#A1A1AA] transition-colors enabled:text-[#466557] enabled:hover:text-[#072E28] disabled:cursor-default"
               >
                 Resend email {countdown > 0 ? `(${formatSeconds(countdown)})` : ""}
               </button>
@@ -224,7 +224,7 @@ export default function VerifyEmailPage({ domainId }: { domainId: string }) {
             <div className="mx-auto mt-5 max-w-[440px]">
               <Button
                 onClick={handleVerify}
-                className="h-12 w-full rounded-xl bg-[#0F264F] text-base font-semibold text-white hover:bg-[#0F264F]/90"
+                className="h-12 w-full rounded-xl bg-[#072E28] text-base font-semibold text-white hover:bg-[#072E28]/90"
               >
                 Verify Code
               </Button>

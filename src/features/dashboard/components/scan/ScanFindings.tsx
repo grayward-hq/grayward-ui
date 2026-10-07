@@ -139,7 +139,7 @@ export function ScanFindings({ activeTab }: ScanFindingsProps) {
     return (
       <section className='mx-auto w-full max-w-6xl bg-white px-4 py-4 md:bg-transparent md:px-6 md:py-6'>
         <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-2 p-5">
-          <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
           <p className="text-neutral-500 font-medium text-sm">Loading security findings...</p>
         </div>
       </section>
@@ -171,7 +171,7 @@ export function ScanFindings({ activeTab }: ScanFindingsProps) {
                   className={`w-full font-semibold h-11 transition-colors ${
                   cooldown > 0 
                     ? "bg-neutral-200 text-neutral-500 cursor-not-allowed hover:bg-neutral-200 opacity-100" 
-                    : "bg-[#0F264F] text-white hover:bg-[#0F264F]/90"
+                    : "bg-[#072e28] text-white hover:bg-[#072e28]/90"
                 }`}
                 >
                   {cooldown > 0 ? `Retry in ${cooldown}s...` : "Try Again"}
@@ -184,7 +184,7 @@ export function ScanFindings({ activeTab }: ScanFindingsProps) {
                 </Link>
               </div>
             ) : (
-              <Button asChild className="w-full mt-2 bg-[#0F264F] text-white hover:bg-[#0F264F]/90 font-semibold h-11">
+              <Button asChild className="w-full mt-2 bg-[#072e28] text-white hover:bg-[#072e28]/90 font-semibold h-11">
                 <Link href={backHref}>Back to Summary</Link>
               </Button>
             )}

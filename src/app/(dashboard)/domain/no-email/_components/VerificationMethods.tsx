@@ -15,10 +15,10 @@ export default function VerificationMethods({ domainName }: VerificationMethodsP
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Option 1: DNS TXT Record */}
-        <div className="border border-[#0F264F] rounded-lg p-4 bg-white transition duration-200">
+        <div className="border border-[#072E28] rounded-lg p-4 bg-white transition duration-200">
           <div className="flex gap-3 items-start">
             <div className="w-9 h-9 rounded-lg bg-[#A0E870] flex items-center justify-center shrink-0">
-              <Database size={18} className="text-[#0F264F]" />
+              <Database size={18} className="text-[#072E28]" />
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="font-geist font-normal text-[16px] leading-[24px] tracking-[0px] text-[#2B2B2B]">
@@ -29,7 +29,7 @@ export default function VerificationMethods({ domainName }: VerificationMethodsP
               </p>
               <Link
                 href={`/domain/no-email?method=dns&domain=${domainName}`}
-                className="font-geist font-normal text-[12px] leading-[16px] tracking-[0px] text-[#0F264F] hover:underline flex items-center gap-1 mt-2 cursor-pointer"
+                className="font-geist font-normal text-[12px] leading-[16px] tracking-[0px] text-[#072E28] hover:underline flex items-center gap-1 mt-2 cursor-pointer"
               >
                 Use this method &rarr;
               </Link>
@@ -38,10 +38,10 @@ export default function VerificationMethods({ domainName }: VerificationMethodsP
         </div>
 
         {/* Option 2: File Upload */}
-        <div className="border border-[#0F264F] rounded-lg p-4 bg-white transition duration-200">
+        <div className="border border-[#072E28] rounded-lg p-4 bg-white transition duration-200">
           <div className="flex gap-3 items-start">
             <div className="w-9 h-9 rounded-lg bg-[#A0E870] flex items-center justify-center shrink-0">
-              <FileUp size={18} className="text-[#0F264F]" />
+              <FileUp size={18} className="text-[#072E28]" />
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="font-geist font-normal text-[16px] leading-[24px] tracking-[0px] text-[#2B2B2B]">
@@ -52,7 +52,7 @@ export default function VerificationMethods({ domainName }: VerificationMethodsP
               </p>
               <Link
                 href={`/domain/no-email?method=file&domain=${domainName}`}
-                className="font-geist font-normal text-[12px] leading-[16px] tracking-[0px] text-[#0F264F] hover:underline flex items-center gap-1 mt-2 cursor-pointer"
+                className="font-geist font-normal text-[12px] leading-[16px] tracking-[0px] text-[#072E28] hover:underline flex items-center gap-1 mt-2 cursor-pointer"
               >
                 Use this method &rarr;
               </Link>

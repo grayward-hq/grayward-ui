@@ -42,7 +42,7 @@ function FileUploadStepper({ current }: { current: Step }) {
                   isDone
                     ? "bg-brand-green text-white"
                     : isActive
-                    ? "bg-[#0F264F] text-white"
+                    ? "bg-[#072E28] text-white"
                     : "bg-[#E5E7EB] text-[#9CA3AF]"
                 }`}
               >
@@ -203,7 +203,7 @@ function Step1Setup({
               <span className="text-xs text-brand-dark font-mono flex-1 truncate">{fileContent}</span>
               <button
                 onClick={() => onCopy(fileContent, "content")}
-                className="shrink-0 flex items-center gap-1 text-xs text-[#0F264F] font-medium hover:opacity-75 transition-opacity cursor-pointer"
+                className="shrink-0 flex items-center gap-1 text-xs text-[#072E28] font-medium hover:opacity-75 transition-opacity cursor-pointer"
               >
                 {copied === "content" ? <Check size={12} /> : <Copy size={12} />}
                 {copied === "content" ? "Copied" : "Copy"}
@@ -226,7 +226,7 @@ function Step1Setup({
             <span className="text-xs text-brand-dark font-mono flex-1 truncate">{accessUrl}</span>
             <button
               onClick={() => onCopy(accessUrl, "accessUrl")}
-              className="shrink-0 flex items-center gap-1 text-xs text-[#0F264F] font-medium hover:opacity-75 transition-opacity cursor-pointer"
+              className="shrink-0 flex items-center gap-1 text-xs text-[#072E28] font-medium hover:opacity-75 transition-opacity cursor-pointer"
             >
               {copied === "accessUrl" ? <Check size={12} /> : <Copy size={12} />}
               {copied === "accessUrl" ? "Copied" : "Copy"}
@@ -239,7 +239,7 @@ function Step1Setup({
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
         <Button
           onClick={onDownload}
-          className="bg-[#0F264F] hover:bg-[#0F264F]/90 text-white font-medium h-11 px-6 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
+          className="bg-[#072E28] hover:bg-[#072E28]/90 text-white font-medium h-11 px-6 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
         >
           <Download size={16} />
           Download verification file
@@ -247,7 +247,7 @@ function Step1Setup({
         <Button
           onClick={onNext}
           variant="outline"
-          className="h-11 px-6 rounded-lg border-[#0F264F] text-[#0F264F] font-medium flex items-center justify-center gap-2 cursor-pointer"
+          className="h-11 px-6 rounded-lg border-[#072E28] text-[#072E28] font-medium flex items-center justify-center gap-2 cursor-pointer"
         >
           I have downloaded it
           <ArrowRight size={16} />
@@ -303,8 +303,8 @@ function Step2Upload({
               onClick={() => setPlatform(p.id)}
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer font-geist ${
                 platform === p.id
-                  ? "bg-[#0F264F] text-white"
-                  : "bg-white border border-[#E5E7EB] text-brand-dark hover:border-[#0F264F]"
+                  ? "bg-[#072E28] text-white"
+                  : "bg-white border border-[#E5E7EB] text-brand-dark hover:border-[#072E28]"
               }`}
             >
               {p.label}
@@ -319,7 +319,7 @@ function Step2Upload({
       {/* Platform-specific instructions */}
       <div className="bg-white rounded-lg border border-[#E5E7EB] p-5 space-y-4">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-[4px] bg-[#0F264F] flex items-center justify-center shrink-0">
+          <div className="w-6 h-6 rounded-[4px] bg-[#072E28] flex items-center justify-center shrink-0">
             <span className="text-white text-[11px] font-bold font-geist">
               {platformLabel.charAt(0).toUpperCase()}
             </span>
@@ -365,7 +365,7 @@ function Step2Upload({
           </p>
           <button
             onClick={onCopyDevInstructions}
-            className="flex items-center gap-1.5 text-xs font-medium text-[#0F264F] border border-[#0F264F] rounded-md px-3 py-1.5 hover:bg-[#0F264F]/5 transition-colors cursor-pointer font-geist"
+            className="flex items-center gap-1.5 text-xs font-medium text-[#072E28] border border-[#072E28] rounded-md px-3 py-1.5 hover:bg-[#072E28]/5 transition-colors cursor-pointer font-geist"
           >
             {copied === "dev" ? <Check size={12} /> : <Copy size={12} />}
             {copied === "dev" ? "Copied!" : "Copy instructions for your developer"}
@@ -393,7 +393,7 @@ function Step2Upload({
         </button>
         <Button
           onClick={onVerify}
-          className="bg-[#0F264F] hover:bg-[#0F264F]/90 text-white font-medium h-11 px-6 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
+          className="bg-[#072E28] hover:bg-[#072E28]/90 text-white font-medium h-11 px-6 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
         >
           I&apos;ve uploaded the file — Verify now
           <ArrowRight size={16} />
@@ -423,7 +423,7 @@ function Step3Checking({
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] gap-6 py-8">
       <div className="w-20 h-20 rounded-full border-4 border-[#E5E7EB] flex items-center justify-center">
-        <Loader2 size={32} className="animate-spin text-[#0F264F]" />
+        <Loader2 size={32} className="animate-spin text-[#072E28]" />
       </div>
 
       <div className="text-center">
@@ -446,7 +446,7 @@ function Step3Checking({
                   <Check size={11} className="text-white" />
                 </div>
               ) : active ? (
-                <Loader2 size={16} className="animate-spin text-[#0F264F] shrink-0" />
+                <Loader2 size={16} className="animate-spin text-[#072E28] shrink-0" />
               ) : (
                 <div className="w-5 h-5 rounded-full border-2 border-[#D1D5DB] shrink-0" />
               )}
@@ -566,7 +566,7 @@ function Step4Success({
         </p>
         <Button
           onClick={onScan}
-          className="w-full bg-[#0F264F] hover:bg-[#0F264F]/90 text-white h-11 rounded-lg flex items-center justify-center gap-2 font-medium cursor-pointer"
+          className="w-full bg-[#072E28] hover:bg-[#072E28]/90 text-white h-11 rounded-lg flex items-center justify-center gap-2 font-medium cursor-pointer"
         >
           Run my first scan
         </Button>
@@ -678,7 +678,7 @@ function Step4Failed({
       <div className="w-full max-w-sm flex flex-col sm:flex-row gap-3">
         <Button
           onClick={onGoBack}
-          className="flex-1 bg-[#0F264F] hover:bg-[#0F264F]/90 text-white h-11 rounded-lg font-medium cursor-pointer"
+          className="flex-1 bg-[#072E28] hover:bg-[#072E28]/90 text-white h-11 rounded-lg font-medium cursor-pointer"
         >
           Go back and fix upload
         </Button>
@@ -808,7 +808,7 @@ export default function VerifyFileUploadPage({ domainId }: { domainId: string })
   if (loadingDomain) {
     return (
       <div className="px-4 md:px-6 py-6 flex items-center justify-center min-h-[60vh]">
-        <Loader2 size={24} className="animate-spin text-[#0F264F]" />
+        <Loader2 size={24} className="animate-spin text-[#072E28]" />
       </div>
     );
   }

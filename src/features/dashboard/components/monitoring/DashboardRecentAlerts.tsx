@@ -33,7 +33,7 @@ function AlertRow({ alert }: { alert: DashboardAlertItem }) {
     >
       {/* Alert icon */}
       <div className="flex items-center justify-center shrink-0 mt-0.5">
-        <TriangleAlert size={20} strokeWidth={1.8} style={{ color: '#0F264F' }} />
+        <TriangleAlert size={20} strokeWidth={1.8} style={{ color: '#072E28' }} />
       </div>
 
       {/* Content */}
@@ -142,7 +142,7 @@ export function DashboardRecentAlerts({
             fontWeight: 500,
             fontSize: '16px',
             lineHeight: '16px',
-            color: '#0F264F',
+            color: '#072E28',
             background: 'transparent',
             border: 'none',
             cursor: 'pointer',

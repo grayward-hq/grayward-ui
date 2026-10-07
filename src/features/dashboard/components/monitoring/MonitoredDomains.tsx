@@ -177,7 +177,7 @@ export function MonitoredDomains({
           className="flex items-center justify-center hover:opacity-90 transition-opacity"
           style={{
             padding: '16px 24px',
-            background: '#0F264F',
+            background: '#072E28',
             borderRadius: '12px',
             fontFamily: 'Inter, sans-serif',
             fontWeight: 600,

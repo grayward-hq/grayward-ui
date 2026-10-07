@@ -33,7 +33,7 @@ function VerificationIllustration() {
       <div className="absolute inset-5 rounded-full bg-[#FFF2D3]" />
       <div className="absolute left-1/2 top-1/2 flex h-[120px] w-[104px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[6px] border border-[#D8D8D8] bg-white shadow-[0_8px_24px_rgba(17,24,39,0.08)] sm:h-[148px] sm:w-[128px]">
         <div className="flex flex-col items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#0F264F] text-[#0F264F]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#072E28] text-[#072E28]">
             <AtSign className="h-5 w-5" strokeWidth={2} />
           </div>
           <div className="flex items-center gap-1.5 text-[#3C494E]">
@@ -66,7 +66,7 @@ function ProgressCard() {
               />
             ) : (
               <LoaderCircle
-                className="h-4 w-4 shrink-0 animate-spin text-[#0F264F]"
+                className="h-4 w-4 shrink-0 animate-spin text-[#072E28]"
                 strokeWidth={1.8}
               />
             )}
@@ -90,7 +90,7 @@ function ProgressCard() {
           aria-valuemax={100}
           aria-valuenow={75}
         >
-          <div className="h-full w-3/4 rounded-full bg-[#0F264F]" />
+          <div className="h-full w-3/4 rounded-full bg-[#072E28]" />
         </div>
         <p className="text-center text-[11px] leading-4 text-[#666666]">
           This usually takes 5-15 seconds
@@ -123,7 +123,7 @@ export default function EmailVerificationSearch({
           <ProgressCard />
         </div>
 
-        <aside className="mt-5 flex w-full max-w-[560px] items-start gap-3 rounded-[4px] border-l-4 border-[#0F264F] bg-[#FFF8EA] px-4 py-3">
+        <aside className="mt-5 flex w-full max-w-[560px] items-start gap-3 rounded-[4px] border-l-4 border-[#072E28] bg-[#FFF8EA] px-4 py-3">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#6B7280]" strokeWidth={1.8} />
           <p className="text-[12px] leading-5 text-[#2B2B2B]">
             For privacy and security, VulnWatch only searches common publicly
@@ -150,7 +150,7 @@ export default function EmailVerificationSearch({
               automate weekly or monthly reports in your{" "}
               <Link
                 href="/settings"
-                className="font-medium underline underline-offset-2 transition-colors hover:text-[#0F264F]"
+                className="font-medium underline underline-offset-2 transition-colors hover:text-[#072E28]"
               >
                 Settings
               </Link>

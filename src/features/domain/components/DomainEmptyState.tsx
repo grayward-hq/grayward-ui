@@ -49,7 +49,7 @@ export default function DomainEmptyState({ onAddDomain }: Props) {
 
       <Button
         onClick={onAddDomain}
-        className="bg-[#0F264F] text-white hover:bg-[#0F264F]/90 rounded-lg px-6 h-10"
+        className="bg-[#072E28] text-white hover:bg-[#072E28]/90 rounded-lg px-6 h-10"
       >
         <PlusCircle size={16} className="mr-2" />
         Add domain
@@ -61,7 +61,7 @@ export default function DomainEmptyState({ onAddDomain }: Props) {
         <div className="h-px w-16 bg-[#E5E7EB]" />
       </div>
 
-      <button className="text-sm text-[#0F264F] font-medium hover:underline mb-3">
+      <button className="text-sm text-[#072E28] font-medium hover:underline mb-3">
         View setup guide
       </button>
 

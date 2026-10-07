@@ -69,7 +69,7 @@ export default function VerifyEmailWaitingPage({
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-4 py-6 md:px-6">
-        <Loader2 size={24} className="animate-spin text-[#0F264F]" />
+        <Loader2 size={24} className="animate-spin text-[#072E28]" />
       </div>
     );
   }

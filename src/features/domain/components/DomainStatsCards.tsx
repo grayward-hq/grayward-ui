@@ -14,7 +14,7 @@ export default function DomainStatsCards({ total, pending, verified }: Props) {
       {/* Total Domain Card */}
       <div className="bg-white rounded-2xl border border-[#EDEDED] p-5 flex flex-col items-start gap-4">
         <div className="w-10 h-10 rounded-[10px] bg-[#EAF5F3] flex items-center justify-center shrink-0">
-          <Globe size={20} className="text-[#0F264F]" />
+          <Globe size={20} className="text-[#072E28]" />
         </div>
         <div className="space-y-1">
           <p className="text-[28px] font-bold text-brand-dark font-geist leading-none">

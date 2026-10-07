@@ -41,7 +41,7 @@ export function SecuritySummaryCard({ detailsHref, module = 'all' }: SecuritySum
   if (loading) {
     return (
       <section className='rounded-xl border border-[#E5E7EB] bg-white p-5 md:p-6 flex flex-col justify-center items-center h-full min-h-[180px]'>
-        <Loader2 className="h-6 w-6 animate-spin text-[#0F264F]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#072e28]" />
         <p className="text-neutral-500 font-medium text-xs mt-2">Loading security summary...</p>
       </section>
     );

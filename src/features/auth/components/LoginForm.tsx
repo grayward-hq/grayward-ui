@@ -81,7 +81,7 @@ export function LoginForm() {
           <div className="mb-4">
             <Link href="/">
               <Image
-                src="/images/logo.png"
+                src="/images/logo-auth.png"
                 alt="VulnWatch AI Logo"
                 width={240}
                 height={69}

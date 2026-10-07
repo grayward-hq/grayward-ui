@@ -73,7 +73,7 @@ export function AddEmailDialog({
           <div className="flex flex-col items-center gap-6 w-full">
             {/* Mail icon */}
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#A0E870]">
-              <Mail className="h-6 w-6 text-[#0F264F]" strokeWidth={1.5} />
+              <Mail className="h-6 w-6 text-[#072E28]" strokeWidth={1.5} />
             </div>
 
             {/* Text + form */}
@@ -100,7 +100,7 @@ export function AddEmailDialog({
                   onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                   className={cn(
                     "w-full h-12 px-6 py-4 border rounded-lg text-base text-brand-dark placeholder:text-brand-dark outline-none transition-colors",
-                    error ? "border-red-500 focus:border-red-500" : "border-[#EDEDED] focus:border-[#0F264F]"
+                    error ? "border-red-500 focus:border-red-500" : "border-[#EDEDED] focus:border-[#072E28]"
                   )}
                 />
                 {error && <p className="mt-1.5 text-xs text-red-500 text-left">{error}</p>}
@@ -110,13 +110,13 @@ export function AddEmailDialog({
               <button
                 type="button"
                 onClick={() => setAgreed(!agreed)}
-                className="w-full flex items-start gap-4 p-4 border border-[#0F264F] rounded-lg text-left"
+                className="w-full flex items-start gap-4 p-4 border border-[#072E28] rounded-lg text-left"
               >
                 {/* Checkbox */}
                 <div
                   className={cn(
                     "flex-shrink-0 h-6 w-6 rounded flex items-center justify-center transition-colors",
-                    agreed ? "bg-[#0F264F]" : "border border-[#0F264F] bg-white"
+                    agreed ? "bg-[#072E28]" : "border border-[#072E28] bg-white"
                   )}
                 >
                   {agreed && <Check className="h-4 w-4 text-white" strokeWidth={3} />}
@@ -136,7 +136,7 @@ export function AddEmailDialog({
                   type="button"
                   onClick={handleSubmit}
                   disabled={isLoading || !email || !agreed}
-                  className="w-full flex items-center justify-center gap-2 bg-[#0F264F] text-white rounded-lg py-[14px] text-base font-medium tracking-wide disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#0a3d35] transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-[#072E28] text-white rounded-lg py-[14px] text-base font-medium tracking-wide disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#0a3d35] transition-colors"
                 >
                   {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
                   Submit

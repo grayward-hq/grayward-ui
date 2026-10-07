@@ -20,13 +20,14 @@ export default function Features() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <span className='mb-3 rounded-xl border border-[#E0E0E0] bg-[#FAFAFA] px-4 py-2.5 text-[18px] font-medium text-[#2B2B2B] sm:mb-4 md:mb-5'>
+          <span className='mb-3 rounded-md bg-[#FAFAFA] px-4 py-2.5 sm:mb-4 md:mb-5'>
             Features
           </span>
-          <h2 className='mb-4 text-center text-2xl font-medium text-[#2B2B2B] sm:mb-6 md:mb-8 md:text-5xl md:leading-13.75'>
+          <h2 className='mb-4 text-center text-2xl font-medium sm:mb-6 md:mb-8 md:text-5xl md:leading-13.75'>
             Everything you need to{' '}
-            <span className='text-[#0F264F]'>
-              stay <br /> protected
+            <span className='text-[#072E28]'>
+              {' '}
+              stay <br /> protected{' '}
             </span>
           </h2>
           <p className='px-5 text-center text-base font-normal text-[#666666] sm:mb-6 md:mb-10 md:text-xl'>
@@ -47,16 +48,16 @@ export default function Features() {
             <motion.div
               key={title}
               variants={cardVariants}
-              className='flex flex-col gap-4 rounded-xl border-2 border-[#EFEFEF] bg-white p-6
-                transition-all duration-200 hover:border-[#0F264F] hover:shadow-md'
+              className='flex flex-col gap-4 rounded-lg border-2 border-[#EFEFEF] bg-white p-6
+                transition-all duration-200 hover:border-primary hover:shadow-md'
             >
-              <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-[#0F264F] p-2'>
+              <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-md bg-[#F4F8F5]'>
                 <Image
                   src={image}
                   alt={title}
-                  width={32}
-                  height={32}
-                  className='h-full w-full object-contain'
+                  width={48}
+                  height={48}
+                  className='h-full w-full object-cover'
                 />
               </div>
               <h3 className='text-lg font-semibold text-[#2B2B2B]'>{title}</h3>

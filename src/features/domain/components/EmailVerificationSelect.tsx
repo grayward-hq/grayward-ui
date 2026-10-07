@@ -89,7 +89,7 @@ function EmailOption({ email, selected }: { email: VerificationEmail; selected: 
     <label
       className={
         selected
-          ? "flex cursor-pointer items-center gap-3 rounded-[8px] border border-[#0F264F] bg-white px-4 py-4 shadow-[0_1px_4px_rgba(17,24,39,0.04)]"
+          ? "flex cursor-pointer items-center gap-3 rounded-[8px] border border-[#072E28] bg-white px-4 py-4 shadow-[0_1px_4px_rgba(17,24,39,0.04)]"
           : "flex cursor-pointer items-center gap-3 rounded-[8px] border border-[#F0F0F0] bg-white px-4 py-4 opacity-70"
       }
     >
@@ -119,7 +119,7 @@ function EmailOption({ email, selected }: { email: VerificationEmail; selected: 
         </span>
       </span>
       {selected ? (
-        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#0F264F]" strokeWidth={1.8} />
+        <CheckCircle2 className="h-5 w-5 shrink-0 text-[#072E28]" strokeWidth={1.8} />
       ) : (
         <Circle className="h-5 w-5 shrink-0 text-[#E5E7EB]" strokeWidth={1.8} />
       )}
@@ -173,7 +173,7 @@ export default function EmailVerificationSelect({
           <div className="mt-6 rounded-b-[8px] bg-[#A0E870] p-3">
             <button
               type="button"
-              className="flex h-11 w-full items-center justify-center gap-2 rounded-[6px] bg-[#0F264F] text-sm font-semibold text-white transition-colors hover:bg-[#0A3B34] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2"
+              className="flex h-11 w-full items-center justify-center gap-2 rounded-[6px] bg-[#072E28] text-sm font-semibold text-white transition-colors hover:bg-[#0A3B34] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#072E28] focus-visible:ring-offset-2"
             >
               Send Verification Email
               <ChevronRight className="h-4 w-4" strokeWidth={1.8} />
@@ -181,7 +181,7 @@ export default function EmailVerificationSelect({
             <button
               type="button"
               onClick={onChooseDifferentMethod}
-              className="mt-3 h-7 w-full text-center text-[12px] font-medium text-[#2B2B2B] underline-offset-2 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F]"
+              className="mt-3 h-7 w-full text-center text-[12px] font-medium text-[#2B2B2B] underline-offset-2 transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#072E28]"
             >
               Choose a different verification method
             </button>

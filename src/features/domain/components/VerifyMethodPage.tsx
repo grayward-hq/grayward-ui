@@ -87,7 +87,7 @@ export default function VerifyMethodPage({ domainId }: { domainId: string }) {
   if (loading) {
     return (
       <div className="px-4 md:px-6 py-6 flex items-center justify-center min-h-[60vh]">
-        <Loader2 size={24} className="animate-spin text-[#0F264F]" />
+        <Loader2 size={24} className="animate-spin text-[#072E28]" />
       </div>
     );
   }
@@ -149,7 +149,7 @@ export default function VerifyMethodPage({ domainId }: { domainId: string }) {
                 toast.info("Proceeding to DNS verification...");
                 router.push(`/domain/${domainId}/verify/dns?token=${encodeURIComponent(token)}`);
               }}
-              className="w-full bg-[#0F264F] hover:bg-[#0F264F]/90 text-white font-medium h-11 rounded-[8px] cursor-pointer"
+              className="w-full bg-[#072E28] hover:bg-[#072E28]/90 text-white font-medium h-11 rounded-[8px] cursor-pointer"
             >
               Continue
             </Button>

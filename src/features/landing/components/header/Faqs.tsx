@@ -207,7 +207,7 @@ const FaqPage = () => {
                 {showAllCategories ? "Show less" : "Show more category"}
                 <ChevronDown
                   className={cn(
-                    "h-4 w-4 stroke-2 text-[#0F264F] transition-transform xl:h-5 xl:w-5",
+                    "h-4 w-4 stroke-2 text-[#57D132] transition-transform xl:h-5 xl:w-5",
                     showAllCategories && "rotate-180",
                   )}
                 />
@@ -224,33 +224,33 @@ const FaqPage = () => {
 
 const FaqSection = () => {
   return (
-    <section id="faqs" className="w-full bg-[#FAFAFA] py-12 md:py-24">
+    <section id="faqs" className="w-full bg-white py-12 md:py-24">
       <div className="mx-auto max-w-7xl md:px-6 lg:px-8">
-        <div className="grid items-center gap-16 bg-[#F4F4F5] px-4 py-10 sm:px-6 md:grid-cols-[min-content_1fr] md:rounded-[40px] md:p-14">
+        <div className="grid items-center gap-16 bg-[#FAFAFA] px-4 py-10 sm:px-6 md:grid-cols-[min-content_1fr] md:rounded-4xl md:p-14">
           <div className="space-y-12">
             <div className="space-y-4">
-              <h2 className="mb-2 text-4xl font-semibold text-[#2B2B2B] md:text-[40px]">
+              <h2 className="mb-2 text-4xl font-semibold text-[#2b2b2b] md:text-[40px]">
                 Frequently asked questions
               </h2>
-              <p className="text-[#666666]">
+              <p className="text-muted-foreground">
                 Have Questions? Here are quick answers to some of the most
                 common queries
               </p>
             </div>
-            <Card className="rounded-[15px] border border-[#E4E4E4] bg-[#FAFAFA] shadow-none">
-              <CardContent className="space-y-4 p-6">
+            <Card>
+              <CardContent className="space-y-3 pt-4">
                 <div className="space-y-1 leading-tight">
-                  <h3 className="text-lg font-bold text-[#2B2B2B]">
+                  <h3 className="text-lg font-bold text-header">
                     More questions?
                   </h3>
-                  <p className="text-[#71717A] text-sm">
+                  <p className="text-muted-foreground text-sm">
                     We&apos;re always ready to help you out.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 sm:flex-nowrap">
                   <UserAvatarCascade />
                   <Button
-                    className="bg-[#0F264F] text-white hover:bg-[#0a1b38] rounded-xl px-6 py-2.5 font-semibold transition-colors"
+                    className="bg-secondary px-8 text-primary hover:bg-secondary"
                     href="/contact"
                   >
                     Contact support

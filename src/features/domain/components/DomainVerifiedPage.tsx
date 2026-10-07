@@ -117,7 +117,7 @@ export default function DomainVerifiedPage({
         <div className="w-full max-w-md flex flex-col items-center gap-3">
           <Button
             onClick={() => router.push("/scan")}
-            className="w-full bg-[#0F264F] hover:bg-[#0F264F]/90 text-white font-medium h-11 rounded-[8px] cursor-pointer"
+            className="w-full bg-[#072E28] hover:bg-[#072E28]/90 text-white font-medium h-11 rounded-[8px] cursor-pointer"
           >
             Start your first scan
           </Button>

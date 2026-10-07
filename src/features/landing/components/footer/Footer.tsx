@@ -4,7 +4,7 @@ import { FooterBottomBar } from "./FooterBottomBar";
 
 export function Footer() {
   return (
-    <footer aria-label="Site footer" className="w-full bg-[#F5F8FD]">
+    <footer aria-label="Site footer" className="w-full bg-[#F0F0F0]">
       {/* Divider */}
       <div className="border-t border-[#E4E4E7]" />
 

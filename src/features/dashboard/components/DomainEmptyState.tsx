@@ -33,7 +33,7 @@ export function DomainEmptyState({ domainName, domainId }: DomainEmptyStateProps
       {/* CTA */}
       <Link
         href={`/scan?domainId=${encodeURIComponent(domainId)}&domainName=${encodeURIComponent(domainName)}`}
-        className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-[#0F264F] text-white rounded-xl hover:opacity-90 transition-opacity w-[190px] h-[54px]'
+        className='inline-flex items-center justify-center gap-4 px-6 py-4 bg-[#072E28] text-white rounded-xl hover:opacity-90 transition-opacity w-[190px] h-[54px]'
       >
         <ScanLine className='h-5 w-5' />
         <span className='font-inter font-semibold text-[16px] leading-[22px] tracking-[-0.5px]'>

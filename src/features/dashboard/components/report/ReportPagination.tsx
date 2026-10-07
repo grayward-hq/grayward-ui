@@ -41,7 +41,7 @@ export function ReportPagination({ page, totalPages, onPageChange }: ReportPagin
             className={cn(
               "inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium transition-colors",
               page === p
-                ? "bg-[#0F264F] text-white"
+                ? "bg-[#072E28] text-white"
                 : "border border-[#E5E7EB] text-[#2B2B2B] hover:bg-gray-50"
             )}
           >

@@ -6,8 +6,8 @@ export function FooterBottomBar() {
       <div
         className="flex w-full flex-col items-center justify-center gap-4 rounded-xl px-6 py-[18px] text-center md:flex-row md:justify-between md:text-left"
         style={{
-          backgroundColor: "#0F264F",
-          border: "1px solid #0F264F",
+          backgroundColor: "#072E28",
+          border: "1px solid #072E28",
           minHeight: "68px",
         }}
       >

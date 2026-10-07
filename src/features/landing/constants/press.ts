@@ -16,7 +16,7 @@ export type PressReleaseItem = {
 export const pressHero = {
     title: "Press and Media",
     subtitle: "Stories, assets, and contacts for journalists.",
-    email: "Vulnwatchai@gmail.com",
+    email: "info@grayward.net",
     brandKitUrl: "",
 };
 

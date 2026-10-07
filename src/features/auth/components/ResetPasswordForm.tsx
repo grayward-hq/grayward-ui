@@ -83,7 +83,7 @@ export function ResetPasswordForm() {
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4">
             <Image
-              src="/images/logo-auth.png"
+              src="/images/logo.png"
               alt="VulnWatch AI Logo"
               width={240}
               height={69}

@@ -197,7 +197,7 @@ export default function Report() {
                     >
                       <span className="truncate">{d.domain}</span>
                       {d.id === selectedDomain?.id && (
-                        <span className="ml-2 h-2 w-2 rounded-full bg-[#072E28] shrink-0" />
+                        <span className="ml-2 h-2 w-2 rounded-full bg-[#0F264F] shrink-0" />
                       )}
                     </button>
                   ))

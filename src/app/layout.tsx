@@ -8,15 +8,15 @@ const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "VulnWatch AI — Intelligent Vulnerability Detection";
 const appDescription =
   "Intelligent vulnerability detection for your domains and GitHub repositories — continuous, non-intrusive scans with severity-ranked findings and step-by-step fixes anyone can follow.";
-const ogImage = "/images/logo.jpg";
+const ogImage = "/images/logo.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
   applicationName: appName,
   icons: {
-    icon: "/images/logo-auth.png",
-    shortcut: "/images/logo-auth.png",
-    apple: "/images/logo-auth.png",
+    icon: "/images/icon.png",
+    shortcut: "/images/icon.png",
+    apple: "/images/icon.png",
   },
   title: {
     default: appName,

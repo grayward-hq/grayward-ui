@@ -14,7 +14,7 @@ export const tourSteps: TourStep[] = [
     {
         id: 1,
         label: 'TOUR 1 OF 4 - WELCOME',
-        title: 'Welcome to VulnWatch!',
+        title: 'Welcome to Grayward!',
         description: "We are thrilled to have you here! Let's take a quick tour to show you how easy it is to get full visibility into your security posture.",
         targetSelector: 'body',
         arrow: 'none',
@@ -42,7 +42,7 @@ export const tourSteps: TourStep[] = [
         id: 4,
         label: 'TOUR 4 OF 4 - RESOURCES',
         title: 'Your docs and API keys live here',
-        description: 'Security Docs walks you through every finding type and remediation guide. API Access gives you your key to integrate VulnWatch scan results into your own pipelines and tools.',
+        description: 'Security Docs walks you through every finding type and remediation guide. API Access gives you your key to integrate Grayward scan results into your own pipelines and tools.',
         targetSelector: '#tour-resources, #tour-mobile-settings',
         arrow: 'left',
         buttonLabel: 'done',

@@ -5,7 +5,7 @@ const sections = [
   {
     id: "who-we-are",
     heading: "Who we are",
-    body: "VulnWatch AI is a surface intelligence and website security platform built to help businesses identify visible security weaknesses before attackers exploit them. We simplify complex cybersecurity into clear, understandable insights that help you protect your digital presence.",
+    body: "Grayward is a surface intelligence and website security platform built to help businesses identify visible security weaknesses before attackers exploit them. We simplify complex cybersecurity into clear, understandable insights that help you protect your digital presence.",
     image: "/images/landing-page/Rectangle 34624202.jpg",
     alt: "Who we are",
     imageLeft: true,
@@ -38,7 +38,7 @@ const AboutUs = () => {
           <p className="font-inter text-[#666666] mx-auto mt-6 max-w-255 text-base leading-7 font-normal tracking-[-0.0625rem] md:text-xl md:leading-8">
             Most website security tools overwhelm people with technical jargon,
             fragmented reports, and unclear priorities.{" "}
-            <span className="text-[#2B2B2B] font-semibold">VulnWatch AI</span> was
+            <span className="text-[#2B2B2B] font-semibold">Grayward</span> was
             created to change that. We turn complex surface-level security
             checks into clear, actionable insights businesses can actually
             understand and fix without needing a cybersecurity team.

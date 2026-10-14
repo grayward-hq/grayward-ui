@@ -56,7 +56,7 @@ function VerifyEmailContent() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/logo.png"
-                alt="VulnWatch AI Logo"
+                alt="Grayward Logo"
                 className="h-auto w-[240px] object-contain"
               />
             </Link>

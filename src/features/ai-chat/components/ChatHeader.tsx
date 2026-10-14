@@ -24,7 +24,7 @@ export function ChatHeader({ onClose }: ChatHeaderProps) {
         </div>
         <div className="flex flex-col gap-1">
           <span className="font-geist font-medium text-base leading-none text-white">
-            VulnWatch AI
+            Grayward
           </span>
           <span className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-green shrink-0" />

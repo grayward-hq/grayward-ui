@@ -236,7 +236,7 @@ const GeneralSettingsContent = ({
 
       <Section
         title="Preferences"
-        subtitle="Customize how VulnWatch works for you"
+        subtitle="Customize how Grayward works for you"
       >
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           <Toggle

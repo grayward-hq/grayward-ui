@@ -59,7 +59,7 @@ export function VerifyWaitlistPage() {
             <CheckCircle2 className="h-16 w-16 text-secondary" />
             <h3 className="text-2xl font-semibold text-brand-dark">Email Verified!</h3>
             <p className="text-brand-gray">
-              Your email ({email}) has been successfully verified. You are now officially on the VulnWatch waitlist.
+              Your email ({email}) has been successfully verified. You are now officially on the Grayward waitlist.
             </p>
             <div className="mt-4 w-full">
               <Button asChild className="w-full h-14 text-base rounded-xl font-semibold bg-primary hover:bg-primary/90 text-white">

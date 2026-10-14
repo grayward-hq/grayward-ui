@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 const items = [
   {
     title: "Built for non-technical users",
-    body: "VulnWatch AI is designed for real business teams who need clear answers, not confusing technical reports.",
+    body: "Grayward is designed for real business teams who need clear answers, not confusing technical reports.",
   },
   {
     title: "AI-powered risk explanations",
@@ -15,7 +15,7 @@ const items = [
   },
 ];
 
-/** Renders the "What makes us different?" section highlighting VulnWatch AI's key differentiators. */
+/** Renders the "What makes us different?" section highlighting Grayward's key differentiators. */
 const Different = () => {
   return (
     <section className="bg-white px-5 py-16 md:px-20 md:py-24">

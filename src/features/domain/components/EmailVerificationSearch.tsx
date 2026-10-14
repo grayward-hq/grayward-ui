@@ -126,7 +126,7 @@ export default function EmailVerificationSearch({
         <aside className="mt-5 flex w-full max-w-[560px] items-start gap-3 rounded-[4px] border-l-4 border-[#0F264F] bg-[#FFF8EA] px-4 py-3">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#6B7280]" strokeWidth={1.8} />
           <p className="text-[12px] leading-5 text-[#2B2B2B]">
-            For privacy and security, VulnWatch only searches common publicly
+            For privacy and security, Grayward only searches common publicly
             accessible verification mailboxes.
           </p>
         </aside>

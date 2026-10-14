@@ -17,7 +17,7 @@ const emailSchema = z.object({
 
 type EmailFormValues = z.infer<typeof emailSchema>;
 
-const STATUS_STORAGE_KEY = "vulnwatch_waitlist_status";
+const STATUS_STORAGE_KEY = "grayward_waitlist_status";
 
 export function WaitlistStatusPage() {
   const [statusData, setStatusData] = useState<WaitlistStatusResponse | null>(null);

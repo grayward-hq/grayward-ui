@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "VulnWatch AI — Intelligent Vulnerability Detection";
+const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Grayward — Intelligent Vulnerability Detection";
 const appDescription =
   "Intelligent vulnerability detection for your domains and GitHub repositories — continuous, non-intrusive scans with severity-ranked findings and step-by-step fixes anyone can follow.";
 const ogImage = "/images/logo.png";
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: appName,
     title: appName,
     description: appDescription,
-    images: [{ url: ogImage, width: 516, height: 144, alt: "VulnWatch AI" }],
+    images: [{ url: ogImage, width: 516, height: 144, alt: "Grayward" }],
   },
   twitter: {
     card: "summary_large_image",

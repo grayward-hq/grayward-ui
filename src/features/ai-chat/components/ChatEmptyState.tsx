@@ -22,7 +22,7 @@ export function ChatEmptyState({ firstName, onSuggestedQuestion }: ChatEmptyStat
       <div className="flex flex-col items-center gap-6 pt-4">
         <RobotIcon />
         <p className="font-geist font-medium text-xl leading-8 text-center text-brand-dark max-w-sm">
-          Hi {firstName}, I&apos;m your VulnWatch AI assistant. Ask me anything about your scan results
+          Hi {firstName}, I&apos;m your Grayward assistant. Ask me anything about your scan results
         </p>
       </div>
 

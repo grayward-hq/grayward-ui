@@ -37,7 +37,7 @@ export function ConnectGithubDialog({ open, onOpenChange, onConnect }: Props) {
         <DialogHeader>
           <DialogTitle className="text-brand-dark">Connect GitHub Repository</DialogTitle>
           <DialogDescription className="text-brand-gray">
-            Grant VulnWatch read-only access to your GitHub repositories for security scanning.
+            Grant Grayward read-only access to your GitHub repositories for security scanning.
           </DialogDescription>
         </DialogHeader>
 
@@ -58,7 +58,7 @@ export function ConnectGithubDialog({ open, onOpenChange, onConnect }: Props) {
           {/* Security note */}
           <div className="rounded-lg border border-brand-light-gray bg-owasp-warn-bg p-4">
             <p className="text-sm text-scan-yellow-900">
-              <strong>Security Note:</strong> VulnWatch will never push commits, create pull
+              <strong>Security Note:</strong> Grayward will never push commits, create pull
               requests, or modify your repositories. Access is strictly read-only for security
               analysis.
             </p>

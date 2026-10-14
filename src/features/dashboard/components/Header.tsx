@@ -103,7 +103,7 @@ export function DashboardHeader() {
         <Link href='/dashboard' className='lg:hidden order-1 md:order-2 shrink-0'>
           <Image
             src='/images/logo-mobile.png'
-            alt='VulnWatch AI'
+            alt='Grayward'
             width={140}
             height={32}
             className='h-6 w-auto'
@@ -193,7 +193,7 @@ export function DashboardHeader() {
           <Link href='/dashboard'>
             <Image
               src='/images/logo.png'
-              alt='VulnWatch AI'
+              alt='Grayward'
               width={140}
               height={32}
               className='h-6 w-auto'

@@ -139,7 +139,7 @@ const FaqPage = () => {
           </h1>
           <p className="faq-page-description">
             Everything you need to know about domain verification, vulnerability
-            scanning, monitoring, and security reports in VulnWatch.
+            scanning, monitoring, and security reports in Grayward.
           </p>
         </div>
       </section>

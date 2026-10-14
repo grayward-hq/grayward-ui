@@ -4,7 +4,7 @@ import InTheNews from "@/features/landing/components/press/InTheNews";
 import PressReleases from "@/features/landing/components/press/PressReleases";
 
 export const metadata: Metadata = {
-    title: "Press and Media | VulnWatch",
+    title: "Press and Media | Grayward",
     description: "Stories, assets, and contacts for journalists.",
 };
 

@@ -100,9 +100,9 @@
 }
 
 :root {
-  /* VulnWatch AI Brand Colors */
+  /* Grayward Brand Colors */
   --primary: #0F264F;
-  --Primary-Vulnwatch-color: #0F264F;
+  --Primary-Grayward-color: #0F264F;
   --primary-foreground: #ffffff;
 
   --secondary: #C0D7FF;
@@ -127,7 +127,7 @@
 /* I hardcoded dark mode colors until further notice */
 .dark {
   --primary: #0F264F;
-  --Primary-Vulnwatch-color: #0F264F;
+  --Primary-Grayward-color: #0F264F;
   --primary-foreground: #ffffff;
 
   --secondary: #C0D7FF;

@@ -20,7 +20,7 @@ export function FormalHowItWorksSection() {
     {
       number: "04",
       title: "Connect Your Repositories",
-      description: "Authorize VulnWatch with read-only GitHub OAuth. Select the repos you want monitored."
+      description: "Authorize Grayward with read-only GitHub OAuth. Select the repos you want monitored."
     },
     {
       number: "05",

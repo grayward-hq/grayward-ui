@@ -54,7 +54,7 @@ export const mockDashboardData: DashboardData = {
       id: "ai-2",
       title: "Add CSP Header via Nginx",
       description:
-        "Add add_header Content-Security-Policy to your nginx.conf. VulnWatch has generated a starter policy for your stack.",
+        "Add add_header Content-Security-Policy to your nginx.conf. Grayward has generated a starter policy for your stack.",
       priority: "High",
       category: "Security Headers",
     },

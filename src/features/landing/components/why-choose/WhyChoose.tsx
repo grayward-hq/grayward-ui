@@ -13,12 +13,12 @@ const WhyChoose: React.FC = () => {
     {
       title: "Catch Problems Before Customers Do",
       description:
-        "Expiring SSL certificate, misconfigured DNS and exposed admin pages can break your site & lead to loss of customer trust overnight. Vulnwatch flags these before they become incidents.",
+        "Expiring SSL certificate, misconfigured DNS and exposed admin pages can break your site & lead to loss of customer trust overnight. Grayward flags these before they become incidents.",
     },
     {
       title: "Prioritize the Risks That Matter",
       description:
-        "VulnWatch AI helps teams cut through noisy scan results by highlighting the vulnerabilities most likely to affect real users and critical systems.",
+        "Grayward helps teams cut through noisy scan results by highlighting the vulnerabilities most likely to affect real users and critical systems.",
     },
     {
       title: "Move Faster With AI-Assisted Triage",
@@ -43,7 +43,7 @@ const WhyChoose: React.FC = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <span className="mb-6 w-fit rounded-xl border border-[#E0E0E0] bg-[#FAFAFA] px-4 py-2 text-[0.9rem] font-geist font-medium tracking-wide text-[#2B2B2B] sm:text-[1.1rem]">
-            Why Choose VulnWatch AI
+            Why Choose Grayward
           </span>
           <h2 className="mb-4 w-[95%] text-2xl leading-snug font-semibold text-[#2B2B2B] sm:w-full sm:text-3xl md:text-4xl lg:text-5xl">
             See risks clearly, fix them faster,

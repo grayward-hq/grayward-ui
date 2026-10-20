@@ -139,7 +139,7 @@ function ScanReportContent() {
   if (loading) {
     return (
       <div className="flex h-[50vh] w-full flex-col items-center justify-center gap-2 p-5">
-        <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
         <p className="text-neutral-500 font-medium text-sm">Loading security report...</p>
       </div>
     );
@@ -158,7 +158,7 @@ function ScanReportContent() {
               {error || "The report could not be found."}
             </p>
           </div>
-          <Button asChild className="w-full mt-2 bg-[#072e28] text-white hover:bg-[#072e28]/90 font-semibold h-11">
+          <Button asChild className="w-full mt-2 bg-[#0F264F] text-white hover:bg-[#0F264F]/90 font-semibold h-11">
             <Link href="/scan">Back to Scan Setup</Link>
           </Button>
         </div>

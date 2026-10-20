@@ -16,7 +16,7 @@ export type PressReleaseItem = {
 export const pressHero = {
     title: "Press and Media",
     subtitle: "Stories, assets, and contacts for journalists.",
-    email: "Vulnwatchai@gmail.com",
+    email: "info@grayward.net",
     brandKitUrl: "",
 };
 
@@ -24,9 +24,9 @@ export const newsItems: NewsItem[] = [
     {
         source: "TVC News",
         date: "May 6, 2026",
-        headline: "VulnWatch raises $14 to make website security boring",
-        url: "/press/news/vulnwatch-raises-funding",
-        slug: "vulnwatch-raises-funding",
+        headline: "Grayward raises $14 to make website security boring",
+        url: "/press/news/grayward-raises-funding",
+        slug: "grayward-raises-funding",
     },
     {
         source: "Punch Newspaper",
@@ -54,19 +54,19 @@ export const newsItems: NewsItem[] = [
 export const pressReleases: PressReleaseItem[] = [
     {
         date: "May 9, 2026",
-        title: "VulnWatch adds DNS hijack detection across 14M domains",
+        title: "Grayward adds DNS hijack detection across 14M domains",
         url: "/press/dns-hijack-detection",
         slug: "dns-hijack-detection",
     },
     {
         date: "April 28, 2026",
-        title: "VulnWatch exits beta with 50,000 sites scanned weekly",
+        title: "Grayward exits beta with 50,000 sites scanned weekly",
         url: "/press/exits-beta-50k-sites",
         slug: "exits-beta-50k-sites",
     },
     {
         date: "March 12, 2026",
-        title: "VulnWatch launches Continuous Monitoring for SMEs",
+        title: "Grayward launches Continuous Monitoring for SMEs",
         url: "/press/continuous-monitoring-smes",
         slug: "continuous-monitoring-smes",
     },

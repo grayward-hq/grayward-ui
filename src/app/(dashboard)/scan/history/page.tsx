@@ -243,7 +243,7 @@ function ScanHistoryContent() {
   if (loading) {
     return (
       <div className="flex h-[60vh] w-full flex-col items-center justify-center gap-3 p-5">
-        <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
         <p className="text-neutral-500 font-medium text-sm">Retrieving scan history...</p>
       </div>
     );
@@ -257,7 +257,7 @@ function ScanHistoryContent() {
         <div className="space-y-3 flex-1">
           <Link
             href="/scan"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#072e28] hover:text-[#0b473e] hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-[#0F264F] hover:text-[#0b473e] hover:underline"
           >
             <ChevronLeft className="h-4 w-4" strokeWidth={2} /> Back to Scan Setup
           </Link>
@@ -299,7 +299,7 @@ function ScanHistoryContent() {
             <Button
               onClick={handleStartScan}
               disabled={startingScan}
-              className="bg-[#072e28] hover:bg-[#0b473e] text-white font-semibold h-12 px-8 rounded-lg flex items-center gap-2 transition-all cursor-pointer disabled:opacity-60"
+              className="bg-[#0F264F] hover:bg-[#0b473e] text-white font-semibold h-12 px-8 rounded-lg flex items-center gap-2 transition-all cursor-pointer disabled:opacity-60"
             >
               {startingScan ? (
                 <>
@@ -455,7 +455,7 @@ export default function ScanHistoryPage() {
     <Suspense
       fallback={
         <div className="flex h-[60vh] w-full items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
         </div>
       }
     >

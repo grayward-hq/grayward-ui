@@ -86,7 +86,7 @@ export default function DashboardController() {
   if (isDomainsLoading || isDashboardDataLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-[#072E28]" />
+        <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
         <p className="text-sm text-[#6B7280] font-medium">Loading your dashboard...</p>
       </div>
     );

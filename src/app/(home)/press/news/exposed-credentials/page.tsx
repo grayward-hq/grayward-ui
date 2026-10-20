@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "How a start-up is mapping the web's exposed credentials | Tech Media Hub",
-    description: "Tech Media Hub reports on VulnWatch's credential exposure detection and how it is helping businesses protect their users.",
+    description: "Tech Media Hub reports on Grayward's credential exposure detection and how it is helping businesses protect their users.",
 };
 
 export default function NewsExposedCredentialsPage() {
@@ -31,7 +31,7 @@ export default function NewsExposedCredentialsPage() {
 
                 <div className="space-y-6 text-base leading-relaxed text-gray-700">
                     <p>
-                        Somewhere on the dark web right now, there is a database containing the email addresses and passwords of your customers. You almost certainly don&apos;t know it exists. You probably haven&apos;t checked. VulnWatch AI has built a system to check for you — and alert you before the damage is done.
+                        Somewhere on the dark web right now, there is a database containing the email addresses and passwords of your customers. You almost certainly don&apos;t know it exists. You probably haven&apos;t checked. Grayward has built a system to check for you — and alert you before the damage is done.
                     </p>
                     <p>
                         The Lagos-based security startup has developed a credential exposure detection engine that cross-references domains against a continuously updated index of known data breaches. When a match is found — an email associated with your domain appearing in a leaked database — the domain owner receives an alert detailing the breach source, the date, and the recommended actions.
@@ -43,28 +43,28 @@ export default function NewsExposedCredentialsPage() {
                     <p>
                         For businesses, the risk is not just to their own systems. When a customer&apos;s email and password from your platform appear in a breach, attackers use them to access the customer&apos;s other accounts — banking, social media, email. The business that suffered the original breach becomes the starting point for a cascade of harm.
                     </p>
-                    <h2 className="text-xl font-semibold text-header mt-10">How VulnWatch maps exposure</h2>
+                    <h2 className="text-xl font-semibold text-header mt-10">How Grayward maps exposure</h2>
                     <p>
-                        VulnWatch&apos;s credential detection works by monitoring domains, not individual users. When you verify a domain on the platform, VulnWatch begins checking whether email addresses associated with that domain appear in indexed breach databases. The system is updated continuously as new breaches are indexed.
+                        Grayward&apos;s credential detection works by monitoring domains, not individual users. When you verify a domain on the platform, Grayward begins checking whether email addresses associated with that domain appear in indexed breach databases. The system is updated continuously as new breaches are indexed.
                     </p>
                     <p>
-                        Critically, VulnWatch does not store or display the actual passwords from breaches — only the metadata needed to alert you to the fact that exposure has occurred. The goal is awareness and action, not surveillance.
+                        Critically, Grayward does not store or display the actual passwords from breaches — only the metadata needed to alert you to the fact that exposure has occurred. The goal is awareness and action, not surveillance.
                     </p>
                     <h2 className="text-xl font-semibold text-header mt-10">The bigger picture</h2>
                     <p>
-                        VulnWatch&apos;s credential detection is one piece of a broader security monitoring suite that includes SSL certificate monitoring, DNS integrity checks, security header analysis, and open port detection. Together, these capabilities give any business owner — regardless of technical background — a comprehensive view of their security posture.
+                        Grayward&apos;s credential detection is one piece of a broader security monitoring suite that includes SSL certificate monitoring, DNS integrity checks, security header analysis, and open port detection. Together, these capabilities give any business owner — regardless of technical background — a comprehensive view of their security posture.
                     </p>
                     <p>
-                        &ldquo;We want businesses to know what attackers know about them,&rdquo; said the VulnWatch team. &ldquo;Right now, most of them don&apos;t. That information asymmetry is exactly what we are closing.&rdquo;
+                        &ldquo;We want businesses to know what attackers know about them,&rdquo; said the Grayward team. &ldquo;Right now, most of them don&apos;t. That information asymmetry is exactly what we are closing.&rdquo;
                     </p>
                     <p>
                         Get started free at{" "}
-                        <Link href="/" className="text-primary underline">vulnwatch.com</Link>.
+                        <Link href="/" className="text-primary underline">grayward.net</Link>.
                     </p>
                     <p className="mt-8 text-sm text-gray-400 border-t border-gray-200 pt-6">
                         Originally covered by Tech Media Hub. For press enquiries, contact:{" "}
-                        <a href="mailto:Vulnwatchai@gmail.com" className="text-primary underline">
-                            Vulnwatchai@gmail.com
+                        <a href="mailto:info@grayward.net" className="text-primary underline">
+                            info@grayward.net
                         </a>
                     </p>
                 </div>

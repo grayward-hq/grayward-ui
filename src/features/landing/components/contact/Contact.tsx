@@ -18,7 +18,7 @@ const contactItems = [
   // },
   {
     label: "Email Address",
-    value: "info@vulnwatch.com.ng",
+    value: "info@grayward.net",
     icon: Mail,
   },
   {
@@ -78,12 +78,16 @@ export function Contact() {
 
   return (
     <main className="bg-white">
-      <section className="flex min-h-[256px] items-center bg-gradient-to-b from-white via-[#F5FFF0] to-[#E4FFD8] px-4 py-10 text-center md:py-16">
+      <section className="flex min-h-[256px] items-center px-4 py-10 text-center md:py-16"
+        style={{
+          background: "linear-gradient(174.71deg, #FFFFFF 53.46%, #C0D7FF 165.81%)",
+        }}
+      >
         <div className="mx-auto max-w-[920px]">
-          <h1 className="font-geist text-[32px] leading-[40px] font-bold tracking-[-1px] text-[#2B2B2BE5] md:text-[56px] md:leading-[64px] md:tracking-[-1.5px]">
+          <h1 className="font-geist text-[32px] leading-[40px] font-bold tracking-[-1px] text-[rgba(43,43,43,0.9)] md:text-[56px] md:leading-[64px] md:tracking-[-1.5px]">
             Contact us
           </h1>
-          <p className="mx-auto mt-4 text-[15px] leading-[24px] tracking-[-0.8px] text-[#2B2B2B] md:text-[18px] md:leading-[30px]">
+          <p className="mx-auto mt-4 text-[15px] leading-[24px] tracking-[-0.8px] text-[#4B5568] md:text-[18px] md:leading-[30px]">
             Do you have any question or need help with your domain? Our team is
             ready to assist you with professional solutions and reliable
             support. Feel free to contact us anytime and we will respond as
@@ -94,11 +98,11 @@ export function Contact() {
 
       <section className="px-4 pt-10 pb-12 md:pt-14 md:pb-16">
         <div className="mx-auto grid max-w-[1120px] gap-6 lg:grid-cols-[1fr_1.15fr]">
-          <article className="min-h-[438px] rounded-xl border border-[#D9D9D9] bg-white p-6 md:p-8">
-            <h2 className="font-geist text-[28px] leading-[36px] font-semibold tracking-[-1.2px] text-[#2B2B2B] md:text-[32px] md:leading-[40px]">
+          <article className="min-h-[438px] rounded-xl border border-[#DCDCDC] bg-white p-6 md:p-8">
+            <h2 className="font-geist text-[28px] leading-[36px] font-semibold tracking-[-1.2px] text-[#172033] md:text-[32px] md:leading-[40px]">
               Contact Information
             </h2>
-            <p className="mt-4 max-w-[460px] text-[16px] leading-[26px] tracking-[-0.6px] text-[#2B2B2B] md:text-[17px] md:leading-[28px]">
+            <p className="mt-4 max-w-[460px] text-[16px] leading-[26px] tracking-[-0.6px] text-[#4B5568] md:text-[17px] md:leading-[28px]">
               Feel free to contact us anytime and we will respond as quick as
               possible.
             </p>
@@ -109,7 +113,7 @@ export function Contact() {
                   key={label}
                   className="flex items-start gap-4 py-5 first:pt-0"
                 >
-                  <span className="text-primary mt-1 flex h-6 w-6 shrink-0 items-center justify-center">
+                  <span className="text-[#0F264F] mt-1 flex h-6 w-6 shrink-0 items-center justify-center">
                     <Icon className="h-5 w-5" strokeWidth={1.8} />
                   </span>
                   <div>
@@ -117,8 +121,8 @@ export function Contact() {
                       {label}
                     </h3>
                     <p
-                      className={`font-inter mt-1 text-[13px] leading-[20px] tracking-[-0.4px] text-[#666666] md:text-[14px] ${
-                        emphasize ? "text-[#2B2B2B]" : ""
+                      className={`font-inter mt-1 text-[13px] leading-[20px] tracking-[-0.4px] text-[#4B5568] md:text-[14px] ${
+                        emphasize ? "text-[#000000]" : ""
                       }`}
                     >
                       {label === "Opening Hour" ? (
@@ -136,11 +140,11 @@ export function Contact() {
             </div>
           </article>
 
-          <article className="min-h-[438px] rounded-xl border border-[#DCDCDC] bg-[#F1FCEA] p-6 md:p-8">
-            <h2 className="font-geist text-[28px] leading-[36px] font-semibold tracking-[-1.2px] text-[#2B2B2B] md:text-[32px] md:leading-[40px]">
+          <article className="min-h-[438px] rounded-xl border border-[#DCDCDC] bg-[#F8FAFC] p-6 md:p-8">
+            <h2 className="font-geist text-[28px] leading-[36px] font-semibold tracking-[-1.2px] text-[#172033] md:text-[32px] md:leading-[40px]">
               Get In Touch
             </h2>
-            <p className="mt-4 text-[16px] leading-[26px] tracking-[-0.6px] text-[#666666] md:text-[17px] md:leading-[28px]">
+            <p className="mt-4 text-[16px] leading-[26px] tracking-[-0.6px] text-[#4B5568] md:text-[17px] md:leading-[28px]">
               We would love to hear about your project and help secure your
               website. Fill out the contact form and our team will get back to
               you soon with the best possible solution for your needs.
@@ -219,7 +223,7 @@ export function Contact() {
                 {isSubmitting ? "Sending..." : "Send Message"}
                 <span className="text-primary flex h-8 w-8 items-center justify-center rounded-[8px] bg-white">
                   <SendHorizontal
-                    className="h-4 w-4 -rotate-20 text-[#072E28]"
+                    className="h-4 w-4 -rotate-20 text-[#0F264F]"
                     strokeWidth={2}
                   />
                 </span>

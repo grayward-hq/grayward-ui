@@ -214,7 +214,7 @@ export function DashboardStatCards({
       <StatCard
         label="Security Score"
         value={securityScore}
-        icon={<Shield size={15} style={{ color: '#072E28' }} />}
+        icon={<Shield size={15} style={{ color: '#0F264F' }} />}
         footer={<ScoreTrendIndicator text={scoreTrend} direction={scoreTrendDirection} />}
       />
 
@@ -222,7 +222,7 @@ export function DashboardStatCards({
       <StatCard
         label="Total Issue"
         value={totalIssues}
-        icon={<TriangleAlert size={18} style={{ color: '#072E28' }} />}
+        icon={<TriangleAlert size={18} style={{ color: '#0F264F' }} />}
         footer={<SeverityPills critical={criticalCount} high={highCount} />}
       />
 
@@ -230,7 +230,7 @@ export function DashboardStatCards({
       <StatCard
         label="SSL Certificate"
         value={sslCount}
-        icon={<Lock size={15} style={{ color: '#072E28' }} />}
+        icon={<Lock size={15} style={{ color: '#0F264F' }} />}
         footer={<SslExpiry count={sslExpiringSoon} />}
       />
 

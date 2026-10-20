@@ -102,8 +102,8 @@ export function DashboardHeader() {
         {/* Logo (Mobile: Left, Tablet: Left next to menu) */}
         <Link href='/dashboard' className='lg:hidden order-1 md:order-2 shrink-0'>
           <Image
-            src='/images/logo-dashboard-mobile.png'
-            alt='VulnWatch AI'
+            src='/images/logo-mobile.png'
+            alt='Grayward'
             width={140}
             height={32}
             className='h-6 w-auto'
@@ -192,8 +192,8 @@ export function DashboardHeader() {
         <div className='flex items-center justify-between h-16 px-4 border-b border-slate-200'>
           <Link href='/dashboard'>
             <Image
-              src='/images/logo-dashboard-mobile.png'
-              alt='VulnWatch AI'
+              src='/images/logo.png'
+              alt='Grayward'
               width={140}
               height={32}
               className='h-6 w-auto'

@@ -51,7 +51,7 @@ const featuresList = [
   "Security Score / Remediation Cards"
 ];
 
-const SUBMITTED_STORAGE_KEY = "vulnwatch_waitlist_submitted";
+const SUBMITTED_STORAGE_KEY = "grayward_waitlist_submitted";
 
 export function WaitlistForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -73,13 +73,13 @@ export function WaitlistForm() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const urlRef = params.get("ref") || params.get("referralCode");
-      const storedRef = sessionStorage.getItem("vulnwatch_referral");
+      const storedRef = sessionStorage.getItem("grayward_referral");
 
       const ref = urlRef || storedRef;
       // Only accept a well-formed referral code; ignore anything malicious.
       if (ref && REFERRAL_CODE_PATTERN.test(ref)) {
         form.setValue("referralCode", ref);
-        if (urlRef) sessionStorage.setItem("vulnwatch_referral", ref);
+        if (urlRef) sessionStorage.setItem("grayward_referral", ref);
       }
     }
   }, [form]);
@@ -314,7 +314,7 @@ export function WaitlistForm() {
             <Button 
               type="submit" 
               disabled={form.formState.isSubmitting}
-              className="group h-14 w-full rounded-xl bg-primary border border-green-400 text-lg font-semibold text-white hover:bg-primary/90"
+              className="group h-14 w-full rounded-xl bg-primary border border-primary text-lg font-semibold text-white hover:bg-primary/90"
             >
               {form.formState.isSubmitting ? "Submitting..." : "Join Waitlist"}
               {!form.formState.isSubmitting && (

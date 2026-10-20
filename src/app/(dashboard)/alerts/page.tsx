@@ -61,7 +61,7 @@ export default function AlertsPage() {
 
         {isLoading ? (
           <div className="flex h-40 w-full items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
+            <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
           </div>
         ) : error ? (
           <div className="flex h-40 w-full items-center justify-center text-red-500">

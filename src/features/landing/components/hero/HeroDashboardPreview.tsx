@@ -14,7 +14,7 @@ export function HeroDashboardPreview() {
       {/* Desktop Image */}
       <Image
         src='/images/hero-section-desktop.png'
-        alt='VulnWatch AI Dashboard Preview'
+        alt='Grayward Dashboard Preview'
         width={1440}
         height={760}
         className='hidden h-auto w-full object-cover object-top md:block'
@@ -24,7 +24,7 @@ export function HeroDashboardPreview() {
       {/* Mobile Image */}
       <Image
         src='/images/hero-section-mobile.png'
-        alt='VulnWatch AI Mobile Dashboard Preview'
+        alt='Grayward Mobile Dashboard Preview'
         width={390}
         height={340}
         className='block h-auto w-full object-cover object-top md:hidden'

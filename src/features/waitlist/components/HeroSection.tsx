@@ -16,7 +16,7 @@ export function HeroSection() {
         </h1>
         
         <p className="mx-auto mt-6 max-w-3xl text-lg text-brand-gray md:text-xl">
-          VulnWatch connects to your GitHub repos and scans every dependency for CVEs automatically. Continuously, with simple explanations your whole team can act on.
+          Grayward connects to your GitHub repos and scans every dependency for CVEs automatically. Continuously, with simple explanations your whole team can act on.
         </p>
 
         {FEATURE_FLAGS.SHOW_WAITLIST_HERO_CTA && (

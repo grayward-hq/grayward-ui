@@ -51,8 +51,8 @@ export function ForgotPasswordForm() {
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="mb-4">
             <Image
-              src="/images/logo-auth.png"
-              alt="VulnWatch AI Logo"
+              src="/images/logo.png"
+              alt="Grayward Logo"
               width={240}
               height={69}
               className="h-auto w-[240px] object-contain"

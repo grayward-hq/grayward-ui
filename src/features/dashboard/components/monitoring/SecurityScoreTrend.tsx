@@ -46,7 +46,7 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string> 
               fontFamily: 'Geist, sans-serif',
               fontWeight: 400,
               fontSize: '14px',
-              color: '#072E28',
+              color: '#0F264F',
             }}
           >
             Score : {payload[0].value}
@@ -147,11 +147,11 @@ export function SecurityScoreTrend({ data = [] }: SecurityScoreTrendProps) {
               <Area
                 type="monotone"
                 dataKey="score"
-                stroke="#072E28"
+                stroke="#0F264F"
                 strokeWidth={1}
                 fillOpacity={1}
                 fill="url(#colorScore)"
-                activeDot={{ r: 4, fill: '#072E28', stroke: '#072E28' }}
+                activeDot={{ r: 4, fill: '#0F264F', stroke: '#0F264F' }}
                 connectNulls={true}
               />
             </AreaChart>

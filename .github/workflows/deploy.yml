@@ -1,8 +1,12 @@
 name: Build and Deploy
+
 on:
   pull_request:
     branches: [staging, main]
     types: [closed]
+
+permissions:
+  contents: read
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -19,7 +23,10 @@ jobs:
       USERNAME: ${{ secrets.USERNAME }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -52,24 +59,26 @@ jobs:
         run: pnpm typecheck
 
       - name: Deploy on server
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          timeout: '60s'
+          command_timeout: '15m'
           script: |
             if [ "${{ github.event.pull_request.base.ref }}" = "main" ]; then
               DEPLOY_DIR="/var/www/frontend-production"
               APP_NAME="frontend-production"
               BRANCH="main"
               PORT=3001
-              ENV_FILE="/etc/vulnwatch/production/frontend.env"
+              ENV_FILE="/etc/grayward/production/frontend.env"
             else
               DEPLOY_DIR="/var/www/frontend-staging"
               APP_NAME="frontend-staging"
               BRANCH="staging"
               PORT=3000
-              ENV_FILE="/etc/vulnwatch/staging/frontend.env"
+              ENV_FILE="/etc/grayward/staging/frontend.env"
             fi
 
             BACKUP_DIR="${DEPLOY_DIR}-backup"
@@ -99,10 +108,10 @@ jobs:
 
             # ── Install dependencies and build ────────────────────────────
             echo "Installing dependencies..."
-            pnpm install
+            pnpm install --frozen-lockfile
 
             echo "Building application..."
-              if ! NODE_OPTIONS="--max-old-space-size=3072" pnpm build; then
+            if ! NODE_OPTIONS="--max-old-space-size=3072" pnpm build; then
               echo "Build failed. Rolling back..."
 
               if [ -d "$BACKUP_DIR" ] && [ "$(ls -A $BACKUP_DIR)" ]; then

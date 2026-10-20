@@ -37,7 +37,7 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
               id={id}
               ref={ref}
               className={cn(
-                "h-4 w-4 rounded border-gray-300 text-[#072E28] accent-[#072E28] focus:ring-[#072E28]",
+                "h-4 w-4 rounded border-gray-300 text-[#0F264F] accent-[#0F264F] focus:ring-[#0F264F]",
                 className,
               )}
               {...props}

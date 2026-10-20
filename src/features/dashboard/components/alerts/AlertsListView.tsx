@@ -17,7 +17,7 @@ function AlertRow({ alert }: { alert: DashboardAlertItem }) {
       }}
     >
       <div className="flex items-center justify-center shrink-0 mt-0.5">
-        <TriangleAlert size={20} strokeWidth={1.8} style={{ color: '#072E28' }} />
+        <TriangleAlert size={20} strokeWidth={1.8} style={{ color: '#0F264F' }} />
       </div>
 
       <div className="flex flex-col gap-3 flex-1 min-w-0">

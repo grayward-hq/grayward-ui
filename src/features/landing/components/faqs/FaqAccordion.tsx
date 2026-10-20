@@ -41,10 +41,14 @@ const FaqAccordion = ({
           const isClickable = !!faq.question && !!faq.answer;
 
           return (
-            <AccordionItem key={faq.question} value={`item-${index}`}>
+            <AccordionItem
+              key={faq.question}
+              value={`item-${index}`}
+              className="border border-[#EAEAEA] bg-[#FAFAFA] rounded-[10px] px-2"
+            >
               <AccordionTrigger
                 className={cn(
-                  "text-md text-left font-geist font-semibold text-[#2B2B2B] [&>svg]:text-[#2B2B2B] hover:no-underline",
+                  "text-md text-left font-geist font-semibold text-[#2B2B2B] [&>svg]:text-[#2B2B2B] hover:no-underline py-4",
                   isClickable
                     ? "cursor-pointer"
                     : "pointer-events-none opacity-30",
@@ -55,7 +59,7 @@ const FaqAccordion = ({
               </AccordionTrigger>
               <AccordionContent
                 className={cn(
-                  "text-sm text-[16px] leading-relaxed text-[#666666] font-geist font-normal",
+                  "text-sm text-[16px] leading-relaxed text-[#71717A] font-geist font-normal pb-4",
                   contentClassName,
                 )}
               >

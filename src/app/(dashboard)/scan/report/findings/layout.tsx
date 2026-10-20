@@ -11,7 +11,7 @@ export default function FindingsLayout({
     <Suspense
       fallback={
         <div className="flex h-[50vh] w-full items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#072e28]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#0F264F]" />
         </div>
       }
     >

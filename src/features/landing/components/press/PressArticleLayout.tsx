@@ -52,8 +52,8 @@ export default function PressArticleLayout({
                     <p className="mt-8 text-sm text-gray-400 border-t border-gray-200 pt-6">
                         {originallyCoveredBy ? `Originally covered by ${originallyCoveredBy}. ` : ""}
                         For press enquiries, contact:{" "}
-                        <a href="mailto:Vulnwatchai@gmail.com" className="text-primary underline">
-                            Vulnwatchai@gmail.com
+                        <a href="mailto:info@grayward.net" className="text-primary underline">
+                            info@grayward.net
                         </a>
                     </p>
                 </div>

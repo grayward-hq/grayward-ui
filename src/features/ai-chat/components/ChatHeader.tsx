@@ -6,7 +6,7 @@ const SparkleIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
     <path
       d="M7.5 1.5C7.5 1.5 6.5 5.5 4 7C1.5 8.5 1.5 8.5 1.5 8.5C1.5 8.5 5.5 9.5 7 12C8.5 14.5 8.5 14.5 8.5 14.5C8.5 14.5 9.5 10.5 12 9C14.5 7.5 14.5 7.5 14.5 7.5C14.5 7.5 10.5 6.5 9 4C7.5 1.5 7.5 1.5 7.5 1.5Z"
-      fill="#072E28"
+      fill="#0F264F"
     />
   </svg>
 );
@@ -24,7 +24,7 @@ export function ChatHeader({ onClose }: ChatHeaderProps) {
         </div>
         <div className="flex flex-col gap-1">
           <span className="font-geist font-medium text-base leading-none text-white">
-            VulnWatch AI
+            Grayward
           </span>
           <span className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand-green shrink-0" />

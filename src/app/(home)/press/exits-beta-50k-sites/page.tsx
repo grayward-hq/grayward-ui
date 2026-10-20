@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "VulnWatch exits beta with 50,000 sites scanned weekly | Press",
-    description: "VulnWatch AI graduates from beta, with over 50,000 websites scanned every week across its growing user base.",
+    title: "Grayward exits beta with 50,000 sites scanned weekly | Press",
+    description: "Grayward graduates from beta, with over 50,000 websites scanned every week across its growing user base.",
 };
 
 export default function PressReleaseExitsBetaPage() {
@@ -21,7 +21,7 @@ export default function PressReleaseExitsBetaPage() {
 
                 <p className="text-sm font-medium text-primary uppercase tracking-widest">Press Release</p>
                 <h1 className="mt-4 text-3xl font-bold text-header md:text-4xl leading-snug">
-                    VulnWatch exits beta with 50,000 sites scanned weekly
+                    Grayward exits beta with 50,000 sites scanned weekly
                 </h1>
                 <p className="mt-3 text-sm text-gray-500">April 28, 2026 · 3 min read</p>
 
@@ -29,14 +29,14 @@ export default function PressReleaseExitsBetaPage() {
 
                 <div className="prose prose-gray max-w-none space-y-6 text-base leading-relaxed text-gray-700">
                     <p>
-                        <strong>Lagos, Nigeria — April 28, 2026</strong> — VulnWatch AI today announced its official exit from beta, having surpassed 50,000 website scans per week across its growing user base. The milestone marks a significant step for the platform, which launched its closed beta in January 2026 and has since grown to serve thousands of domain owners across Africa, Europe, and North America.
+                        <strong>Lagos, Nigeria — April 28, 2026</strong> — Grayward today announced its official exit from beta, having surpassed 50,000 website scans per week across its growing user base. The milestone marks a significant step for the platform, which launched its closed beta in January 2026 and has since grown to serve thousands of domain owners across Africa, Europe, and North America.
                     </p>
                     <p>
-                        During the beta period, VulnWatch focused on three core capabilities: SSL certificate monitoring, DNS configuration analysis, and exposed credential detection. Feedback from beta users shaped the product significantly — leading to the introduction of real-time alerts, a redesigned vulnerability report, and one-click domain verification.
+                        During the beta period, Grayward focused on three core capabilities: SSL certificate monitoring, DNS configuration analysis, and exposed credential detection. Feedback from beta users shaped the product significantly — leading to the introduction of real-time alerts, a redesigned vulnerability report, and one-click domain verification.
                     </p>
                     <h2 className="text-xl font-semibold text-header mt-10">What&apos;s new at launch</h2>
                     <p>
-                        With today&apos;s general availability launch, VulnWatch introduces several new features beyond what was available in beta:
+                        With today&apos;s general availability launch, Grayward introduces several new features beyond what was available in beta:
                     </p>
                     <ul className="list-disc list-inside space-y-2 text-gray-700">
                         <li>Continuous monitoring with customisable alert thresholds</li>
@@ -50,17 +50,17 @@ export default function PressReleaseExitsBetaPage() {
                         The team is actively working on integrations with popular CMS platforms and web hosting providers, making it even simpler for non-technical users to resolve detected issues. A public API for enterprise customers is also on the roadmap for Q3 2026.
                     </p>
                     <p>
-                        &ldquo;Leaving beta doesn&apos;t mean slowing down — it means we now have the stability and the user base to build even faster,&rdquo; said the VulnWatch founding team. &ldquo;50,000 scans a week is just the beginning.&rdquo;
+                        &ldquo;Leaving beta doesn&apos;t mean slowing down — it means we now have the stability and the user base to build even faster,&rdquo; said the Grayward founding team. &ldquo;50,000 scans a week is just the beginning.&rdquo;
                     </p>
-                    <h2 className="text-xl font-semibold text-header mt-10">About VulnWatch</h2>
+                    <h2 className="text-xl font-semibold text-header mt-10">About Grayward</h2>
                     <p>
-                        VulnWatch AI is a website security monitoring platform that helps businesses detect vulnerabilities, expired certificates, DNS misconfigurations, and exposed credentials before attackers do. New users can start for free at{" "}
-                        <Link href="/" className="text-primary underline">vulnwatch.com</Link>.
+                        Grayward is a website security monitoring platform that helps businesses detect vulnerabilities, expired certificates, DNS misconfigurations, and exposed credentials before attackers do. New users can start for free at{" "}
+                        <Link href="/" className="text-primary underline">grayward.net</Link>.
                     </p>
                     <p className="mt-8 text-sm text-gray-400 border-t border-gray-200 pt-6">
                         For press enquiries, contact:{" "}
-                        <a href="mailto:Vulnwatchai@gmail.com" className="text-primary underline">
-                            Vulnwatchai@gmail.com
+                        <a href="mailto:info@grayward.net" className="text-primary underline">
+                            info@grayward.net
                         </a>
                     </p>
                 </div>

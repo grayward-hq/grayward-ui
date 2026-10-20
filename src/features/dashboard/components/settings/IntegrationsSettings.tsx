@@ -77,7 +77,7 @@ const IntegrationsSettings = () => {
   if (loading) {
     return (
       <div className="space-y-6">
-        <Section title="Integrations" subtitle="Connect VulnWatch to your favorite tools">
+        <Section title="Integrations" subtitle="Connect Grayward to your favorite tools">
           <div className="flex items-center justify-center p-10">
             <Loader2 className="h-6 w-6 animate-spin text-primary" />
           </div>
@@ -92,7 +92,7 @@ const IntegrationsSettings = () => {
     <div className="space-y-6">
       <Section
         title="Integrations"
-        subtitle="Connect VulnWatch to your favorite tools"
+        subtitle="Connect Grayward to your favorite tools"
       >
         <div className="flex flex-col gap-4">
           

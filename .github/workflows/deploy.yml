@@ -4,6 +4,7 @@ on:
   pull_request:
     branches: [staging, main]
     types: [closed]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,11 +14,11 @@ env:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true && github.event.repository.fork == false
+    if: (github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch') && github.event.repository.fork == false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:
-      name: ${{ github.event.pull_request.base.ref == 'main' && 'production' || 'staging' }}
+      name: ${{ (github.event.pull_request.base.ref == 'main' || github.ref_name == 'main') && 'production' || 'staging' }}
     env:
       HOST: ${{ secrets.HOST }}
       USERNAME: ${{ secrets.USERNAME }}
@@ -67,7 +68,7 @@ jobs:
           timeout: '60s'
           command_timeout: '15m'
           script: |
-            if [ "${{ github.event.pull_request.base.ref }}" = "main" ]; then
+            if [ "${{ github.event.pull_request.base.ref }}" = "main" ] || [ "${{ github.ref_name }}" = "main" ]; then
               DEPLOY_DIR="/var/www/frontend-production"
               APP_NAME="frontend-production"
               BRANCH="main"
@@ -109,6 +110,10 @@ jobs:
             # ── Install dependencies and build ────────────────────────────
             echo "Installing dependencies..."
             pnpm install --frozen-lockfile
+
+            # ── Clear Next.js cache to prevent stale image optimizations ──
+            echo "Clearing Next.js image cache..."
+            rm -rf "$DEPLOY_DIR/.next/cache/images"
 
             echo "Building application..."
             if ! NODE_OPTIONS="--max-old-space-size=3072" pnpm build; then

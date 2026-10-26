@@ -26,3 +26,4 @@ overrides:
   "proxy-addr": ">=2.0.8 <3"
   "source-map-js": ">=1.2.2 <2"
   "@modelcontextprotocol/sdk": ">=1.31.0 <2"
+  "follow-redirects": ">=1.16.1 <2"

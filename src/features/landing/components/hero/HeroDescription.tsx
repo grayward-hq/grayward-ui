@@ -7,7 +7,7 @@ export function HeroDescription() {
         color: "#666666",
       }}
     >
-      Type your domain name. Vulnwatch scans your website for potential
+      Type your domain name. Grayward scans your website for potential
       <br />
       threats and tells you exactly how to fix the threats.
     </p>

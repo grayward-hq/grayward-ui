@@ -9,18 +9,18 @@ export interface SocialLink {
 
 export const FOOTER_SOCIALS: SocialLink[] = [
   {
-    label: "VulnWatch AI on X",
-    href: "https://x.com/_vulnwatch",
+    label: "Grayward on X",
+    href: "https://x.com/_grayward",
     icon: "x",
   },
   {
-    label: "VulnWatch AI on Instagram",
-    href: "https://www.instagram.com/_vulnwatch",
+    label: "Grayward on Instagram",
+    href: "https://www.instagram.com/_grayward",
     icon: "instagram",
   },
   {
-    label: "VulnWatch AI on LinkedIn",
-    href: "https://www.linkedin.com/company/vulnwatch/",
+    label: "Grayward on LinkedIn",
+    href: "https://www.linkedin.com/company/grayward/",
     icon: "linkedin",
   },
 ];

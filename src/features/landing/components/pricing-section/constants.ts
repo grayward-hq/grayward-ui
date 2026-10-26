@@ -1,6 +1,6 @@
 import { Plan } from "./types";
 
-/** Pricing plan definitions for the VulnWatch AI landing page. Tiers scale Essential → Professional → Premium. */
+/** Pricing plan definitions for the Grayward landing page. Tiers scale Essential → Professional → Premium. */
 
 export const plans: Plan[] = [
   {

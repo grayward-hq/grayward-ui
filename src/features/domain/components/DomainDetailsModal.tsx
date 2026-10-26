@@ -263,12 +263,12 @@ export default function DomainDetailsModal({ domain, open, onOpenChange, onDelet
           {(() => {
             const storedToken =
               typeof window !== "undefined"
-                ? (localStorage.getItem(`vulnwatch_token_${liveDomain.id}`) ?? "")
+                ? (localStorage.getItem(`grayward_token_${liveDomain.id}`) ?? "")
                 : "";
             const token = liveDomain.status === "Revoked" 
               ? "" 
               : (liveDomain.verificationToken || liveDomain.instructions?.value || storedToken || (checking ? "Loading..." : ""));
-            const rawHost = liveDomain.txtRecord || liveDomain.instructions?.txtRecord || "_vulnwatch-verify";
+            const rawHost = liveDomain.txtRecord || liveDomain.instructions?.txtRecord || "_grayward-verify";
             const domainName = liveDomain.domain || "";
             const host = (domainName && rawHost.endsWith(`.${domainName}`))
               ? rawHost.slice(0, -(domainName.length + 1))

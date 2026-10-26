@@ -76,7 +76,7 @@ export function RegisterVerifyEmail() {
             <Link href="/">
               <Image
                 src="/images/logo.png"
-                alt="VulnWatch AI Logo"
+                alt="Grayward Logo"
                 width={260}
                 height={105}
                 className="h-auto w-56 object-contain"

@@ -1,9 +1,9 @@
 import { RepositorySecurityPage } from "@/features/repository-security/components/RepositorySecurityPage";
 
 export const metadata = {
-  title: "Repository Security | VulnWatch AI",
+  title: "Repository Security | Grayward",
   description:
-    "Monitor your GitHub repositories for vulnerabilities and security risks with VulnWatch AI.",
+    "Monitor your GitHub repositories for vulnerabilities and security risks with Grayward.",
 };
 
 export default function RepositoriesPage() {

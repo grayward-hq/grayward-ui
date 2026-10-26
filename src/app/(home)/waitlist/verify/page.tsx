@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { VerifyWaitlistPage } from "@/features/waitlist/views/VerifyWaitlistPage";
 
 export const metadata = {
-  title: "Verify Waitlist | VulnWatch",
-  description: "Verify your email to join the VulnWatch waitlist.",
+  title: "Verify Waitlist | Grayward",
+  description: "Verify your email to join the Grayward waitlist.",
 };
 
 export default function WaitlistVerifyRoute() {

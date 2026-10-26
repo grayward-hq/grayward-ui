@@ -42,7 +42,7 @@ const STEPS: StepItem[] = [
     number: "04",
     title: "Connect Your Repositories",
     description:
-      "Authorize VulnWatch with read-only GitHub OAuth. Select the repos you want monitored.",
+      "Authorize Grayward with read-only GitHub OAuth. Select the repos you want monitored.",
     image: "/images/landing-page/04.png",
     imageAlt: "Connect your repositories preview",
   },

@@ -81,7 +81,7 @@ export default function VerifyDnsPage({ domainId }: { domainId: string }) {
   }
 
   const token = tokenFromUrl || domain?.verificationToken || domain?.domain || "";
-  const rawHost = domain?.txtRecord || domain?.instructions?.txtRecord || "_vulnwatch-verify";
+  const rawHost = domain?.txtRecord || domain?.instructions?.txtRecord || "_grayward-verify";
   const domainName = domain?.domain || "";
   const host = (domainName && rawHost.endsWith(`.${domainName}`))
     ? rawHost.slice(0, -(domainName.length + 1))

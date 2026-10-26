@@ -1,8 +1,8 @@
 import { WaitlistStatusPage } from "@/features/waitlist/views/WaitlistStatusPage";
 
 export const metadata = {
-  title: "Check Waitlist Status | VulnWatch",
-  description: "Check your position on the VulnWatch waitlist.",
+  title: "Check Waitlist Status | Grayward",
+  description: "Check your position on the Grayward waitlist.",
 };
 
 export default function WaitlistStatusRoute() {

@@ -511,7 +511,7 @@ function Step4Success({
           <span className="text-brand-dark">is verified</span>
         </h2>
         <p className="text-sm text-brand-gray font-geist mt-1 max-w-sm mx-auto">
-          You&apos;ve confirmed ownership of your domain. VulnWatch AI can now safely
+          You&apos;ve confirmed ownership of your domain. Grayward can now safely
           scan your external attack surface.
         </p>
       </div>
@@ -727,8 +727,8 @@ export default function VerifyFileUploadPage({ domainId }: { domainId: string })
 
   const domainName = domain?.domain ?? "yourdomain.com";
   const tokenShort = tokenFromUrl.slice(0, 8) || "verify";
-  const fileName = `vulnwatch-verify-${tokenShort}.txt`;
-  const fileContent = `vulnwatch-verification=${tokenFromUrl || "token"}`;
+  const fileName = `grayward-verify-${tokenShort}.txt`;
+  const fileContent = `grayward-verification=${tokenFromUrl || "token"}`;
   const accessUrl = `https://${domainName}/${fileName}`;
 
   const onCopy = (text: string, key: string) => {
@@ -752,7 +752,7 @@ export default function VerifyFileUploadPage({ domainId }: { domainId: string })
   const onCopyDevInstructions = () => {
     const steps = getPlatformSteps(platform, fileName, accessUrl);
     const text = [
-      "VulnWatch Domain Verification Instructions",
+      "Grayward Domain Verification Instructions",
       `Domain: ${domainName}`,
       `File: ${fileName}`,
       `Upload URL: ${accessUrl}`,

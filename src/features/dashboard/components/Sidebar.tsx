@@ -61,7 +61,7 @@ export function Sidebar() {
         <Link href='/dashboard' className='flex items-center w-full'>
           <Image
             src='/images/logo.png'
-            alt='VulnWatch AI'
+            alt='Grayward'
             width={140}
             height={48}
             className='h-auto w-48'

@@ -15,7 +15,7 @@ const steps = [
     id: "02",
     title: "Scan Your Website",
     description: "Full access to settings, reports, and tax configurations between Admin and Users",
-    image: "/images/how-it-work-2.png",
+    image: "/images/grayward-scan-coming-soon.png",
     imageLeft: false,
   },
   {

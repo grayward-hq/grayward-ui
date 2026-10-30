@@ -6,6 +6,8 @@ interface StepItem {
   title: string;
   description: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   imageAlt: string;
 }
 
@@ -16,7 +18,9 @@ const STEPS: StepItem[] = [
     title: "Add Your Domain",
     description:
       "Enter your domain name and verify ownership to begin the security process. Users can choose from multiple verification methods, including DNS verification, Email verification, or File Upload verification. Once verification is successfully completed, you can proceed to the website scanning session.",
-    image: "/images/landing-page/01.png",
+    image: "/images/how-it-works/add-domain.jpeg",
+    imageWidth: 1600,
+    imageHeight: 923,
     imageAlt: "Add your domain preview",
   },
   {
@@ -25,7 +29,9 @@ const STEPS: StepItem[] = [
     title: "Scan Your Website",
     description:
       "Scan your website to detect potential attacks, vulnerabilities, and security threats. This stage provides access to advanced features such as security settings, detailed reports, and role-based configurations between admins and users, ensuring complete visibility and control over your website's security.",
-    image: "/images/landing-page/02.png",
+    image: "/images/how-it-works/scan-website.jpeg",
+    imageWidth: 1600,
+    imageHeight: 1166,
     imageAlt: "Website scan preview",
   },
   {
@@ -35,6 +41,8 @@ const STEPS: StepItem[] = [
     description:
       "Expired SSL certificates, misconfigured DNS records, exposed admin panels, and unresolved security vulnerabilities can leave your website vulnerable to attacks, service disruptions, data breaches, and loss of customer trust — potentially impacting your business reputation and operations overnight.",
     image: "/images/landing-page/03.png",
+    imageWidth: 984,
+    imageHeight: 702,
     imageAlt: "Generated report preview",
   },
   {
@@ -43,7 +51,9 @@ const STEPS: StepItem[] = [
     title: "Connect Your Repositories",
     description:
       "Authorize Grayward with read-only GitHub OAuth. Select the repos you want monitored.",
-    image: "/images/landing-page/04.png",
+    image: "/images/how-it-works/connect-repositories.jpeg",
+    imageWidth: 1600,
+    imageHeight: 923,
     imageAlt: "Connect your repositories preview",
   },
   {
@@ -52,7 +62,9 @@ const STEPS: StepItem[] = [
     title: "Run Your First Scan",
     description:
       "Our Trivy engine analyzes every dependency file: package.json, requirements.txt, go.mod, pom.xml.",
-    image: "/images/landing-page/05.png",
+    image: "/images/how-it-works/run-first-scan.jpeg",
+    imageWidth: 1600,
+    imageHeight: 923,
     imageAlt: "Run your first scan preview",
   },
   {
@@ -61,7 +73,9 @@ const STEPS: StepItem[] = [
     title: "Monitor and Remediate",
     description:
       "Get alerted to new CVEs instantly. Follow AI-generated remediation steps with exact version pins.",
-    image: "/images/landing-page/06.png",
+    image: "/images/how-it-works/monitor-remediate.jpeg",
+    imageWidth: 1600,
+    imageHeight: 923,
     imageAlt: "Monitor and remediate preview",
   },
 ];
@@ -131,13 +145,14 @@ export default function HowItWorks() {
                     isEven ? "order-2 md:order-1" : "order-2"
                   }`}
                 >
-                  <div className="relative aspect-[480/300] w-full max-w-[480px] overflow-hidden rounded-[16px] border border-[#D9E0EA] bg-[#FAFAFA] shadow-md transition-shadow hover:shadow-lg md:rounded-[20px]">
+                  <div className="w-full max-w-[560px] overflow-hidden rounded-[16px] border border-[#D9E0EA] bg-white shadow-md transition-shadow hover:shadow-lg md:rounded-[20px]">
                     <Image
                       src={item.image}
                       alt={item.imageAlt}
-                      fill
-                      className="object-contain p-2"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                      width={item.imageWidth}
+                      height={item.imageHeight}
+                      className="block h-auto w-full"
+                      sizes="(max-width: 768px) 100vw, 560px"
                     />
                   </div>
                 </div>

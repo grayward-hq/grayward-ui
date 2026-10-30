@@ -3,6 +3,10 @@
 import { motion } from "motion/react";
 import Image from 'next/image';
 
+// Static imports give content-hashed URLs, so a replaced image is never served from a stale cache
+import heroDesktop from '../../assets/hero-section-desktop.png';
+import heroMobile from '../../assets/hero-section-mobile.png';
+
 export function HeroDashboardPreview() {
   return (
     <motion.div
@@ -13,20 +17,16 @@ export function HeroDashboardPreview() {
     >
       {/* Desktop Image */}
       <Image
-        src='/images/hero-section-desktop.png'
+        src={heroDesktop}
         alt='Grayward Dashboard Preview'
-        width={1440}
-        height={760}
         className='hidden h-auto w-full object-cover object-top md:block'
         priority
       />
 
       {/* Mobile Image */}
       <Image
-        src='/images/hero-section-mobile.png'
+        src={heroMobile}
         alt='Grayward Mobile Dashboard Preview'
-        width={390}
-        height={340}
         className='block h-auto w-full object-cover object-top md:hidden'
         priority
       />

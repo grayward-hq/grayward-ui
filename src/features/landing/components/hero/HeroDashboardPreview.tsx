@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import Image from 'next/image';
 
 // Static imports give content-hashed URLs, so a replaced image is never served from a stale cache
-import heroDesktop from '../../assets/hero-section-desktop.png';
+import heroDesktop from '../../assets/grayward-verify-coming-soon.png';
 import heroMobile from '../../assets/hero-section-mobile.png';
 
 export function HeroDashboardPreview() {

@@ -38,7 +38,7 @@ export const SCAN_PROGRESS: ProgressItem[] = [
     status: "pending",
     icon: (
       <div className="bg-[#FFDB431A] p-2.5 rounded-full">
-        <Server className="text-[#072E28]" strokeWidth={1.5} />
+        <Server className="text-[#0F264F]" strokeWidth={1.5} />
       </div>
     ),
   },

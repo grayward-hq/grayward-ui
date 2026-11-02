@@ -186,7 +186,7 @@ const SessionContent = ({
 
       <Section
         title="Preferences"
-        subtitle="Customize how VulnWatch works for you"
+        subtitle="Customize how Grayward works for you"
       >
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.6fr_0.65fr_0.65fr]">
           <Field label="Default Dashboard View">
@@ -235,7 +235,7 @@ const SessionContent = ({
 
       <Section
         title="Appearances"
-        subtitle="Customize how VulnWatch looks for you"
+        subtitle="Customize how Grayward looks for you"
       >
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_0.5fr_0.7fr] lg:items-end">
           <div>

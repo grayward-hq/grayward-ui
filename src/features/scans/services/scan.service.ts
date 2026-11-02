@@ -340,7 +340,7 @@ export const scanService = {
         target: payload.domainId,
         targetType: "Domain",
         coverage: COVERAGE_MAP[payload.scanType],
-        surfaceTypes: "Dns, Ssl, Http",
+        surfaceTypes: "Dns, Ssl, HttpHeaders",
       },
       {
         headers: {

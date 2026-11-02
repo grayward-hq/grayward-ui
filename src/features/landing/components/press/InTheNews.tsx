@@ -1,48 +1,42 @@
-import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { newsItems } from "../../constants/press";
 
 export default function InTheNews() {
-    return (
-        <section className="mx-auto max-w-6xl px-6 py-10">
-            <h2 className="mb-8 text-[20px] font-bold text-header md:text-[24px]">
-                In the news
-            </h2>
+  return (
+    <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <h2 className="mb-8 text-[26px] font-semibold leading-[36px] tracking-[-1px] text-black md:text-[32px] md:leading-[40px]">
+        In the news
+      </h2>
 
-            <ul className="divide-y divide-gray-200">
-                {newsItems.map((item) => (
-                    <li key={item.headline}>
-                        <a
-                            href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group flex items-start justify-between gap-6 py-6"
-                        >
-                            <div className="flex-1">
-                                <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                                    <span className="text-[15px] font-semibold text-header md:text-base">
-                                        {item.source}
-                                    </span>
-                                    <span className="text-xs text-gray-500 md:text-sm">
-                                        {item.date}
-                                    </span>
-                                </div>
-                                <p className="mt-2 text-sm text-gray-800 transition group-hover:text-gray-600 md:text-base">
-                                    {item.headline}
-                                </p>
-                            </div>
+      <div className="space-y-0 divide-y divide-[#DCDCDC]">
+        {newsItems.map((item) => (
+          <a
+            key={item.headline}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col justify-between gap-4 py-6 transition md:flex-row md:items-center hover:bg-gray-50/50 rounded-lg px-2"
+          >
+            <div className="flex-1 space-y-2">
+              <div className="flex items-center gap-5">
+                <span className="text-[17px] font-medium text-black md:text-[20px] tracking-[-0.5px]">
+                  {item.source}
+                </span>
+                <span className="text-[15px] font-normal text-[#888888] md:text-[18px] tracking-[-0.5px]">
+                  {item.date}
+                </span>
+              </div>
+              <p className="text-[15px] font-normal text-[#4B5568] md:text-[18px] tracking-[-0.5px] group-hover:text-black transition-colors">
+                {item.headline}
+              </p>
+            </div>
 
-                            <Image
-                                src="/icons/icon-link.svg"
-                                alt="external link icon"
-                                width={16}
-                                height={16}
-                                aria-hidden="true"
-                                className="h-4 w-4 shrink-0"
-                            />
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </section>
-    );
+            <div className="flex items-center justify-end">
+              <ArrowUpRight className="h-6 w-6 text-[#292D32] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
 }

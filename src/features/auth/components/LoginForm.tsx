@@ -44,7 +44,7 @@ export function LoginForm() {
         toast.success(msg);
         useAuthStore
           .getState()
-          .login(response.value.accessToken, data.email);
+          .login(response.value.accessToken, data.email, undefined, response.value.refreshToken);
 
         const returnUrl = searchParams.get("returnUrl");
         router.push(getSafeReturnUrl(returnUrl));
@@ -81,8 +81,8 @@ export function LoginForm() {
           <div className="mb-4">
             <Link href="/">
               <Image
-                src="/images/logo-auth.png"
-                alt="VulnWatch AI Logo"
+                src="/images/logo.png"
+                alt="Grayward Logo"
                 width={240}
                 height={69}
                 className="h-auto w-[240px] object-contain"

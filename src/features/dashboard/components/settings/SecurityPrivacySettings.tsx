@@ -42,7 +42,7 @@ const SecurityRow = ({
         <button
           type="button"
           onClick={onAction}
-          className="w-full cursor-pointer rounded-lg border border-[#072E28] px-4 py-3 text-sm font-semibold text-[#072E28] transition-colors hover:bg-[#F5FAF8] sm:w-auto sm:min-w-[180px] sm:text-[16px]"
+          className="w-full cursor-pointer rounded-lg border border-[#0F264F] px-4 py-3 text-sm font-semibold text-[#0F264F] transition-colors hover:bg-[#F5FAF8] sm:w-auto sm:min-w-[180px] sm:text-[16px]"
         >
           {actionLabel}
         </button>

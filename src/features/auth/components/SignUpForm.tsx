@@ -63,8 +63,8 @@ export function SignUpForm() {
           <div className='mb-8 w-full flex items-center justify-center'>
             <Link href='/'>
               <Image
-                src='/images/logo-auth.png'
-                alt='VulnWatch AI Logo'
+                src='/images/logo.png'
+                alt='Grayward Logo'
                 width={260}
                 height={105}
                 className='h-auto w-56 object-contain'

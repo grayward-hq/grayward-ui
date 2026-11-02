@@ -170,7 +170,7 @@ export function AllFindingsTab({ report }: AllFindingsTabProps) {
           {severityFilter !== 'all' && (
             <button
               onClick={handleClearFilter}
-              className="text-xs font-semibold text-[#072E28] flex items-center gap-1 hover:underline cursor-pointer"
+              className="text-xs font-semibold text-[#0F264F] flex items-center gap-1 hover:underline cursor-pointer"
             >
               <X size={14} /> Clear Filter
             </button>
@@ -188,7 +188,7 @@ export function AllFindingsTab({ report }: AllFindingsTabProps) {
                 className={[
                   'rounded-md px-4 py-4 text-sm font-medium md:py-3 text-left transition-all duration-200 cursor-pointer border-2',
                   isActive 
-                    ? 'border-[#072E28] ring-2 ring-[#072E28]/10' 
+                    ? 'border-[#0F264F] ring-2 ring-[#0F264F]/10' 
                     : 'border-transparent hover:border-neutral-300',
                   stat.className,
                 ].join(' ')}

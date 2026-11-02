@@ -91,7 +91,7 @@ export default function AddDomainModal({ open, onOpenChange }: Props) {
     try {
       const domain = await domainService.createDomain({ domain: validationResult.data });
       if (typeof window !== "undefined") {
-        localStorage.setItem(`vulnwatch_token_${domain.id}`, domain.verificationToken);
+        localStorage.setItem(`grayward_token_${domain.id}`, domain.verificationToken);
       }
       toast.success("Domain added! Proceeding to verification...");
       onOpenChange(false);

@@ -69,7 +69,7 @@ export default function VerifyEmailWaitingPage({
   if (loading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center px-4 py-6 md:px-6">
-        <Loader2 size={24} className="animate-spin text-[#072E28]" />
+        <Loader2 size={24} className="animate-spin text-[#0F264F]" />
       </div>
     );
   }
@@ -170,7 +170,7 @@ export default function VerifyEmailWaitingPage({
         </div>
 
         <div className="mx-auto mt-6 max-w-[520px] text-center text-[11px] leading-4.5 text-[#8D8D8D] sm:text-xs">
-          VulnWatch AI uses enterprise-grade encryption to protect your domain
+          Grayward uses enterprise-grade encryption to protect your domain
           assets. Verification ensures only authorized administrators can
           trigger advanced vulnerability scans.
         </div>

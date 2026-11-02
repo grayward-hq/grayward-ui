@@ -249,8 +249,8 @@ const SessionActivity = () => {
         <section className="mt-6 border-y border-[#F0F0F0] bg-white px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-5 text-lg font-semibold text-[#2B2B2B] md:text-xl">
             <Sparkles className="h-5 w-5" />
-            <span className="hidden md:inline">VulnWatch Device Activity Scan</span>
-            <span className="md:hidden">VulnWatch Activity Detection</span>
+            <span className="hidden md:inline">Grayward Device Activity Scan</span>
+            <span className="md:hidden">Grayward Activity Detection</span>
           </div>
         </section>
 

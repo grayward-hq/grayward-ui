@@ -27,7 +27,7 @@ export function ReportScansTable({
 
       {loading ? (
         <div className="flex h-40 items-center justify-center rounded-2xl border border-[#E5E7EB] bg-white">
-          <Loader2 className="h-6 w-6 animate-spin text-[#072e28]" />
+          <Loader2 className="h-6 w-6 animate-spin text-[#0F264F]" />
         </div>
       ) : !domainId ? (
         <div className="flex h-40 flex-col items-center justify-center rounded-2xl border border-dashed border-[#E5E7EB] bg-white text-center">

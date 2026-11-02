@@ -14,7 +14,7 @@ type AuthState = {
   picture: string | null;
   firstName: string | null;
   lastName: string | null;
-  login: (token: string, email?: string | null, picture?: string | null) => void;
+  login: (token: string, email?: string | null, picture?: string | null, refreshToken?: string) => void;
   logout: () => void;
   updateProfile: (firstName: string | null, lastName: string | null, picture: string | null) => void;
 };
@@ -67,7 +67,7 @@ const getInitialState = (): AuthState => {
     picture: localStorage.getItem("auth_picture"),
     firstName: localStorage.getItem("auth_firstName"),
     lastName: localStorage.getItem("auth_lastName"),
-    login: (token, fallbackEmail, fallbackPicture) => {
+    login: (token, fallbackEmail, fallbackPicture, refreshToken) => {
       const safeToken = token || "dummy_token_if_cookie_based";
       let finalEmail = fallbackEmail ?? null;
       let finalPicture = fallbackPicture ?? null;
@@ -78,7 +78,7 @@ const getInitialState = (): AuthState => {
         const payload = jwtDecode<AccessTokenPayload>(safeToken);
         if (payload.firstName) finalFirstName = payload.firstName;
         if (payload.lastName) finalLastName = payload.lastName;
-        
+
         const tokenEmail = payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"];
         if (tokenEmail) finalEmail = tokenEmail;
 
@@ -90,11 +90,17 @@ const getInitialState = (): AuthState => {
       }
 
       localStorage.setItem("auth_token", safeToken);
+      if (refreshToken) {
+        localStorage.setItem("auth_refresh_token", refreshToken);
+      } else {
+        localStorage.removeItem("auth_refresh_token");
+      }
+
       if (finalEmail) localStorage.setItem("auth_email", finalEmail);
       else localStorage.removeItem("auth_email");
-      
+
       setAuthCookie(safeToken);
-      
+
       if (finalPicture) localStorage.setItem("auth_picture", finalPicture);
       else localStorage.removeItem("auth_picture");
 
@@ -119,6 +125,7 @@ const getInitialState = (): AuthState => {
     logout: () => {
       clearScanReportCache();
       localStorage.removeItem("auth_token");
+      localStorage.removeItem("auth_refresh_token");
       localStorage.removeItem("auth_email");
       localStorage.removeItem("auth_picture");
       localStorage.removeItem("auth_firstName");

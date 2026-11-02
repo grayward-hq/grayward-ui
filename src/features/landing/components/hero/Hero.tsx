@@ -13,7 +13,7 @@ export function Hero() {
         className='absolute inset-0 z-0 hidden md:block'
         style={{
           background:
-            'linear-gradient(180.52deg, #FFFFFF 54.04%, #A0E870 106.46%)',
+            'linear-gradient(180.52deg, #FFFFFF 54.04%, #C0D7FF 106.46%)',
         }}
         aria-hidden='true'
       />
@@ -48,7 +48,7 @@ export function Hero() {
               y2='273.321'
               gradientUnits='userSpaceOnUse'
             >
-              <stop stopColor='#A0E870' />
+              <stop stopColor='#C0D7FF' />
               <stop offset='1' stopColor='white' />
             </linearGradient>
           </defs>

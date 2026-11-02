@@ -8,7 +8,7 @@ export const TESTIMONIALS: TestimonialType[] = [
     role: "Head of Security",
     company: "Ad-Tech Inc.",
     quote:
-      "VulnWatchAI caught a misconfigured DMARC record that was letting phishing emails impersonate our domain. Fixed in minutes, not weeks.",
+      "GraywardAI caught a misconfigured DMARC record that was letting phishing emails impersonate our domain. Fixed in minutes, not weeks.",
     avatarUrl: "https://i.pravatar.cc/150?img=11",
   },
   {
@@ -32,7 +32,7 @@ export const TESTIMONIALS: TestimonialType[] = [
     role: "Security Manager",
     company: "BULGI LMT",
     quote:
-      "VulnWatchAI found an exposed admin subdomain we had completely forgotten about from a legacy deployment. That single find justified the subscription.",
+      "GraywardAI found an exposed admin subdomain we had completely forgotten about from a legacy deployment. That single find justified the subscription.",
     avatarUrl: "https://i.pravatar.cc/150?img=56",
   },
   {
@@ -48,7 +48,7 @@ export const TESTIMONIALS: TestimonialType[] = [
     role: "Co-Manager",
     company: "Fizzz Media",
     quote:
-      "We manage domains for 40+ clients. VulnWatchAI makes it possible for a two-person team to stay on top of every single one without burning out.",
+      "We manage domains for 40+ clients. GraywardAI makes it possible for a two-person team to stay on top of every single one without burning out.",
     avatarUrl: "https://i.pravatar.cc/150?img=67",
   },
   {
@@ -56,7 +56,7 @@ export const TESTIMONIALS: TestimonialType[] = [
     role: "Tech Founder",
     company: "Peris Comp.",
     quote:
-      "As a startup founder I can't afford a dedicated security team. VulnWatchAI gives us enterprise-grade monitoring at a price that actually makes sense.",
+      "As a startup founder I can't afford a dedicated security team. GraywardAI gives us enterprise-grade monitoring at a price that actually makes sense.",
     avatarUrl: "https://i.pravatar.cc/150?img=49",
   },
   {

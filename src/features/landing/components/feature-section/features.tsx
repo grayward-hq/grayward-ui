@@ -47,7 +47,7 @@ export default function Features() {
             <motion.div
               key={title}
               variants={cardVariants}
-              className='flex flex-col gap-4 rounded-xl border-2 border-[#EFEFEF] bg-white p-6
+              className='flex flex-col gap-4 rounded-2xl border-2 border-[#EFEFEF] bg-white p-6
                 transition-all duration-200 hover:border-[#0F264F] hover:shadow-md'
             >
               <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-[#0F264F] p-2'>

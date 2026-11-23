@@ -87,8 +87,7 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
   }
 
   // Mirrors HeaderActions so the desktop and mobile menus never disagree.
-  const isCtaSuppressedPage =
-    pathname === ROUTES.HOME || pathname === ROUTES.WAITLIST;
+  const isCtaSuppressedPage = pathname === ROUTES.WAITLIST;
   const showLogin = FEATURE_FLAGS.SHOW_LOGIN_BUTTON;
   const showJoinWaitlist =
     FEATURE_FLAGS.SHOW_JOIN_WAITLIST_BUTTON && !isCtaSuppressedPage;

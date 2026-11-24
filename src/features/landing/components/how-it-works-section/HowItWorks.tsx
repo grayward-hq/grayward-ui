@@ -14,7 +14,7 @@ const steps = [
   {
     id: "02",
     title: "Scan Your Website",
-    description: "Choose a quick or full scan. Grayward safely checks your site for misconfigurations and potential risks.",
+    description: "Full access to settings, reports, and tax configurations between Admin and Users",
     image: "/images/grayward-scan-coming-soon.png",
     imageLeft: false,
   },

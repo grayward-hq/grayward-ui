@@ -9,15 +9,10 @@ const inFlightScanReportRequests = new Map<string, Promise<ApiResponse<ScanRepor
 // that resolve after a logout cannot re-populate the cache.
 let scanReportCacheGeneration = 0;
 
-// Maps our internal UI enum values to what the API expects
-const COVERAGE_MAP: Record<string, "Quick" | "Full"> = {
-  QUICK_SCAN: "Quick",
-  FULL_SCAN: "Full",
-};
-
 export interface CreateScanPayload {
   domainId: string;
-  scanType: "QUICK_SCAN" | "FULL_SCAN";
+  /** Deprecated — coverage is now assigned authoritatively by the API. */
+  scanType?: "QUICK_SCAN" | "FULL_SCAN";
 }
 
 export type ScanTargetType = "Domain" | "Repository";
@@ -339,8 +334,8 @@ export const scanService = {
       {
         target: payload.domainId,
         targetType: "Domain",
-        coverage: COVERAGE_MAP[payload.scanType],
-        surfaceTypes: "Dns, Ssl, HttpHeaders",
+        // coverage and surfaceTypes are assigned authoritatively by the API
+        // based on targetType — client must not narrow or mismatch them.
       },
       {
         headers: {
@@ -360,8 +355,10 @@ export const scanService = {
       {
         target: payload.target,
         targetType: payload.targetType,
-        coverage: payload.coverage ?? "Quick",
-        surfaceTypes: payload.surfaceTypes ?? "None",
+        // coverage and surfaceTypes are assigned authoritatively by the API
+        // based on targetType — client must not narrow or mismatch them.
+        coverage: payload.coverage,
+        surfaceTypes: payload.surfaceTypes,
       },
       {
         headers: {

@@ -109,7 +109,6 @@ export function RepositoryDetail({ repository, vulnerabilities, trendData }: Pro
       const res = await scanService.createTargetScan({
         target: repository.id,
         targetType: "Repository",
-        surfaceTypes: "ssl",
       });
       if (res.isSuccess && res.value) {
         toast.success(res.value.message || "Scan queued.");

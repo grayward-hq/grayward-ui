@@ -26,7 +26,7 @@ export function ExposureTab({ report }: ExposureTabProps) {
       ...(report.summary.lowSeverityIssues || []),
     ];
     allIssues.forEach(f => {
-      if (typeof f !== "string" && (f.surface.toLowerCase() === "exposure" || f.surface.toLowerCase() === "httpheaders")) {
+      if (typeof f !== "string" && ["exposure", "httpheaders", "subdomains", "ports"].includes(f.surface.toLowerCase())) {
         activeFailed.push(mapFindingDtoToSummary(f, "Exposure"));
       }
     });
@@ -92,7 +92,7 @@ export function ExposureTab({ report }: ExposureTabProps) {
         <div className='pt-1'>
           <p className='mb-3 text-xs font-medium text-[#6B7280]'>
             <Check className='mr-2 inline h-3.5 w-3.5 text-[#1FA870]' />
-            Passed Checked ({activePassed.length})
+            Passed Checks ({activePassed.length})
           </p>
 
           <div className='space-y-4'>

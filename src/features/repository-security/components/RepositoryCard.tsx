@@ -84,7 +84,6 @@ export function RepositoryCard({ repository }: Props) {
       const res = await scanService.createTargetScan({
         target: repository.id,
         targetType: "Repository",
-        surfaceTypes: "ssl",
       });
       if (res.isSuccess && res.value) {
         toast.success(res.value.message || "Scan queued.");

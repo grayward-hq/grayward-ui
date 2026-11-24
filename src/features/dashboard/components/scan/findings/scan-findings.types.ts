@@ -50,6 +50,7 @@ export const mapFindingDtoToSummary = (finding: FindingDto, defaultModule: Findi
   const surface = finding.surface.toLowerCase();
   if (surface === "dns") findingModule = "DNS";
   if (surface === "ssl") findingModule = "SSL";
+  if (surface === "httpheaders" || surface === "subdomains" || surface === "ports") findingModule = "Exposure";
   
   let severity: Severity = "Medium";
   const sev = finding.severity.toLowerCase();

@@ -6,13 +6,12 @@ import { Globe, ScanLine, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import type { ScanType } from "./domain-detail.types";
 import { WHAT_HAPPENS_NEXT } from "@/features/scans/configure-new-scan/lib/constants";
 
 interface RunScanModalProps {
   domainName: string;
   onClose: () => void;
-  onStart: (scanType: ScanType) => void;
+  onStart: () => void;
 }
 
 export function RunScanModal({ domainName, onClose, onStart }: RunScanModalProps) {
@@ -118,7 +117,7 @@ export function RunScanModal({ domainName, onClose, onStart }: RunScanModalProps
           </Button>
           <Button
             disabled={!authorized}
-            onClick={() => onStart("quick")}
+            onClick={() => onStart()}
             className="bg-primary hover:bg-primary/90 text-white px-5 font-semibold disabled:opacity-50"
           >
             <ScanLine className="h-4 w-4 mr-2" />

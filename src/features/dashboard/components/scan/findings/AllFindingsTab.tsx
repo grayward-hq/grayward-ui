@@ -124,14 +124,14 @@ export function AllFindingsTab({ report }: AllFindingsTabProps) {
     {
       label: 'Medium fixes',
       count: mediumCount,
-      description: 'Could cause serious harm if not fixed soon',
+      description: 'Should be addressed when possible',
       className: 'bg-[#FFF8DB] text-[#B89412]',
       countClassName: 'bg-[#B89412] text-white',
     },
     {
       label: 'Low fixes',
       count: lowCount,
-      description: 'Important to fix within the next 2 weeks',
+      description: 'Minor issues to consider for future updates',
       className: 'bg-[#E8EDFF] text-[#2F5BC7]',
       countClassName: 'bg-[#2F5BC7] text-white',
     },
@@ -234,7 +234,7 @@ export function AllFindingsTab({ report }: AllFindingsTabProps) {
         <div className='pt-1'>
           <p className='mb-3 text-xs font-medium text-[#6B7280]'>
             <Check className='mr-2 inline h-3.5 w-3.5 text-[#1FA870]' />
-            Passed Checked ({filteredPassed.length})
+            Passed Checks ({filteredPassed.length})
           </p>
 
           <div className='space-y-3'>

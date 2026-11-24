@@ -208,7 +208,6 @@ function ScanHistoryContent() {
     try {
       const response = await scanService.createScan({
         domainId: domainId,
-        scanType: "QUICK_SCAN",
       });
 
       if (response.isSuccess && response.value) {
@@ -353,8 +352,8 @@ function ScanHistoryContent() {
                           </td>
                           <td className="px-8 py-3.5">
                             <div className="flex items-center gap-2 text-sm font-medium text-brand-dark">
-                              <ScanTypeIcon scanType={run.coverage || "Quick Scan"} />
-                              {run.coverage || "Quick"} Scan
+                              <ScanTypeIcon scanType={run.coverage || "Full Scan"} />
+                              {run.coverage || "Full"} Scan
                             </div>
                           </td>
                           <td className="px-8 py-3.5">
@@ -426,8 +425,8 @@ function ScanHistoryContent() {
                             Scan Type
                           </p>
                           <div className="mt-2 flex items-center gap-2 text-sm font-medium text-brand-dark">
-                            <ScanTypeIcon scanType={run.coverage || "Quick Scan"} />
-                            {run.coverage || "Quick"} Scan
+                            <ScanTypeIcon scanType={run.coverage || "Full Scan"} />
+                            {run.coverage || "Full"} Scan
                           </div>
                         </div>
                         <div>

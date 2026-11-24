@@ -234,7 +234,6 @@ export default function ScanCompleteModal({
                         const { scanService } = await import("@/features/scans/services/scan.service");
                         const res = await scanService.createScan({
                           domainId,
-                          scanType: "QUICK_SCAN",
                         });
                         if (res.isSuccess && res.value?.scanId) {
                           // Force a hard reload on the new URL to reset all states cleanly

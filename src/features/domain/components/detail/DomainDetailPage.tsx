@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -22,7 +23,6 @@ import type {
 } from "@/features/monitoring/types/monitoring.types";
 import type {
   DomainDetailData,
-  ScanType,
   MonitoringSettings as MonitoringSettingsType,
 } from "./domain-detail.types";
 
@@ -57,13 +57,12 @@ export function DomainDetailPage({ data, domainId }: DomainDetailPageProps) {
     }
   };
 
-  const handleScanStart = async (scanType: ScanType) => {
+  const handleScanStart = async () => {
     setShowScanModal(false);
     setIsLaunching(true);
     try {
       const res = await scanService.createScan({
         domainId: domainId,
-        scanType: scanType === "deep" ? "FULL_SCAN" : "QUICK_SCAN",
       });
 
       if (res.isSuccess && res.value) {
@@ -123,7 +122,7 @@ export function DomainDetailPage({ data, domainId }: DomainDetailPageProps) {
         <RunScanModal
           domainName={data.domainName}
           onClose={() => setShowScanModal(false)}
-          onStart={(type) => void handleScanStart(type)}
+          onStart={() => void handleScanStart()}
         />
       )}
 

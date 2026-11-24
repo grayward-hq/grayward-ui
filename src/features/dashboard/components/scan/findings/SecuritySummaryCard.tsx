@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, ChevronRight, Loader2 } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { scanService, ScanReport } from '../../../../scans/services/scan.service';
 
@@ -102,7 +102,11 @@ export function SecuritySummaryCard({ detailsHref, module = 'all' }: SecuritySum
             <>
               {/* Critical */}
               <div className='flex gap-4 text-sm leading-6'>
-                <CheckCircle2 className='mt-0.5 h-5 w-5 shrink-0 fill-[#1FA870] text-white' />
+                {criticalCount > 0 ? (
+                  <AlertTriangle className='mt-0.5 h-5 w-5 shrink-0 text-[#D92D50]' />
+                ) : (
+                  <CheckCircle2 className='mt-0.5 h-5 w-5 shrink-0 fill-[#1FA870] text-white' />
+                )}
                 <p className='text-[#6B7280]'>
                   Your domain has{' '}
                   <strong className='text-[#D92D50] font-semibold'>
@@ -115,7 +119,11 @@ export function SecuritySummaryCard({ detailsHref, module = 'all' }: SecuritySum
 
               {/* High */}
               <div className='hidden md:flex gap-4 text-sm leading-6'>
-                <CheckCircle2 className='mt-0.5 h-5 w-5 shrink-0 fill-[#1FA870] text-white' />
+                {highCount > 0 ? (
+                  <AlertTriangle className='mt-0.5 h-5 w-5 shrink-0 text-[#E46B16]' />
+                ) : (
+                  <CheckCircle2 className='mt-0.5 h-5 w-5 shrink-0 fill-[#1FA870] text-white' />
+                )}
                 <p className='text-[#6B7280]'>
                   <strong className='text-[#D92D50] font-semibold'>
                     {highCount} high-severity {highCount === 1 ? 'finding' : 'findings'}

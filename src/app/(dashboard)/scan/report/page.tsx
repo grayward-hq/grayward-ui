@@ -9,7 +9,7 @@ import ScanReportPageHeader from "@/features/scans/scan-report/ui/ScanReportPage
 import ScanReportScoreStatCard from "@/features/scans/scan-report/ui/ScanReportStatCard";
 import Card from "@/features/scans/shared/ui/Card";
 import PageHeader from "@/features/scans/shared/ui/PageHeader";
-import { ChevronRight, Loader2, AlertCircle } from "lucide-react";
+import { ChevronRight, Loader2, AlertCircle, AlertTriangle } from "lucide-react";
 import SecurityScoreCard from "@/features/scans/scan-report/ui/SecurityScoreCard";
 import { scanService, ScanReport } from "@/features/scans/services/scan.service";
 import { AIChatbot } from "@/features/ai-chat/components/AIChatbot";
@@ -71,7 +71,6 @@ function ScanReportContent() {
       setIsRescanning(true);
       const response = await scanService.createScan({
         domainId: report.domainId,
-        scanType: "QUICK_SCAN",
       });
       if (response.isSuccess && response.value) {
         if (
@@ -232,7 +231,7 @@ function ScanReportContent() {
         description={
           <div className="flex items-center gap-2 text-sm">
             <span className="font-semibold">Scan type: </span>
-            <span className="font-semibold">{report.coverage || "Quick Scan"}</span>
+            <span className="font-semibold">{report.coverage || "Full Scan"}</span>
             <div className="size-1.5 bg-neutral-300 rounded-full"></div>
             <span className="text-neutral-500">{formatScannedDate(report.completedAt || report.initiatedAt)}</span>
           </div>
@@ -247,7 +246,11 @@ function ScanReportContent() {
             </h2>
             <div className="space-y-4 font-geist font-normal text-[16px]">
               <div className="flex items-start gap-4">
-                <CustomCheckIcon className="text-[#1DAF61] shrink-0 mt-0.5" />
+                {criticalCount > 0 ? (
+                  <AlertTriangle className="text-[#D92D50] shrink-0 mt-0.5 h-5 w-5" />
+                ) : (
+                  <CustomCheckIcon className="text-[#1DAF61] shrink-0 mt-0.5" />
+                )}
                 <p>
                   <span className="text-[#2B2B2B]">
                     Your domain has <span className="text-[#D00416] font-semibold">{criticalCount} Critical {criticalCount === 1 ? "Issue" : "Issues"}</span> that {criticalCount === 1 ? "needs" : "need"} immediate attention:
@@ -258,7 +261,11 @@ function ScanReportContent() {
                 </p>
               </div>
               <div className="flex items-start gap-4">
-                <CustomCheckIcon className="text-[#1DAF61] shrink-0 mt-0.5" />
+                {highCount > 0 ? (
+                  <AlertTriangle className="text-[#E46B16] shrink-0 mt-0.5 h-5 w-5" />
+                ) : (
+                  <CustomCheckIcon className="text-[#1DAF61] shrink-0 mt-0.5" />
+                )}
                 <p>
                   <span className="text-[#2B2B2B]">
                     <span className="text-[#D00416] font-semibold">{highCount} high-severity {highCount === 1 ? "finding" : "findings"}</span> compound the risk:

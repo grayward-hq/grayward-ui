@@ -120,7 +120,7 @@ export function MobileMenu({ isOpen, onClose, toggleButtonId }: MobileMenuProps)
                   href={href}
                   onClick={onClose}
                   className={cn(
-                    "font-geist block rounded-lg px-2 py-2 text-lg font-medium cursor-pointer transition-all duration-200 hover:bg-primary/10 hover:pl-4",
+                    "font-geist block rounded-lg px-2 py-2 text-lg font-medium cursor-pointer transition-all duration-200 hover:bg-[#F4F6F8] hover:pl-4",
                     isActive ? "text-primary" : "text-[#414141]"
                   )}
                 >

@@ -27,7 +27,7 @@ export function HeaderActions() {
           href={ROUTES.LOGIN}
           className="border-[#0F264F] text-[#2A2A2A] flex h-11 items-center justify-center gap-1.5
            rounded-xl border bg-white px-6 py-3 text-base leading-6 font-medium
-           transition-all duration-400 hover:bg-[#0F264F]/5"
+           transition-all duration-400 hover:bg-[#F4F6F8]"
         >
           Login
         </Link>

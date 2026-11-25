@@ -32,7 +32,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href={ROUTES.HOME}
-            className="flex shrink-0 items-center"
+            className="flex shrink-0 items-center opacity-100"
             aria-label="Grayward home"
           >
             {/* Mobile Logo */}
@@ -41,8 +41,9 @@ export function Header() {
               alt="Grayward"
               width={140}
               height={40}
-              className="block h-8 w-auto object-contain md:hidden"
+              className="block h-8 w-auto object-contain opacity-100 md:hidden"
               priority
+              unoptimized
             />
             {/* Desktop Logo */}
             <Image
@@ -50,8 +51,9 @@ export function Header() {
               alt="Grayward"
               width={160}
               height={40}
-              className="hidden h-10 w-auto object-contain md:block"
+              className="hidden h-10 w-auto object-contain opacity-100 md:block"
               priority
+              unoptimized
             />
           </Link>
 

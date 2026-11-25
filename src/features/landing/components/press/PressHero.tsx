@@ -11,11 +11,11 @@ export default function PressHero() {
       }}
     >
       <div className="mx-auto max-w-4xl">
-        <h1 className="text-[36px] font-bold leading-[44px] tracking-[-1.5px] text-[#2B2B2B]/90 md:text-[64px] md:leading-[72px] md:tracking-[-2px]">
+        <h1 className="text-[36px] font-bold leading-[44px] tracking-[-1.5px] text-[#2B2B2B] md:text-[64px] md:leading-[72px] md:tracking-[-2px]">
           {pressHero.title}
         </h1>
 
-        <p className="mt-4 text-[16px] font-normal leading-[26px] tracking-[-0.5px] text-[#2B2B2B]/90 md:text-[20px] md:leading-[32px] md:tracking-[-1px]">
+        <p className="mt-4 text-[16px] font-normal leading-[26px] tracking-[-0.5px] text-[#2B2B2B] md:text-[20px] md:leading-[32px] md:tracking-[-1px]">
           {pressHero.subtitle}
         </p>
 

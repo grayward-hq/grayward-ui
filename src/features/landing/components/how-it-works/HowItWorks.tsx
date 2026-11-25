@@ -90,7 +90,7 @@ export default function HowItWorks() {
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 sm:py-14 md:py-24">
           <h1
             tabIndex={0}
-            className="mx-auto text-[36px] font-semibold leading-[40px] tracking-[-0.02em] text-[#2B2B2BE5] max-w-[350px] md:max-w-none md:text-[64px] md:font-bold md:leading-[72px] md:tracking-[-2px] outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded"
+            className="mx-auto text-[36px] font-semibold leading-[40px] tracking-[-0.02em] text-[#2B2B2B] max-w-[350px] md:max-w-none md:text-[64px] md:font-bold md:leading-[72px] md:tracking-[-2px] outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded"
           >
             How It Works
           </h1>
@@ -130,7 +130,7 @@ export default function HowItWorks() {
 
                   <h4
                     tabIndex={0}
-                    className="mt-2 text-[22px] font-semibold leading-tight text-black/90 md:mt-3 md:text-[28px] outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded"
+                    className="mt-2 text-[22px] font-semibold leading-tight text-[#2B2B2B] md:mt-3 md:text-[28px] outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded"
                   >
                     {item.title}
                   </h4>

@@ -84,7 +84,7 @@ export function Contact() {
         }}
       >
         <div className="mx-auto max-w-[920px]">
-          <h1 className="font-geist text-[32px] leading-[40px] font-bold tracking-[-1px] text-[rgba(43,43,43,0.9)] md:text-[56px] md:leading-[64px] md:tracking-[-1.5px]">
+          <h1 className="font-geist text-[32px] leading-[40px] font-bold tracking-[-1px] text-[#2B2B2B] md:text-[56px] md:leading-[64px] md:tracking-[-1.5px]">
             Contact us
           </h1>
           <p className="mx-auto mt-4 text-[15px] leading-[24px] tracking-[-0.8px] text-[#4B5568] md:text-[18px] md:leading-[30px]">

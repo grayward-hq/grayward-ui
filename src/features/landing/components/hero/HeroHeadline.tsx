@@ -7,7 +7,7 @@ export function HeroHeadline() {
       style={{
         maxWidth: "1075px",
         fontSize: "clamp(36px, 5vw, 60px)",
-        color: "rgba(43, 43, 43, 0.9)",
+        color: "#2B2B2B",
       }}
       aria-label={HERO_ARIA.section}
     >

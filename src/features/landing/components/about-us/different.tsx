@@ -20,7 +20,7 @@ const Different = () => {
   return (
     <section className="bg-white px-5 py-16 md:px-20 md:py-24">
       <div className="mx-auto max-w-300">
-        <h2 tabIndex={0} className="font-geist text-[rgba(43,43,43,0.9)] text-center text-3xl font-semibold tracking-[-0.02em] md:text-4xl outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
+        <h2 tabIndex={0} className="font-geist text-[#2B2B2B] text-center text-3xl font-semibold tracking-[-0.02em] md:text-4xl outline-none focus-visible:ring-2 focus-visible:ring-[#0F264F] focus-visible:ring-offset-2 rounded">
           What makes us different?
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 md:mt-14 md:grid-cols-3">

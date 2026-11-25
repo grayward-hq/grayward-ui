@@ -19,7 +19,7 @@ export default function PressRelease() {
                 {release.date}
               </p>
 
-              <h3 className="text-[17px] font-normal leading-[26px] tracking-[-0.5px] text-[#2B2B2B]/90 md:text-[19px] md:leading-[30px]">
+              <h3 className="text-[17px] font-normal leading-[26px] tracking-[-0.5px] text-[#2B2B2B] md:text-[19px] md:leading-[30px]">
                 {release.title}
               </h3>
             </div>

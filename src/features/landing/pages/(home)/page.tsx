@@ -5,6 +5,7 @@ import Testimonials from "@/features/landing/components/testimonials/Testimonial
 import HowItWorks from "@/features/landing/components/how-it-works-section/HowItWorks";
 import { TrustTransparency } from "@/features/landing/components/trust-transparency/TrustTransparency";
 import WhyChoose from "@/features/landing/components/why-choose/WhyChoose";
+import PricingSection from "@/features/landing/components/pricing-section";
 
 // order in page -
 // hero,
@@ -23,7 +24,7 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <WhyChoose />
-      {/* <PricingSection /> */}
+      <PricingSection />
       <Testimonials />
       <FAQs />
       <TrustTransparency />

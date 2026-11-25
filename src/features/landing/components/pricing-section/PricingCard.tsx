@@ -1,4 +1,6 @@
-import Image from "next/image";
+import Link from "next/link";
+import { CircleCheck } from "lucide-react";
+import { ROUTES } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { Plan } from "./types";
 
@@ -59,12 +61,9 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
                 key={feature}
                 className="text-[#514C4C] flex items-start gap-2.5 text-sm"
               >
-                <Image
-                  src="/images/checkbox-circle-line.jpg"
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="mt-0.5 h-4 w-4 flex-shrink-0"
+                <CircleCheck
+                  aria-hidden="true"
+                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#0F264F]"
                 />
                 <span>{feature}</span>
               </li>
@@ -74,11 +73,12 @@ const PricingCard = ({ plan, index }: PricingCardProps) => {
 
         {/* CTA */}
         <div className="mt-6">
-          <button
+          <Link
+            href={`${ROUTES.WAITLIST}#waitlist-form`}
             className="bg-[#0F264F] text-white hover:bg-[#0a1b38] transition-colors relative block w-full rounded-xl py-3.5 text-center text-sm font-semibold cursor-pointer"
           >
             Try Demo
-          </button>
+          </Link>
         </div>
       </div>
     </div>

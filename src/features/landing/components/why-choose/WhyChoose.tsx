@@ -18,12 +18,12 @@ const WhyChoose: React.FC = () => {
     {
       title: "Prioritize the Risks That Matter",
       description:
-        "Grayward helps teams cut through noisy scan results by highlighting the vulnerabilities most likely to affect real users and critical systems.",
+        "Grayward helps teams cut through heavy scan results by highlighting the vulnerabilities most likely to affect real users and critical systems.",
     },
     {
       title: "Move Faster With AI-Assisted Triage",
       description:
-        "Get clearer explanations, severity context, and suggested next steps so developers can understand security issues quickly and fix them with less back-and-forth.",
+        "The platform translates complex security data into concise, actionable summaries. These summaries often include risk assessments and recommended remediation steps in plain language.",
     },
     {
       title: "Stay Ahead of Emerging Threats",
@@ -70,16 +70,12 @@ const WhyChoose: React.FC = () => {
                 hidden: { opacity: 0, x: index % 2 === 0 ? -30 : 30 },
                 visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
               } as Variants}
-              className={`mt-4 border-l-[8px] border-t-transparent border-r-transparent border-b-transparent px-6 py-2 shadow-sm md:mt-8 md:px-8 md:py-2 ${
-                index === 0 || index === 3
-                  ? "border-[#C0D7FF]"
-                  : "border-[#0F264F]"
-              } transition-shadow duration-200 hover:shadow-md`}
+              className="mt-4 border-l-[8px] border-t-transparent border-r-transparent border-b-transparent px-6 py-2 shadow-sm md:mt-8 md:px-8 md:py-2 border-section-tint transition-shadow duration-200 hover:shadow-md"
             >
-              <h3 className="mb-3 text-base font-semibold text-[#2B2B2B] sm:text-xl md:text-2xl">
+              <h3 className="font-geist mb-3 text-base font-semibold text-[#2B2B2B] sm:text-xl md:text-2xl">
                 {benefit.title}
               </h3>
-              <p className="text-[0.9rem] leading-relaxed text-[#666666] sm:text-base md:text-[1.05rem] md:leading-7">
+              <p className="font-geist text-[0.9rem] leading-relaxed text-[#666666] sm:text-base md:text-[1.05rem] md:leading-7">
                 {benefit.description}
               </p>
             </motion.div>

@@ -4,9 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-geist: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-inter: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-geist: var(--font-geist), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-inter: var(--font-inter), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-geist), var(--font-inter), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 
   --color-primary: var(--primary);
@@ -24,6 +24,8 @@
 
   --color-body: var(--body);
   --color-header: var(--header);
+  --color-section-tint: var(--section-tint);
+  --color-brand-light-blue: var(--brand-light-blue);
   --color-brand-dark: #2b2b2b;
   --color-brand-gray: #666666;
   --color-brand-light-green: #a0e870;
@@ -115,13 +117,15 @@
   --error: #ef4444;
 
   --background: #f0f0f0;
-  --foreground: #666666;
+  --foreground: #2B2B2B;
   --muted-foreground: #666666;
   --border: #d4d4d4;
 
   --body: #666666;
   --header: #2b2b2b;
   --cards: #ffffff;
+  --section-tint: #EFF4FC;
+  --brand-light-blue: #EFF4FC;
 }
 
 /* I hardcoded dark mode colors until further notice */
@@ -140,13 +144,15 @@
   --error: #ef4444;
 
   --background: #f0f0f0;
-  --foreground: #666666;
+  --foreground: #2B2B2B;
   --muted-foreground: #666666;
   --border: #d4d4d4;
 
   --body: #666666;
   --header: #2b2b2b;
   --cards: #ffffff;
+  --section-tint: #EFF4FC;
+  --brand-light-blue: #EFF4FC;
 }
 
 @layer base {

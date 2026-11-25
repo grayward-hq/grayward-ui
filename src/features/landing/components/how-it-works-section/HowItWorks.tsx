@@ -7,14 +7,14 @@ const steps = [
   {
     id: "01",
     title: "Add Your Domain",
-    description: "Enter your website's domain. No installs, no agents and no access to your hosting accounts needed.",
+    description: "Just enter your domain. Grayward handles the rest, with nothing to install or configure.",
     image: "/images/how-it-work-1.png",
     imageLeft: true,
   },
   {
     id: "02",
     title: "Scan Your Website",
-    description: "Grayward runs non-intrusive checks across SSL/TLS, DNS, security headers and malware, with no exploit attempts.",
+    description: "Full access to settings, reports, and tax configurations between Admin and Users",
     image: "/images/grayward-scan-coming-soon.png",
     imageLeft: false,
   },

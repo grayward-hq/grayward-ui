@@ -13,7 +13,7 @@ export function Hero() {
         className='absolute inset-0 z-0 hidden md:block'
         style={{
           background:
-            'linear-gradient(180.52deg, #FFFFFF 54.04%, #C0D7FF 106.46%)',
+            'linear-gradient(180.52deg, #FFFFFF 54.04%, var(--section-tint) 106.46%)',
         }}
         aria-hidden='true'
       />
@@ -48,14 +48,14 @@ export function Hero() {
               y2='273.321'
               gradientUnits='userSpaceOnUse'
             >
-              <stop stopColor='#C0D7FF' />
+              <stop style={{ stopColor: "var(--section-tint)" }} stopColor="#EFF4FC" />
               <stop offset='1' stopColor='white' />
             </linearGradient>
           </defs>
         </svg>
       </div>
 
-      <div className='relative z-10 mx-auto max-w-7xl px-5 pt-20 pb-16 md:px-8 md:pt-24 lg:pt-28'>
+      <div className='relative z-10 mx-auto max-w-7xl px-5 pt-20 pb-6 md:px-8 md:pt-24 md:pb-8 lg:pt-28'>
         <HeroContent />
       </div>
 

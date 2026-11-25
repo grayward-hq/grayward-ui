@@ -30,8 +30,8 @@ const steps = [
 /** Renders the How It Works section showing the three-step domain verification and scanning process. */
 const HowItWorks = () => {
   return (
-    <section className="overflow-hidden bg-brand-mint">
-      <div className="bg-brand-mint md:py-14">
+    <section className="overflow-hidden bg-section-tint">
+      <div className="bg-section-tint md:py-14">
         <div className="mx-auto max-w-360 px-5 md:px-20">
           <motion.div
             className="mx-auto max-w-2xl px-8 py-10 text-center md:border-0 md:bg-transparent md:px-0 md:py-0"
@@ -54,7 +54,7 @@ const HowItWorks = () => {
         </div>
       </div>
 
-      <div className="pb-0 bg-brand-mint">
+      <div className="pb-0 bg-section-tint">
         <div className="mx-auto w-full max-w-300 px-5 md:px-0">
           <div className="flex flex-col gap-y-6 md:gap-y-0">
             {steps.map((step, index) => {

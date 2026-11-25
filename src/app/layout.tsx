@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
+import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
+
+const geistSans = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "Grayward — Intelligent Vulnerability Detection";
 const appDescription =
@@ -56,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", "font-sans")}
+      className={cn("h-full", "antialiased", "font-sans", geistSans.variable, inter.variable)}
     >
       <body className="min-h-full flex flex-col">
         <ReactQueryProvider>

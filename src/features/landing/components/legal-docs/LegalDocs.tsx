@@ -155,11 +155,11 @@ export function LegalDocs() {
         className="flex min-h-64 items-center px-4 py-10 text-center md:py-16"
         style={{
           background:
-            "linear-gradient(179.2deg, #FFFFFF 53.96%, #C0D7FF 244.21%)",
+            "linear-gradient(179.2deg, #FFFFFF 53.96%, var(--section-tint) 244.21%)",
         }}
       >
         <div className="mx-auto max-w-190">
-          <h1 className="font-geist text-[36px] leading-10 font-bold tracking-[-1.5px] text-[#2B2B2B]/90 md:text-[64px] md:leading-[72px] md:tracking-[-2px]">
+          <h1 className="font-geist text-[36px] leading-10 font-bold tracking-[-1.5px] text-[#2B2B2B] md:text-[64px] md:leading-[72px] md:tracking-[-2px]">
             Legal Doc
           </h1>
           <p className="mx-auto mt-4 max-w-155 text-[15px] leading-6 tracking-[-0.5px] text-[#666666] md:text-[20px] md:leading-8 md:tracking-[-1px]">

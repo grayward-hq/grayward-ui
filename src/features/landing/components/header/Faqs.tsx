@@ -67,16 +67,13 @@ const Summary = "summary" as const;
 const FaqQuestion = ({
   question,
   answer,
-  isDefaultOpen,
 }: {
   question: string;
   answer: string;
-  isDefaultOpen?: boolean;
 }) => (
   <Details
     className="group faq-question"
     name="faq-page-questions"
-    open={isDefaultOpen}
   >
     <Summary className="faq-question-summary">
       <span className="min-w-0">{question}</span>
@@ -181,16 +178,15 @@ const FaqPage = () => {
 
           <div className="pt-8 lg:pt-0 lg:pl-8 xl:pl-14">
             <div className="space-y-6 lg:space-y-7">
-              {displayedGroups.map((group, groupIndex) => (
+              {displayedGroups.map((group) => (
                 <section key={group.id} id={group.id} className="scroll-mt-24">
                   <h2 className="faq-group-title">{group.title}</h2>
                   <div className="space-y-2 lg:space-y-3">
-                    {group.questions.map((faq, questionIndex) => (
+                    {group.questions.map((faq) => (
                       <FaqQuestion
                         key={faq.question}
                         question={faq.question}
                         answer={faq.answer}
-                        isDefaultOpen={groupIndex === 0 && questionIndex === 0}
                       />
                     ))}
                   </div>

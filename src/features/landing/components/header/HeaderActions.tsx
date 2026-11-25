@@ -8,10 +8,9 @@ import { FEATURE_FLAGS } from "@/constants/feature-flags";
 export function HeaderActions() {
   const pathname = usePathname();
 
-  // The waitlist CTA is suppressed on Home and Waitlist — those pages have
-  // their own in-page CTA, so a duplicate in the header is noise.
-  const isCtaSuppressedPage =
-    pathname === ROUTES.HOME || pathname === ROUTES.WAITLIST;
+  // The waitlist CTA is suppressed only on the Waitlist page, which already
+  // hosts the form. Home shows it, matching the design's header.
+  const isCtaSuppressedPage = pathname === ROUTES.WAITLIST;
 
   const showLogin = FEATURE_FLAGS.SHOW_LOGIN_BUTTON;
   const showJoinWaitlist =
@@ -28,7 +27,7 @@ export function HeaderActions() {
           href={ROUTES.LOGIN}
           className="border-[#0F264F] text-[#2A2A2A] flex h-11 items-center justify-center gap-1.5
            rounded-xl border bg-white px-6 py-3 text-base leading-6 font-medium
-           transition-all duration-400 hover:bg-[#0F264F]/5"
+           transition-all duration-400 hover:bg-[#F4F6F8]"
         >
           Login
         </Link>

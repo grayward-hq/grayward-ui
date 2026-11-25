@@ -34,7 +34,6 @@ const FaqAccordion = ({
       <Accordion
         type="single"
         collapsible
-        defaultValue="item-0"
         className="w-full space-y-4"
       >
         {faqs?.map((faq, index) => {

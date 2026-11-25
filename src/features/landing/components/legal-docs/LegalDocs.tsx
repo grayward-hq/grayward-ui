@@ -155,7 +155,7 @@ export function LegalDocs() {
         className="flex min-h-64 items-center px-4 py-10 text-center md:py-16"
         style={{
           background:
-            "linear-gradient(179.2deg, #FFFFFF 53.96%, #C0D7FF 244.21%)",
+            "linear-gradient(179.2deg, #FFFFFF 53.96%, var(--section-tint) 244.21%)",
         }}
       >
         <div className="mx-auto max-w-190">

@@ -28,7 +28,7 @@ const AboutUs = () => {
         className="px-5 py-16 text-center md:px-20"
         style={{
           background:
-            "linear-gradient(181.06deg, #FFFFFF 54.03%, #C0D7FF 223.17%)",
+            "linear-gradient(181.06deg, #FFFFFF 54.03%, var(--section-tint) 223.17%)",
         }}
       >
         <div className="mx-auto max-w-360">

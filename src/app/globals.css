@@ -24,6 +24,8 @@
 
   --color-body: var(--body);
   --color-header: var(--header);
+  --color-section-tint: var(--section-tint);
+  --color-brand-light-blue: var(--brand-light-blue);
   --color-brand-dark: #2b2b2b;
   --color-brand-gray: #666666;
   --color-brand-light-green: #a0e870;
@@ -122,6 +124,8 @@
   --body: #666666;
   --header: #2b2b2b;
   --cards: #ffffff;
+  --section-tint: #EFF4FC;
+  --brand-light-blue: #EFF4FC;
 }
 
 /* I hardcoded dark mode colors until further notice */
@@ -147,6 +151,8 @@
   --body: #666666;
   --header: #2b2b2b;
   --cards: #ffffff;
+  --section-tint: #EFF4FC;
+  --brand-light-blue: #EFF4FC;
 }
 
 @layer base {

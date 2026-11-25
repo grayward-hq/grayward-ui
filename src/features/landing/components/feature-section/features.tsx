@@ -11,10 +11,10 @@ const cardVariants: Variants = {
 
 export default function Features() {
   return (
-    <div className='bg-white py-10 sm:py-24'>
+    <div className='bg-white py-12 sm:py-20 md:py-24'>
       <div className='mx-auto max-w-300'>
         <motion.div
-          className='flex flex-col items-center py-5 text-center'
+          className='flex flex-col items-center pt-0 pb-5 text-center'
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}

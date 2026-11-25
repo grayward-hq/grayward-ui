@@ -7,7 +7,7 @@ import { ROUTES } from "@/constants/routes";
 
 export function TrustTransparency() {
   return (
-    <section className="bg-[#DFE8F8] relative w-full py-16 md:py-24">
+    <section className="bg-section-tint relative w-full py-16 md:py-24">
       <motion.div
         className="mx-auto flex w-full max-w-360 flex-col items-center gap-6 px-5 text-center md:gap-8"
         initial={{ opacity: 0, y: 30 }}

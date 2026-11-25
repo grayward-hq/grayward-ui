@@ -7,7 +7,7 @@ export default function PressHero() {
       className="relative px-6 pt-20 pb-16 md:pt-28 md:pb-20 text-center"
       style={{
         background:
-          "linear-gradient(178.53deg, #FFFFFF 53.92%, #C0D7FF 198.91%)",
+          "linear-gradient(178.53deg, #FFFFFF 53.92%, var(--section-tint) 198.91%)",
       }}
     >
       <div className="mx-auto max-w-4xl">

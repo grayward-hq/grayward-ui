@@ -80,7 +80,7 @@ export function Contact() {
     <main className="bg-white">
       <section className="flex min-h-[256px] items-center px-4 py-10 text-center md:py-16"
         style={{
-          background: "linear-gradient(174.71deg, #FFFFFF 53.46%, #C0D7FF 165.81%)",
+          background: "linear-gradient(174.71deg, #FFFFFF 53.46%, var(--section-tint) 165.81%)",
         }}
       >
         <div className="mx-auto max-w-[920px]">

@@ -13,7 +13,7 @@ export function HeroBackgroundGlow() {
           width: "800px",
           height: "400px",
           background:
-            "radial-gradient(ellipse at center, rgba(192, 215, 255, 0.4) 0%, transparent 70%)",
+            "radial-gradient(ellipse at center, var(--section-tint) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />

@@ -85,7 +85,7 @@ export default function HowItWorks() {
   return (
     <main className="bg-white text-[#111]">
       <section id="how-it-works" className="relative overflow-hidden scroll-mt-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#EEF7F9] to-[#C0D7FF]/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ffffff] via-[#DFE8F8] to-[#C0D7FF]/20" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 text-center sm:px-6 sm:py-14 md:py-24">
           <h1

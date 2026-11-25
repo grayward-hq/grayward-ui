@@ -7,7 +7,7 @@ import { ROUTES } from "@/constants/routes";
 
 export function TrustTransparency() {
   return (
-    <section className="bg-[#C0D7FF] relative w-full py-16 md:py-24">
+    <section className="bg-[#DFE8F8] relative w-full py-16 md:py-24">
       <motion.div
         className="mx-auto flex w-full max-w-360 flex-col items-center gap-6 px-5 text-center md:gap-8"
         initial={{ opacity: 0, y: 30 }}
@@ -19,12 +19,12 @@ export function TrustTransparency() {
           Trust & Transparency
         </span>
 
-        <h2 className="font-geist max-w-[900px] text-center text-[32px] leading-[40px] font-semibold tracking-tight text-white md:text-[56px] md:leading-[64px]">
+        <h2 className="font-geist max-w-[900px] text-center text-[32px] leading-[40px] font-semibold tracking-tight text-[#2B2B2B] md:text-[56px] md:leading-[64px]">
           Your <span className="text-[#0F264F]">Website</span> could be <br />
           compromised <span className="text-[#0F264F]">right now</span>
         </h2>
 
-        <p className="font-geist text-white max-w-[659px] text-center text-lg font-normal md:text-[24px]">
+        <p className="font-geist text-[#4B5568] max-w-[659px] text-center text-lg font-normal md:text-[24px]">
           Find out in under 60 seconds
         </p>
 

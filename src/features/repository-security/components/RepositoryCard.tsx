@@ -1,16 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { GitBranch, Lock, Globe, Calendar, PlayCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { scanService } from "@/features/scans/services/scan.service";
+import { isActiveRepoScan } from "../scan-status";
 import type { Repository, SeverityLevel } from "../types/repository.types";
 
 interface Props {
   repository: Repository;
+  onScanned?: () => void;
 }
 
 type SeverityConfig = { bg: string; text: string; border: string };
@@ -75,10 +77,19 @@ function SeverityBadge({
   );
 }
 
-export function RepositoryCard({ repository }: Props) {
+export function RepositoryCard({ repository, onScanned }: Props) {
+  const router = useRouter();
   const [isScanning, setIsScanning] = useState(false);
 
-  const handleScan = async () => {
+  const activeScan = isActiveRepoScan(repository.latestScanStatus);
+  const showScanning = activeScan || isScanning;
+
+  const handleCardClick = () => {
+    router.push(`/repositories/${repository.id}`);
+  };
+
+  const handleScan = async (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     setIsScanning(true);
     try {
       const res = await scanService.createTargetScan({
@@ -87,6 +98,9 @@ export function RepositoryCard({ repository }: Props) {
       });
       if (res.isSuccess && res.value) {
         toast.success(res.value.message || "Scan queued.");
+        // Refresh the list so the live "Scanning..." badge appears immediately;
+        // the page-level watcher keeps polling until the scan settles.
+        onScanned?.();
       } else {
         toast.error(res.error?.message ?? "Failed to start scan.");
       }
@@ -98,7 +112,18 @@ export function RepositoryCard({ repository }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-brand-light-gray bg-white p-5 transition-shadow hover:shadow-sm">
+    <div
+      role="link"
+      tabIndex={0}
+      onClick={handleCardClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleCardClick();
+        }
+      }}
+      className="flex cursor-pointer flex-col gap-4 rounded-lg border border-brand-light-gray bg-white p-5 transition-shadow hover:shadow-sm"
+    >
       {/* Header */}
       <div>
         <div className="mb-1 flex flex-wrap items-center gap-2">
@@ -124,6 +149,12 @@ export function RepositoryCard({ repository }: Props) {
               Monitored
             </span>
           )}
+          {showScanning && (
+            <span className="inline-flex items-center gap-1 rounded-full border border-scan-yellow-900/30 bg-owasp-warn-bg px-2 py-0.5 text-xs font-medium text-scan-yellow-900">
+              <Loader2 className="h-3 w-3 animate-spin" />
+              Scanning...
+            </span>
+          )}
         </div>
         <p className="text-sm text-brand-gray">{repository.fullName}</p>
         <div className="mt-1.5 flex flex-wrap items-center gap-3 text-xs text-brand-muted">
@@ -141,7 +172,7 @@ export function RepositoryCard({ repository }: Props) {
       </div>
 
       {/* Body */}
-      {repository.lastScanDate ? (
+      {repository.lastScanDate || showScanning ? (
         <>
           <div className="grid grid-cols-4 gap-2">
             <SeverityBadge label="Critical" count={repository.criticalFindings} severity="Critical" />
@@ -149,24 +180,25 @@ export function RepositoryCard({ repository }: Props) {
             <SeverityBadge label="Medium" count={repository.mediumFindings} severity="Medium" />
             <SeverityBadge label="Low" count={repository.lowFindings} severity="Low" />
           </div>
-          <div className="flex gap-2">
-            <Link href={`/repositories/${repository.id}`} className="flex-1">
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary-hover">
-                View Details
-              </Button>
-            </Link>
+          <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+            <Button
+              className="w-full bg-primary text-primary-foreground hover:bg-primary-hover"
+              onClick={handleCardClick}
+            >
+              View Details
+            </Button>
             <Button
               variant="outline"
               className="border-brand-border text-brand-gray hover:bg-brand-medium-gray"
               onClick={handleScan}
-              disabled={isScanning}
+              disabled={showScanning}
             >
-              {isScanning ? (
+              {showScanning ? (
                 <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />
               ) : (
                 <PlayCircle className="mr-1.5 h-4 w-4" />
               )}
-              {isScanning ? "Starting..." : "Rescan"}
+              {activeScan ? "Scanning..." : isScanning ? "Starting..." : "Rescan"}
             </Button>
           </div>
         </>
@@ -178,14 +210,14 @@ export function RepositoryCard({ repository }: Props) {
           <Button
             className="w-full bg-primary text-primary-foreground hover:bg-primary-hover"
             onClick={handleScan}
-            disabled={isScanning}
+            disabled={showScanning}
           >
-            {isScanning ? (
+            {showScanning ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <PlayCircle className="mr-2 h-4 w-4" />
             )}
-            {isScanning ? "Starting..." : "Scan Repository"}
+            {activeScan ? "Scanning..." : isScanning ? "Starting..." : "Scan Repository"}
           </Button>
         </div>
       )}

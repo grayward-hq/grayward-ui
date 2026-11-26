@@ -1,12 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { RepositoryStatsBar } from "./RepositoryStatsBar";
 import { RepositoryToolbar, type FilterStatus } from "./RepositoryToolbar";
 import { RepositoryGrid } from "./RepositoryGrid";
-import { repositoryService } from "../services/repository.service";
+import {
+  RateLimitedError,
+  repositoryService,
+} from "../services/repository.service";
+import { useRepositoriesScanPolling } from "../hooks/useRepositoriesScanPolling";
 import type { Repository } from "../types/repository.types";
 
 export function RepositorySecurityPage() {
@@ -16,15 +20,28 @@ export function RepositorySecurityPage() {
   const [filter, setFilter] = useState<FilterStatus>("all");
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  useEffect(() => {
-    repositoryService.getRepositories()
-      .then(setRepositories)
-      .catch((err) => {
-        console.error("Failed to load repositories:", err);
-        setRepositories([]);
-      })
-      .finally(() => setLoading(false));
+  const loadRepositories = useCallback(async () => {
+    try {
+      setRepositories(await repositoryService.getRepositories());
+    } catch (err) {
+      // Expected 429s arrive as RateLimitedError; rethrow so the page-level
+      // watcher backs off instead of logging an AxiosError to the overlay.
+      if (err instanceof RateLimitedError) throw err;
+      console.error("Failed to load repositories:", err);
+      setRepositories([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  const { refresh } = useRepositoriesScanPolling({
+    repositories,
+    onRefresh: loadRepositories,
+  });
+
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
 
   const handleConnect = () => {
     const url = process.env.GithubApp__InstallationUrl;
@@ -86,6 +103,7 @@ export function RepositorySecurityPage() {
           repositories={filtered}
           searchQuery={search}
           onOpenConnectDialog={() => setDialogOpen(true)}
+          onScanned={refresh}
         />
       )}
     </div>

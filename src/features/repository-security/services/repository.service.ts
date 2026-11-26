@@ -1,4 +1,5 @@
 import { privateApi } from "@/lib/axios";
+import axios from "axios";
 import type {
   ApiResponse,
   ApiRepositoryDetail,
@@ -26,6 +27,50 @@ function unwrap<T>(res: { data: ApiResponse<T>; status: number }): T {
   return res.data.value;
 }
 
+const DEFAULT_RATELIMIT_BACKOFF_MS = 60_000;
+const MAX_RATELIMIT_BACKOFF_MS = 15 * 60_000;
+
+/**
+ * Error thrown when the API responds with 429. Carries the backoff duration so
+ * pollers can pause instead of hammering the endpoint (and without surfacing
+ * a raw AxiosError to the Next.js error overlay).
+ */
+export class RateLimitedError extends Error {
+  readonly retryAfterMs: number;
+
+  constructor(retryAfterMs: number) {
+    super("Too many requests. Please slow down.");
+    this.name = "RateLimitedError";
+    this.retryAfterMs = retryAfterMs;
+  }
+}
+
+function extractRetryAfterMs(error: unknown): number {
+  if (axios.isAxiosError(error)) {
+    const raw = (error.response?.headers as Record<string, string> | undefined)?.[
+      "retry-after"
+    ];
+    if (typeof raw === "string" && raw.trim()) {
+      const seconds = Number(raw);
+      if (Number.isFinite(seconds) && seconds > 0) {
+        return Math.min(Math.ceil(seconds * 1000), MAX_RATELIMIT_BACKOFF_MS);
+      }
+      const headerDate = Date.parse(raw);
+      if (!Number.isNaN(headerDate)) {
+        return Math.max(0, headerDate - Date.now());
+      }
+    }
+  }
+  return DEFAULT_RATELIMIT_BACKOFF_MS;
+}
+
+function normalizeRateLimitError(error: unknown): unknown {
+  if (axios.isAxiosError(error) && error.response?.status === 429) {
+    return new RateLimitedError(extractRetryAfterMs(error));
+  }
+  return error;
+}
+
 function shortName(fullName: string): string {
   const parts = fullName.split("/");
   return parts[parts.length - 1] || fullName;
@@ -46,6 +91,7 @@ function mapListItem(item: ApiRepositoryListItem): Repository {
     visibility: item.isPrivate ? "Private" : "Public",
     defaultBranch: item.defaultBranch,
     lastScanDate: item.lastScannedAt,
+    latestScanStatus: item.latestScanStatus ?? null,
     totalFindings: 0,
     criticalFindings: 0,
     highFindings: 0,
@@ -68,6 +114,7 @@ function mapDetailToRepository(detail: ApiRepositoryDetail): Repository {
     visibility: detail.isPrivate ? "Private" : "Public",
     defaultBranch: detail.defaultBranch,
     lastScanDate: detail.lastScanAt,
+    latestScanStatus: detail.latestScanStatus ?? null,
     totalFindings: critical + high + medium + low,
     criticalFindings: critical,
     highFindings: high,
@@ -97,36 +144,74 @@ function mapVulnerability(v: ApiVulnerability): Vulnerability {
   };
 }
 
+const inFlightListRequests = new Map<string, Promise<Repository[]>>();
+const inFlightDetailRequests = new Map<string, Promise<RepositoryDetailData>>();
+
+function buildRepositoriesQuery(params: GetRepositoriesParams): URLSearchParams {
+  const query = new URLSearchParams();
+  if (params.search) query.set("search", params.search);
+  if (params.status) query.set("status", params.status);
+  if (params.sort_by) query.set("sort_by", params.sort_by);
+  if (params.order) query.set("order", params.order);
+  query.set("page", String(params.page ?? 1));
+  query.set("page_size", String(params.page_size ?? 100));
+  return query;
+}
+
 export const repositoryService = {
   async getRepositories(params: GetRepositoriesParams = {}): Promise<Repository[]> {
-    const query = new URLSearchParams();
-    if (params.search) query.set("search", params.search);
-    if (params.status) query.set("status", params.status);
-    if (params.sort_by) query.set("sort_by", params.sort_by);
-    if (params.order) query.set("order", params.order);
-    query.set("page", String(params.page ?? 1));
-    query.set("page_size", String(params.page_size ?? 100));
+    const key = buildRepositoriesQuery(params).toString();
 
-    const res = await privateApi.get<ApiResponse<Paginated<ApiRepositoryListItem>>>(
-      `/api/repositories?${query.toString()}`,
-    );
-    return unwrap(res).data.map(mapListItem);
+    const inflight = inFlightListRequests.get(key);
+    if (inflight) return inflight;
+
+    const request = (async () => {
+      try {
+        const res = await privateApi.get<ApiResponse<Paginated<ApiRepositoryListItem>>>(
+          `/api/repositories?${key}`,
+        );
+        return unwrap(res).data.map(mapListItem);
+      } catch (error) {
+        throw normalizeRateLimitError(error);
+      } finally {
+        inFlightListRequests.delete(key);
+      }
+    })();
+
+    inFlightListRequests.set(key, request);
+    return request;
   },
 
   async getRepositoryDetail(
     id: string,
     trendDays = 30,
   ): Promise<RepositoryDetailData> {
-    const res = await privateApi.get<ApiResponse<ApiRepositoryDetail>>(
-      `/api/repositories/${id}?trendDays=${trendDays}`,
-    );
-    const detail = unwrap(res);
+    const key = `${id}:${trendDays}`;
 
-    return {
-      repository: mapDetailToRepository(detail),
-      vulnerabilities: detail.vulnerabilities.map(mapVulnerability),
-      trendData: detail.trend as TrendDataPoint[],
-    };
+    const inflight = inFlightDetailRequests.get(key);
+    if (inflight) return inflight;
+
+    const request = (async () => {
+      try {
+        const res = await privateApi.get<ApiResponse<ApiRepositoryDetail>>(
+          `/api/repositories/${id}?trendDays=${trendDays}`,
+        );
+        const detail = unwrap(res);
+
+        return {
+          repository: mapDetailToRepository(detail),
+          vulnerabilities: detail.vulnerabilities.map(mapVulnerability),
+          trendData: detail.trend as TrendDataPoint[],
+        };
+      } catch (error) {
+        throw normalizeRateLimitError(error);
+      } finally {
+        inFlightDetailRequests.delete(key);
+      }
+    })();
+
+    inFlightDetailRequests.set(key, request);
+    return request;
   },
 
   async updateSettings(

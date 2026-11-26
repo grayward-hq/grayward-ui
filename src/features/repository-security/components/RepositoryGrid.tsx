@@ -9,14 +9,15 @@ interface Props {
   repositories: Repository[];
   searchQuery: string;
   onOpenConnectDialog: () => void;
+  onScanned?: () => void;
 }
 
-export function RepositoryGrid({ repositories, searchQuery, onOpenConnectDialog }: Props) {
+export function RepositoryGrid({ repositories, searchQuery, onOpenConnectDialog, onScanned }: Props) {
   if (repositories.length > 0) {
     return (
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
         {repositories.map((repo) => (
-          <RepositoryCard key={repo.id} repository={repo} />
+          <RepositoryCard key={repo.id} repository={repo} onScanned={onScanned} />
         ))}
       </div>
     );

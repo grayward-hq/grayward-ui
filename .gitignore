@@ -49,3 +49,6 @@ next-env.d.ts
 
 # Swagger/OpenAPI spec
 swagger.json
+
+
+.idea

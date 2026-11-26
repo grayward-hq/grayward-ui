@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
@@ -34,12 +34,14 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, type TabOption } from "@/components/ui/tabs";
 import { VulnerabilityList } from "./VulnerabilityList";
+import { useRepositoryScanStatus } from "../hooks/useRepositoryScanStatus";
 import type { Repository, Vulnerability, TrendDataPoint, SeverityLevel } from "../types/repository.types";
 
 interface Props {
   repository: Repository;
   vulnerabilities: Vulnerability[];
   trendData: TrendDataPoint[];
+  onRefresh?: () => void;
 }
 
 type RepoTab = "vulnerabilities" | "trends" | "monitoring";
@@ -95,13 +97,20 @@ function timeAgo(dateStr: string): string {
   return `${months} month${months > 1 ? "s" : ""} ago`;
 }
 
-export function RepositoryDetail({ repository, vulnerabilities, trendData }: Props) {
+export function RepositoryDetail({ repository, vulnerabilities, trendData, onRefresh }: Props) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<RepoTab>("vulnerabilities");
   const [isMonitored, setIsMonitored] = useState(repository.isMonitored);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [slackAlerts, setSlackAlerts] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
+  const scanStatus = useRepositoryScanStatus(repository.id);
+
+  useEffect(() => {
+    if (scanStatus.phase === "completed" || scanStatus.phase === "failed") {
+      onRefresh?.();
+    }
+  }, [scanStatus.phase, onRefresh]);
 
   const handleRunScan = async () => {
     setIsScanning(true);
@@ -112,6 +121,8 @@ export function RepositoryDetail({ repository, vulnerabilities, trendData }: Pro
       });
       if (res.isSuccess && res.value) {
         toast.success(res.value.message || "Scan queued.");
+        // Pick up the newly-Queued scan immediately so the "Scanning..." banner shows.
+        await scanStatus.refresh();
       } else {
         toast.error(res.error?.message ?? "Failed to start scan.");
       }
@@ -174,17 +185,28 @@ export function RepositoryDetail({ repository, vulnerabilities, trendData }: Pro
             variant="outline"
             className="border-brand-border text-brand-gray hover:bg-brand-medium-gray"
             onClick={handleRunScan}
-            disabled={isScanning}
+            disabled={isScanning || scanStatus.isScanning}
           >
-            {isScanning ? (
+            {isScanning || scanStatus.isScanning ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <PlayCircle className="mr-2 h-4 w-4" />
             )}
-            {isScanning ? "Starting..." : "Run Scan"}
+            {scanStatus.isScanning ? "Scanning..." : isScanning ? "Starting..." : "Run Scan"}
           </Button>
         </div>
       </div>
+
+      {/* Live scanning banner */}
+      {scanStatus.isScanning && (
+        <div className="flex items-center gap-3 rounded-lg border border-scan-yellow-900/30 bg-owasp-warn-bg p-4 text-sm text-scan-yellow-900">
+          <Loader2 className="h-5 w-5 shrink-0 animate-spin" />
+          <p>
+            <strong className="font-semibold">Scanning repository…</strong> We&apos;ll
+            refresh these findings automatically when the scan finishes.
+          </p>
+        </div>
+      )}
 
       {/* Severity stat cards */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

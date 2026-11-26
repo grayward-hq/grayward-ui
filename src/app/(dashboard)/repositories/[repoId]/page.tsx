@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { RepositoryDetail } from "@/features/repository-security/components/RepositoryDetail";
-import { repositoryService } from "@/features/repository-security/services/repository.service";
+import {
+  RateLimitedError,
+  repositoryService,
+} from "@/features/repository-security/services/repository.service";
 import type {
   Repository,
   Vulnerability,
@@ -20,34 +23,27 @@ export default function RepositoryDetailPage() {
   const [trendData, setTrendData] = useState<TrendDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const loadData = useCallback(async () => {
     if (!repoId) return;
-
-    let active = true;
-
-    const loadData = async () => {
-      try {
-        const detail = await repositoryService.getRepositoryDetail(repoId);
-        if (active) {
-          setRepository(detail.repository);
-          setVulnerabilities(detail.vulnerabilities);
-          setTrendData(detail.trendData);
-        }
-      } catch (err) {
+    try {
+      const detail = await repositoryService.getRepositoryDetail(repoId);
+      setRepository(detail.repository);
+      setVulnerabilities(detail.vulnerabilities);
+      setTrendData(detail.trendData);
+    } catch (err) {
+      // Expected 429s are silently ignored — the scan-status hook backs off
+      // and retries automatically.
+      if (!(err instanceof RateLimitedError)) {
         console.error("Failed to load repository details:", err);
-      } finally {
-        if (active) {
-          setLoading(false);
-        }
       }
-    };
-
-    loadData();
-
-    return () => {
-      active = false;
-    };
+    } finally {
+      setLoading(false);
+    }
   }, [repoId]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   if (loading) {
     return (
@@ -76,6 +72,7 @@ export default function RepositoryDetailPage() {
       repository={repository}
       vulnerabilities={vulnerabilities}
       trendData={trendData}
+      onRefresh={loadData}
     />
   );
 }

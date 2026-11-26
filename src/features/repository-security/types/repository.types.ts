@@ -9,6 +9,7 @@ export interface Repository {
   visibility: VisibilityType;
   defaultBranch: string;
   lastScanDate: string | null;
+  latestScanStatus: string | null;
   totalFindings: number;
   criticalFindings: number;
   highFindings: number;
@@ -71,6 +72,7 @@ export interface ApiRepositoryListItem {
   createdAt: string;
   updatedAt: string;
   lastScannedAt: string | null;
+  latestScanStatus: string | null;
 }
 
 export interface RepositorySettings {

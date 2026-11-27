@@ -18,6 +18,7 @@ const tabs: FindingTab[] = [
   { id: 'exposure', label: 'Exposure', href: '/scan/report/findings/exposure' },
   { id: 'ssl', label: 'SSL', href: '/scan/report/findings/ssl' },
   { id: 'dns', label: 'DNS', href: '/scan/report/findings/dns' },
+  { id: 'network', label: 'Network', href: '/scan/report/findings/network' },
 ];
 
 export function ScanFindingsLayout({ children }: { children: React.ReactNode }) {
@@ -29,6 +30,7 @@ export function ScanFindingsLayout({ children }: { children: React.ReactNode }) 
   if (pathname.endsWith('/exposure')) activeTab = 'exposure';
   else if (pathname.endsWith('/ssl')) activeTab = 'ssl';
   else if (pathname.endsWith('/dns')) activeTab = 'dns';
+  else if (pathname.endsWith('/network')) activeTab = 'network';
   
   const [report, setReport] = useState<ScanReport | null>(null);
   const [loading, setLoading] = useState(!!scanId);
@@ -187,8 +189,8 @@ export function ScanFindingsLayout({ children }: { children: React.ReactNode }) 
     (report.findingGroups?.mediumCount || 0) +
     (report.findingGroups?.lowCount || 0);
     
-  // Dynamic module count is 3 (Exposure, SSL, DNS)
-  const moduleCount = 3;
+  // Dynamic module count is 4 (Exposure, SSL, DNS, Network)
+  const moduleCount = 4;
 
   return (
     <ScanFindingsContext.Provider value={{ report, loading, error, scanId }}>

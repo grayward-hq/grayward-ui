@@ -3,7 +3,7 @@ import { type FindingDto } from '../../../../scans/services/scan.service';
 
 export type Severity = "Critical" | "High" | "Medium" | "Low" | "Pass";
 
-export type FindingModule = 'Exposure' | 'SSL' | 'DNS';
+export type FindingModule = 'Exposure' | 'SSL' | 'DNS' | 'Network';
 
 export type FindingSummary = {
   id: string;
@@ -50,7 +50,8 @@ export const mapFindingDtoToSummary = (finding: FindingDto, defaultModule: Findi
   const surface = finding.surface.toLowerCase();
   if (surface === "dns") findingModule = "DNS";
   if (surface === "ssl") findingModule = "SSL";
-  if (surface === "httpheaders" || surface === "subdomains" || surface === "ports" || surface === "endpoints") findingModule = "Exposure";
+  if (surface === "httpheaders" || surface === "endpoints") findingModule = "Exposure";
+  if (surface === "ports" || surface === "subdomains") findingModule = "Network";
   
   let severity: Severity = "Medium";
   const sev = finding.severity.toLowerCase();

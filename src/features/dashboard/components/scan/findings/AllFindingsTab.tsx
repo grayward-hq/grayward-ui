@@ -14,6 +14,7 @@ const moduleHref: Record<FindingModule, string> = {
   Exposure: '/scan/report/findings/exposure',
   SSL: '/scan/report/findings/ssl',
   DNS: '/scan/report/findings/dns',
+  Network: '/scan/report/findings/network',
 };
 
 const getSeverityFromLabel = (label: string) => {
@@ -97,6 +98,14 @@ export function AllFindingsTab({ report }: AllFindingsTabProps) {
       severity: 'Pass',
       title: 'Exposure & Endpoints Safe',
       module: 'Exposure',
+    });
+  }
+  if (report.subScores.network.score >= 80 && !dynamicFailed.some(f => f.module === 'Network')) {
+    dynamicPassed.push({
+      id: 'network-pass',
+      severity: 'Pass',
+      title: 'Network, Ports & Subdomains Nominal',
+      module: 'Network',
     });
   }
 

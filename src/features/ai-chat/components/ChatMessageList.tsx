@@ -63,12 +63,22 @@ function ChatBubble({ msg }: { msg: Message }) {
                 ul: ({ children }) => <ul className="list-disc pl-4 mb-2 space-y-1">{children}</ul>,
                 ol: ({ children }) => <ol className="list-decimal pl-4 mb-2 space-y-1">{children}</ol>,
                 li: ({ children }) => <li>{children}</li>,
-                code: ({ children }) => (
-                  <code className="bg-brand-sidebar-bg px-1 py-0.5 rounded text-sm font-mono">{children}</code>
+                pre: ({ children }) => (
+                  <pre className="my-2 overflow-x-auto rounded-lg bg-brand-sidebar-bg p-3 text-sm font-mono leading-relaxed">
+                    {children}
+                  </pre>
                 ),
+                code: ({ className, children }) => {
+                  const isBlock = /language-/.test(className ?? "");
+                  return isBlock ? (
+                    <code className={className}>{children}</code>
+                  ) : (
+                    <code className="bg-brand-sidebar-bg px-1 py-0.5 rounded text-sm font-mono">{children}</code>
+                  );
+                },
               }}
             >
-              {msg.text}
+              {msg.text.replace(/<br\s*\/?>/gi, "\n")}
             </ReactMarkdown>
             {isStreaming && (
               <span

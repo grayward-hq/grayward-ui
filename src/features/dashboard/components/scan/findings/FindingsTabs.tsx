@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export type FindingTabId = 'all' | 'exposure' | 'ssl' | 'dns';
+export type FindingTabId = 'all' | 'exposure' | 'ssl' | 'dns' | 'network';
 
 export type FindingTab = {
   id: FindingTabId;
@@ -19,7 +19,7 @@ export function FindingsTabs({ tabs, activeTab }: FindingsTabsProps) {
       role='tablist'
       aria-label='Scan finding categories'
       className={[
-        '-mx-4 grid grid-cols-4 border-b border-[#E5E7EB] px-4',
+        '-mx-4 grid grid-cols-5 border-b border-[#E5E7EB] px-4',
         'md:mx-0 md:flex md:px-0',
       ].join(' ')}
     >

@@ -6,7 +6,7 @@ import { scanService, ScanReport } from '../../../../scans/services/scan.service
 
 type SecuritySummaryCardProps = {
   detailsHref: string;
-  module?: 'dns' | 'ssl' | 'exposure' | 'all';
+  module?: 'dns' | 'ssl' | 'exposure' | 'network' | 'all';
 };
 
 export function SecuritySummaryCard({ detailsHref, module = 'all' }: SecuritySummaryCardProps) {

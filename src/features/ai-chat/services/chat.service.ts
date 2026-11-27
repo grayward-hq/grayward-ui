@@ -91,33 +91,50 @@ export const chatService = {
       const decoder = new TextDecoder();
       let buffer = "";
 
+      // Returns true when the [DONE] sentinel was consumed (caller should stop).
+      const handleLine = (line: string): boolean => {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data:")) return false;
+
+        const payload = trimmed.slice(5).trim();
+        if (payload === "[DONE]") {
+          onDone();
+          return true;
+        }
+
+        try {
+          const parsed = JSON.parse(payload) as { text: string };
+          if (parsed.text) onChunk(parsed.text);
+        } catch {
+          // Ignore malformed chunks
+        }
+        return false;
+      };
+
       while (true) {
         const { value, done } = await reader.read();
-        if (done) break;
 
-        buffer += decoder.decode(value, { stream: true });
+        // Decode even the final (done) chunk so split UTF-8 sequences and a
+        // trailing SSE frame without a trailing newline are not dropped.
+        if (value) {
+          buffer += decoder.decode(value, { stream: true });
+        }
 
         // SSE lines are separated by newlines
         const lines = buffer.split("\n");
         buffer = lines.pop() ?? "";
 
         for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed.startsWith("data:")) continue;
-
-          const payload = trimmed.slice(5).trim();
-          if (payload === "[DONE]") {
-            onDone();
-            return;
-          }
-
-          try {
-            const parsed = JSON.parse(payload) as { text: string };
-            if (parsed.text) onChunk(parsed.text);
-          } catch {
-            // Ignore malformed chunks
-          }
+          if (handleLine(line)) return; // [DONE] received
         }
+
+        if (done) break;
+      }
+
+      // Flush any remaining decoded output and the trailing partial frame.
+      buffer += decoder.decode();
+      if (buffer.trim()) {
+        handleLine(buffer);
       }
 
       // Stream ended without [DONE] — still call done

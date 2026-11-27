@@ -88,6 +88,7 @@ export interface ScanReport {
     exposure: ScanSubScore;
     ssl: ScanSubScore;
     dns: ScanSubScore;
+    network: ScanSubScore;
   };
 }
 
@@ -110,6 +111,7 @@ export interface SubScoresDto {
   exposure: SubScoreItem | null;
   ssl: SubScoreItem | null;
   dns: SubScoreItem | null;
+  network: SubScoreItem | null;
 }
 
 export interface ScanReportDto {
@@ -171,6 +173,7 @@ function normalizeScanReport(dto: ScanReportDto): ScanReport {
       exposure: normalizeSubScore(dto.subScores?.exposure),
       ssl: normalizeSubScore(dto.subScores?.ssl),
       dns: normalizeSubScore(dto.subScores?.dns),
+      network: normalizeSubScore(dto.subScores?.network),
     },
   };
 }

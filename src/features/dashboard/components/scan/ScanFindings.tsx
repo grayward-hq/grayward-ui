@@ -14,6 +14,7 @@ import {
   type FindingTabId,
 } from './findings/FindingsTabs';
 import { SslTab } from './findings/ssl/SslTab';
+import { NetworkTab } from './findings/network/NetworkTab';
 import { scanService, ScanReport } from '@/features/scans/services/scan.service';
 
 const tabs: FindingTab[] = [
@@ -21,6 +22,7 @@ const tabs: FindingTab[] = [
   { id: 'exposure', label: 'Exposure', href: '/scan/report/findings/exposure' },
   { id: 'ssl', label: 'SSL', href: '/scan/report/findings/ssl' },
   { id: 'dns', label: 'DNS', href: '/scan/report/findings/dns' },
+  { id: 'network', label: 'Network', href: '/scan/report/findings/network' },
 ];
 
 type ScanFindingsProps = {
@@ -130,6 +132,8 @@ export function ScanFindings({ activeTab }: ScanFindingsProps) {
         return <SslTab report={report} />;
       case 'dns':
         return <DnsTab report={report} />;
+      case 'network':
+        return <NetworkTab report={report} />;
       default:
         return null;
     }
@@ -200,8 +204,8 @@ export function ScanFindings({ activeTab }: ScanFindingsProps) {
     (report.findingGroups?.mediumCount || 0) +
     (report.findingGroups?.lowCount || 0);
     
-  // Dynamic module count is 3 (Exposure, SSL, DNS)
-  const moduleCount = 3;
+  // Dynamic module count is 4 (Exposure, SSL, DNS, Network)
+  const moduleCount = 4;
 
   return (
     <section className='mx-auto w-full max-w-6xl bg-white px-4 py-4 md:bg-transparent md:px-6 md:py-6'>

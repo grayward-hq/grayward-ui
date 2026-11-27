@@ -29,6 +29,9 @@ export function AIChatbot({ onClose, scanId }: AIChatbotProps) {
   const [sessionError, setSessionError] = useState<string | null>(null);
   const sessionIdRef = useRef<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  // Dedupe the session-creation request across React StrictMode double-mounts.
+  const sessionPromiseRef = useRef<Promise<{ sessionId: string; greeting: string }> | null>(null);
+  const sessionScanIdRef = useRef<string | null>(null);
 
   // Auth store — read firstName & lastName directly
   const firstName = useSyncExternalStore(
@@ -50,10 +53,18 @@ export function AIChatbot({ onClose, scanId }: AIChatbotProps) {
   useEffect(() => {
     let cancelled = false;
 
-    async function start() {
+    // Reuse an in-flight session request so React StrictMode's double-mount
+    // (or a re-run for the same scan) never fires duplicate POST /session calls.
+    if (!sessionPromiseRef.current || sessionScanIdRef.current !== scanId) {
+      sessionScanIdRef.current = scanId;
       setSessionState("starting");
-      try {
-        const { sessionId, greeting } = await chatService.startSession(scanId);
+      sessionPromiseRef.current = chatService.startSession(scanId);
+    }
+
+    const sessionPromise = sessionPromiseRef.current;
+
+    sessionPromise
+      .then(({ sessionId, greeting }) => {
         if (cancelled) return;
 
         sessionIdRef.current = sessionId;
@@ -70,15 +81,13 @@ export function AIChatbot({ onClose, scanId }: AIChatbotProps) {
 
         // Focus input after session ready
         setTimeout(() => textareaRef.current?.focus(), 100);
-      } catch (err) {
+      })
+      .catch((err: unknown) => {
         if (cancelled) return;
         const msg = err instanceof Error ? err.message : "Failed to start session.";
         setSessionError(msg);
         setSessionState("error");
-      }
-    }
-
-    start();
+      });
 
     return () => {
       cancelled = true;

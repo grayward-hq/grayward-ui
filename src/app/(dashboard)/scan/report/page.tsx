@@ -340,7 +340,7 @@ function ScanReportContent() {
         </div>
       </Card>
 
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <ScanReportScoreStatCard
           score={report.subScores.exposure.score}
           type="Exposure"
@@ -370,6 +370,16 @@ function ScanReportContent() {
             "MX, SPF, DMARC, and DNS record delegation."
           }
           href={scanId ? `/scan/report/findings/dns?scanId=${encodeURIComponent(scanId)}` : undefined}
+        />
+        <ScanReportScoreStatCard
+          score={report.subScores.network.score}
+          type="Network"
+          description={
+            report.subScores.network.explanation ||
+            report.subScores.network.detail ||
+            "Open ports, exposed services, and subdomain discovery."
+          }
+          href={scanId ? `/scan/report/findings/network?scanId=${encodeURIComponent(scanId)}` : undefined}
         />
       </div>
 

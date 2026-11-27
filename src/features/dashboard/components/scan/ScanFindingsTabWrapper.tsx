@@ -5,6 +5,7 @@ import { AllFindingsTab } from "./findings/AllFindingsTab";
 import { ExposureTab } from "./findings/exposure/ExposureTab";
 import { SslTab } from "./findings/ssl/SslTab";
 import { DnsTab } from "./findings/dns/DnsTab";
+import { NetworkTab } from "./findings/network/NetworkTab";
 import { FindingTabId } from "./findings/FindingsTabs";
 
 export function ScanFindingsTabWrapper({ tab }: { tab: FindingTabId }) {
@@ -21,6 +22,8 @@ export function ScanFindingsTabWrapper({ tab }: { tab: FindingTabId }) {
       return <SslTab report={report} />;
     case "dns":
       return <DnsTab report={report} />;
+    case "network":
+      return <NetworkTab report={report} />;
     default:
       return null;
   }

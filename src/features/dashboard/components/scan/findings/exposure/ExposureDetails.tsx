@@ -16,6 +16,72 @@ interface ExposureTechnicalDetail {
   rawRecords?: unknown;
 }
 
+type EndpointRecord = Record<string, unknown>;
+
+const ENDPOINT_COLLECTION_KEYS = [
+  "endpoints",
+  "discoveredEndpoints",
+  "discovered",
+  "records",
+  "urls",
+  "results",
+  "items",
+  "entries",
+] as const;
+
+function firstPresent(record: EndpointRecord, keys: string[]): unknown {
+  for (const key of keys) {
+    const value = record[key];
+    if (value !== undefined && value !== null && value !== "") {
+      return value;
+    }
+  }
+  return undefined;
+}
+
+function toEndpointRecords(detail: unknown): EndpointRecord[] | null {
+  if (Array.isArray(detail)) {
+    const records = detail.filter(
+      (item): item is EndpointRecord =>
+        item !== null && typeof item === "object" && !Array.isArray(item),
+    );
+    return records.length > 0 ? records : null;
+  }
+
+  if (!detail || typeof detail !== "object") {
+    return null;
+  }
+
+  const obj = detail as EndpointRecord;
+  for (const key of ENDPOINT_COLLECTION_KEYS) {
+    const candidate = obj[key];
+    if (!Array.isArray(candidate)) continue;
+    const records = candidate.filter(
+      (item): item is EndpointRecord =>
+        item !== null && typeof item === "object" && !Array.isArray(item),
+    );
+    if (records.length > 0) return records;
+  }
+
+  return null;
+}
+
+function toStringArray(value: unknown): string[] {
+  if (value === undefined || value === null) return [];
+  if (Array.isArray(value)) {
+    return value
+      .filter((item) => item !== undefined && item !== null)
+      .map((item) => (typeof item === "string" ? item : JSON.stringify(item)));
+  }
+  if (typeof value === "string") {
+    return value
+      .split(/[,\s]+/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+  }
+  return [String(value)];
+}
+
 export function ExposureDetails({
   backHref = '/scan/report/findings/exposure',
   scanId,
@@ -59,14 +125,138 @@ export function ExposureDetails({
     ) as FindingDto | null;
   }
 
+  const renderEndpointRecords = (records: EndpointRecord[]) => {
+    const sources = Array.from(
+      new Set(
+        records
+          .map((rec) => firstPresent(rec, ["source", "tool", "discoverySource", "scanner", "origin"]))
+          .filter((value) => value !== undefined)
+          .map((value) => String(value)),
+      ),
+    );
+
+    return (
+      <div className="space-y-2">
+        {sources.length > 0 && (
+          <div>
+            <span className="font-semibold">Discovery sources:</span> {sources.join(", ")}
+          </div>
+        )}
+
+        <ul className="space-y-2">
+          {records.map((rec, i) => {
+            const url = firstPresent(rec, ["url", "matchedUrl", "fullUrl", "matched", "link", "href", "location"]);
+            const path = firstPresent(rec, ["path", "urlPath", "route", "endpoint"]);
+            const host = firstPresent(rec, ["host", "hostname", "targetHost", "target", "domain", "baseUrl", "origin"]);
+            const status = firstPresent(rec, ["statusCode", "httpStatus", "status", "httpStatusCode", "code", "responseCode"]);
+            const source = firstPresent(rec, ["source", "tool", "discoverySource", "scanner", "origin"]);
+            const parameters = toStringArray(firstPresent(rec, ["parameters", "params", "queryParams", "queryParameters", "query", "queryString"]));
+            const routes = toStringArray(firstPresent(rec, ["routes", "paths", "pathList", "routeList", "endpoints"]));
+
+            const display =
+              typeof url === "string" && url
+                ? url
+                : typeof path === "string" && path
+                  ? path
+                  : null;
+            return (
+              <li
+                key={i}
+                className="rounded-md border border-neutral-200 bg-neutral-50/60 p-3 font-mono"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <code className="break-all text-xs text-[#243B78]">
+                    {display ?? "—"}
+                  </code>
+                  {status !== undefined && (
+                    <span className="rounded bg-neutral-100 px-2 py-0.5 text-[11px] font-semibold text-neutral-600">
+                      {String(status)}
+                    </span>
+                  )}
+                  {source !== undefined && (
+                    <span className="text-[11px] text-neutral-500">
+                      via {String(source)}
+                    </span>
+                  )}
+                </div>
+                {typeof host === "string" && host && (
+                  <div className="mt-1 text-[11px] text-neutral-500">
+                    Host: {host}
+                  </div>
+                )}
+                {typeof path === "string" && path && display !== path && (
+                  <div className="mt-1 text-[11px] text-neutral-500">
+                    Path: {path}
+                  </div>
+                )}
+                {parameters.length > 0 && (
+                  <div className="mt-1 text-[11px] text-neutral-500">
+                    Parameters: {parameters.join(", ")}
+                  </div>
+                )}
+                {routes.length > 0 && (
+                  <div className="mt-1 text-[11px] text-neutral-500">
+                    Routes: {routes.join(", ")}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  };
+
   const renderTechnicalDetails = (detail: unknown) => {
     if (!detail) return "No technical details available.";
     if (typeof detail === 'string') return detail;
+
     const d = detail as ExposureTechnicalDetail;
     if (d.error) return d.error;
 
+    const endpointRecords = toEndpointRecords(detail);
+
+    const detailObj =
+      detail !== null && typeof detail === "object" && !Array.isArray(detail)
+        ? (detail as EndpointRecord)
+        : null;
+    const targetHost = detailObj
+      ? firstPresent(detailObj, ["host", "hostname", "targetHost", "targetUrl", "target", "domain", "baseUrl", "origin"])
+      : undefined;
+    const discoveredParameters = detailObj
+      ? toStringArray(firstPresent(detailObj, ["parameters", "params", "queryParams", "queryParameters", "query", "queryString"]))
+      : [];
+    const discoveredRoutes = detailObj
+      ? toStringArray(firstPresent(detailObj, ["routes", "paths", "pathList", "routeList", "endpoints", "urls"]))
+      : [];
+
     return (
       <div className="space-y-2 font-mono text-xs text-[#4B5563]">
+        {typeof targetHost === "string" && targetHost && (
+          <div>
+            <span className="font-semibold">Target host/URL:</span> {targetHost}
+          </div>
+        )}
+        {discoveredParameters.length > 0 && (
+          <div>
+            <span className="font-semibold">Discovered parameters:</span> {discoveredParameters.join(", ")}
+          </div>
+        )}
+        {discoveredRoutes.length > 0 && (
+          <div>
+            <span className="font-semibold">Discovered routes:</span> {discoveredRoutes.join(", ")}
+          </div>
+        )}
+
+        {endpointRecords && (
+          <div>
+            <span className="font-semibold text-[#111827]">
+              Discovered Endpoints ({endpointRecords.length}):
+            </span>
+            <div className="mt-1">{renderEndpointRecords(endpointRecords)}</div>
+          </div>
+        )}
+
         {d.issues && d.issues.length > 0 && (
           <div>
             <span className="font-semibold text-red-600">Issues:</span>
@@ -77,6 +267,7 @@ export function ExposureDetails({
             </ul>
           </div>
         )}
+
         {!!d.rawRecords && (
           <div className="mt-2 pt-2 border-t border-neutral-100">
             <span className="font-semibold">Raw Records:</span>

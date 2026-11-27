@@ -26,7 +26,7 @@ export function ExposureTab({ report }: ExposureTabProps) {
       ...(report.summary.lowSeverityIssues || []),
     ];
     allIssues.forEach(f => {
-      if (typeof f !== "string" && ["exposure", "httpheaders", "subdomains", "ports"].includes(f.surface.toLowerCase())) {
+      if (typeof f !== "string" && ["exposure", "httpheaders", "subdomains", "ports", "endpoints"].includes(f.surface.toLowerCase())) {
         activeFailed.push(mapFindingDtoToSummary(f, "Exposure"));
       }
     });

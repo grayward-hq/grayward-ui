@@ -13,7 +13,7 @@ type NetworkTabProps = {
 
 export function NetworkTab({ report }: NetworkTabProps) {
   const scanId = report.scanId;
-  const activeScore = report.subScores.network.score;
+  const activeScore = report.subScores?.network?.score ?? 100;
 
   const activeFailed: FindingSummary[] = [];
   if (report.summary) {
@@ -31,7 +31,7 @@ export function NetworkTab({ report }: NetworkTabProps) {
   }
 
   const activePassed: FindingSummary[] = [];
-  if (report.subScores.network.score >= 80 && activeFailed.length === 0) {
+  if ((report.subScores?.network?.score ?? 100) >= 80 && activeFailed.length === 0) {
     activePassed.push({
       id: 'network-pass',
       severity: 'Pass',

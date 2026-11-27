@@ -156,6 +156,22 @@ function normalizeSubScore(item: SubScoreItem | null | undefined): ScanSubScore 
   };
 }
 
+// Safe default used when an older API payload (or legacy cached report)
+// predates the 4-category schema and omits `subScores.network`.
+const NETWORK_SUBSCORE_DEFAULT: ScanSubScore = {
+  score: 100,
+  status: "Pass",
+  detail: "No Network issues",
+  explanation: "All Network checks passed.",
+};
+
+function normalizeNetworkSubScore(item: SubScoreItem | null | undefined): ScanSubScore {
+  if (item == null) {
+    return NETWORK_SUBSCORE_DEFAULT;
+  }
+  return normalizeSubScore(item);
+}
+
 function normalizeScanReport(dto: ScanReportDto): ScanReport {
   return {
     scanId: dto.scanId,
@@ -173,7 +189,7 @@ function normalizeScanReport(dto: ScanReportDto): ScanReport {
       exposure: normalizeSubScore(dto.subScores?.exposure),
       ssl: normalizeSubScore(dto.subScores?.ssl),
       dns: normalizeSubScore(dto.subScores?.dns),
-      network: normalizeSubScore(dto.subScores?.network),
+      network: normalizeNetworkSubScore(dto.subScores?.network),
     },
   };
 }
@@ -222,14 +238,42 @@ function writeCompletedScanReportToSession(
   }
 }
 
+/**
+ * Reports cached before the 4-category (Network) schema lack `subScores.network`.
+ * Those must be treated as cache misses and refetched so `report.subScores.network`
+ * never resolves to `undefined` at runtime.
+ */
+function isLegacyNetworkSchema(report: ScanReport | null | undefined): boolean {
+  return Boolean(report && !report.subScores?.network);
+}
+
+function evictScanReportFromCache(scanId: string) {
+  completedScanReportCache.delete(scanId);
+  if (typeof window !== "undefined") {
+    try {
+      window.sessionStorage.removeItem(getCompletedScanReportCacheKey(scanId));
+    } catch {
+      // Ignore storage unavailability.
+    }
+  }
+}
+
 function readCompletedScanReportFromCache(scanId: string): ApiResponse<ScanReport> | null {
   const memoryCache = completedScanReportCache.get(scanId);
   if (memoryCache?.isSuccess && memoryCache.value?.status === "Completed") {
+    if (isLegacyNetworkSchema(memoryCache.value)) {
+      evictScanReportFromCache(scanId);
+      return null;
+    }
     return memoryCache;
   }
 
   const sessionCache = readCompletedScanReportFromSession(scanId);
   if (sessionCache) {
+    if (isLegacyNetworkSchema(sessionCache.value)) {
+      evictScanReportFromCache(scanId);
+      return null;
+    }
     completedScanReportCache.set(scanId, sessionCache);
     return sessionCache;
   }

@@ -71,6 +71,7 @@ export function useRepositoryScanStatus(
 
     if (!enableSignalR) return;
 
+    let disposed = false;
     let connection: signalR.HubConnection | null = null;
 
     (async () => {
@@ -84,6 +85,7 @@ export function useRepositoryScanStatus(
           transport: signalR.HttpTransportType.WebSockets,
         })
         .withAutomaticReconnect()
+        .configureLogging(signalR.LogLevel.None)
         .build();
 
       connectionRef.current = connection;
@@ -97,15 +99,24 @@ export function useRepositoryScanStatus(
       connection.on("ScanCompleted", handleCompleted);
       connection.on("ScanFailed", handleCompleted);
 
+      // Defer start so React StrictMode's immediate unmount/stop can run first.
+      // Otherwise start() races stop() and logs the "Failed to start the
+      // HttpConnection before stop() was called" error during navigation.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      if (disposed) return;
+
       try {
         await connection.start();
         await connection.invoke("JoinUserGroup", userId);
       } catch (err) {
-        console.warn("Repository scan SignalR failed, relying on poller...", err);
+        if (!disposed) {
+          console.warn("Repository scan SignalR failed, relying on poller...", err);
+        }
       }
     })();
 
     return () => {
+      disposed = true;
       if (connectionRef.current) {
         connectionRef.current.stop().catch(() => {});
         connectionRef.current = null;

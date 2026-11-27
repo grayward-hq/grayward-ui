@@ -68,6 +68,7 @@ export function useRepositoriesScanPolling({
           transport: signalR.HttpTransportType.WebSockets,
         })
         .withAutomaticReconnect()
+        .configureLogging(signalR.LogLevel.None)
         .build();
 
       connection.on("ScanCompleted", () => {
@@ -76,6 +77,12 @@ export function useRepositoriesScanPolling({
       connection.on("ScanFailed", () => {
         if (!disposed) void refresh();
       });
+
+      // Defer start so React StrictMode's immediate unmount cleanup can run and
+      // mark `disposed` first. Otherwise start() races with stop() and logs
+      // "Failed to start the HttpConnection before stop() was called".
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      if (disposed) return;
 
       try {
         await connection.start();

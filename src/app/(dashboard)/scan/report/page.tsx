@@ -372,11 +372,11 @@ function ScanReportContent() {
           href={scanId ? `/scan/report/findings/dns?scanId=${encodeURIComponent(scanId)}` : undefined}
         />
         <ScanReportScoreStatCard
-          score={report.subScores.network.score}
+          score={report.subScores?.network?.score ?? 100}
           type="Network"
           description={
-            report.subScores.network.explanation ||
-            report.subScores.network.detail ||
+            report.subScores?.network?.explanation ||
+            report.subScores?.network?.detail ||
             "Open ports, exposed services, and subdomain discovery."
           }
           href={scanId ? `/scan/report/findings/network?scanId=${encodeURIComponent(scanId)}` : undefined}

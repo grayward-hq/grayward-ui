@@ -125,12 +125,49 @@ function mapDetailToRepository(detail: ApiRepositoryDetail): Repository {
   };
 }
 
+// Tokens used by normalizeMarkdown so inline code can be rendered as <code> pills
+// by the consuming component without raw backticks leaking into the UI.
+const CODE_OPEN = "«code»";
+const CODE_CLOSE = "«/code»";
+
+/**
+ * Lightweight, safe Markdown normalizer for legacy database rows that still
+ * contain raw Markdown (`**bold**`, `` `inline code` ``, `<br>`, `###`,
+ * bullet lists, pipe tables, ...).
+ *
+ * Returns a plain string where inline code spans are wrapped in `«code»…«/code»`
+ * tokens. Callers render those tokens as `<code>` elements so no raw Markdown
+ * syntax ever appears in the UI.
+ */
+export function normalizeMarkdown(text: string): string {
+  if (!text) return "";
+
+  return text
+    // <br> → line break
+    .replace(/<br\s*\/?>/gi, "\n")
+    // Headings → plain text
+    .replace(/^#{1,6}\s+/gm, "")
+    // **bold** / __bold__ → plain text
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/__(.*?)__/g, "$1")
+    // `inline code` → tokenised code span
+    .replace(/`([^`]+)`/g, `${CODE_OPEN}$1${CODE_CLOSE}`)
+    // Bullet lists → clean lines
+    .replace(/^\s*[-*+]\s+/gm, "")
+    // Pipe-table rows and separators → dropped
+    .replace(/^\s*\|[^\n]*\|?\s*$/gm, "")
+    .replace(/^\s*[-:\s|]+\s*$/gm, "")
+    // Collapse excessive blank lines
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function mapVulnerability(v: ApiVulnerability): Vulnerability {
   return {
     id: v.id,
-    packageName: v.package,
+    packageName: v.package ?? "",
     severity: v.severity,
-    cveId: v.cveId,
+    cveId: v.cveId ?? "",
     discoveredDate: v.detectedAt,
     description: v.title,
     currentVersion: "",

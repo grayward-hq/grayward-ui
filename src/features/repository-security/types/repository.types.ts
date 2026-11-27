@@ -90,8 +90,8 @@ export interface ApiVulnerability {
   id: string;
   title: string;
   severity: SeverityLevel;
-  package: string;
-  cveId: string;
+  package: string | null;
+  cveId: string | null;
   status: string;
   detectedAt: string;
 }
